@@ -65,7 +65,7 @@
         }
         
         public static function getPromoByName($name){
-            $res = mQuery("SELECT id,name, descr, value, end_date FROM em_promo where upper(name) = upper('$name')");   
+            $res = mQuery("SELECT id,name, descr, value, end_date FROM em_promo where upper(name) = upper('$name') and end_date>=CURDATE()");   
                 if ($row = mysql_fetch_array($res)){
                     $promo = new Promo(null);
                     $promo->id = $row[0];

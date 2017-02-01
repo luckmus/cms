@@ -28,6 +28,7 @@
         URL = host+"/modules/FRONTEND/dlgMessages/userSide/add_order.php?id="+id+"&userId="+userId+"&successFnc=showAddOrderBE&successFncParam="+goodsId+",'"+goodsPrice+"',"+id+",'"+userId+"', 'false'&isXML=1&r=" + Math.random();                                                                                             
         runAJAXXML(URL,msgPlace);
         return;
+        /*
         //alert(URL+'\n'+msgPlace);
         // формируем AJAX запрос
         try{
@@ -56,6 +57,7 @@
             }
         });
         }catch (e){console.log(e);}               
+        */
     }
     
     function showAddOrderBE(goodsId, goodsPriceId,id,userId, fromCart){

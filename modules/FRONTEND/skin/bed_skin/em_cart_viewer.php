@@ -32,20 +32,30 @@ class CartView{
         $res .="</tbody>";  
         $res .= "<tfoot>";
         $res .="<tr>";
-        $res .="<td>Итого:</td>";
+        $res .="<td><b>Итого:</b></td>";
+        $res .="<td></td><td></td>";
         $res .="<td><b>$summ {$GLOBALS[_CURRENCY]}</b></td>";
         $dis = ($c>0)?"":"disabled";
-        $res .="<td><button $dis onClick=\"showAddOrderFE_cart('apply_card',null,null,'{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">Оформить</button></td>";
+        
         $res .="</tr>";
         $res .="<tr>";
         $res .="<td></td>";
-        $res .="<td><input type='checkbox' id='promo_check' 
-        onChange=\" $('#promo_id').css('visibility', this.checked?'visible':'hidden');\">
-        <label for='promo_check' style=\"cursor: pointer\" >У меня есть промо-код</label></td>";
-        $res .="<td><input type='text' id='promo_id' size=10 style=\"visibility: hidden\"></td>";
-        $res .="</tr>";
+        $res .="<td></td>";
+        $res .="<td></td>";
+        $res .="<td></td>";
+        $res .="</tr>";     ;                                                                          
         $res .= "</tfoot>";        
-        $res .="</table>";  
+        $res .="</table>"; 
+        $res .= "</br>";
+        $res .="<input type='checkbox' id='promo_check' 
+        onChange=\" $('#promo').css('visibility', this.checked?'visible':'hidden');\">
+        <label for='promo_check' style=\"cursor: pointer\" >У меня есть промо-код</label>";
+        $res .= "<span id='promo' style=\"visibility: hidden\">";
+        $res .="<input type='text' id='promo_id' size=10>";
+        $res .="<button onClick=\" console.log($('#promo_id').val());\">Применить промо-код</button>";
+        $res .= "</span>";
+        $res .= "</br>";
+        $res .="<button $dis onClick=\"showAddOrderFE_cart('apply_card',null,null,'{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">Оформить</button>";
         return $res; 
     }
 
