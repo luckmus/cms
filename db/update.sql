@@ -1,0 +1,1 @@
+ALTER TABLE `settings` ADD `type` INT NOT NULL;

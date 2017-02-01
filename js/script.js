@@ -1,0 +1,381 @@
+
+    function showAddOrderFE_cart(msgPlace, goodsId, goodsPrice, userId, fromCart, promo){   
+
+        //$('#'+msgPlace).empty();
+        console.log("promo", promo);
+        document.getElementById(msgPlace).innerHTML = "";
+        var id = Math.floor(Math.random(1,1000000)*1000);
+        URL = host+"/modules/FRONTEND/dlgMessages/userSide/add_order_with_cart.php?id="+id+"&fromCart="+fromCart+"&userId="+userId+"&promo="+promo+"&successFnc=showAddOrderBE&successFncParam="+goodsId+",'"+goodsPrice+"',"+id+",'"+userId+"', '"+fromCart+"'&isXML=1&r=" + Math.random();                                                                                             
+        runAJAXXML(URL,msgPlace);
+        return;
+        
+    }
+        
+    function showAddOrderFE(msgPlace, goodsId, goodsPrice, userId){   
+    /*     
+        //alert(1);
+        msgPlace = msgPlace +'1';
+       // alert(2);
+        $('#'+msgPlace).remove();
+        //alert(3);
+        $('body').append('<div style= "visibility:hidden" id="'+msgPlace+'"></div>');
+        //alert(4);
+        */
+        
+        //$('#'+msgPlace).empty();
+        document.getElementById(msgPlace).innerHTML = "";
+        var id = Math.floor(Math.random(1,1000000)*1000);
+        URL = host+"/modules/FRONTEND/dlgMessages/userSide/add_order.php?id="+id+"&userId="+userId+"&successFnc=showAddOrderBE&successFncParam="+goodsId+",'"+goodsPrice+"',"+id+",'"+userId+"', 'false'&isXML=1&r=" + Math.random();                                                                                             
+        runAJAXXML(URL,msgPlace);
+        return;
+        //alert(URL+'\n'+msgPlace);
+        // формируем AJAX запрос
+        try{
+        $.ajax({
+            url: URL,
+            dataType: (jQuery.browser.msie) ? "text" : "xml", // проверка IE и выбор типа данных
+            success: function(xmlData){
+                var data;
+                if ( typeof xmlData == "string") {
+                    // если это IE то создаем ActiveX объект и приобразуем строковую переменную в XML
+                    data = new ActiveXObject( "Microsoft.XMLDOM");
+                    data.async = false;
+                    data.loadXML( xmlData);
+                } else {
+                    data = xmlData;
+                }
+            // генерация HTML кода
+            var _result = "";
+            var res = parseMsgXML(data);
+            //document.getElementById(msgPlace).innerHTML = res[0];
+            $('#'+msgPlace).html(res[0]);
+            setTimeout(res[1],0)
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+                alert('Ошибка');
+            }
+        });
+        }catch (e){console.log(e);}               
+    }
+    
+    function showAddOrderBE(goodsId, goodsPriceId,id,userId, fromCart){
+        URL = host+"modules/BACKEND/userSide/add_order_be.php";
+        console.log("fromCart", fromCart);
+        var price = $('#'+goodsPriceId).val();
+        if ((price==null)||(price=='')){
+            price = $('#'+goodsPriceId).html();
+        }
+        try{   
+                     $.ajax({
+                     type: "POST",
+                     url: URL,             // указываем URL и
+                     data:{'rcontrdig': $('#rcontrdig'+id).val(),  
+                        'name': $('#firstnameid'+id).val(), 
+                       'lastname': $('#lastеnameid'+id).val(),
+                       'tel':$('#telid'+id).val(),
+                       'email':$('#emailid'+id).val(),
+                       'adress':$('#adresid'+id).val(),
+                       'descr':$('#descrid'+id).val(),
+                       'userId':userId,
+                       'price':price,
+                        'goodsId': goodsId,
+                       'fromCart':fromCart},
+                     success: function (data, textStatus) { // вешаем свой обработчик на функцию success*
+                        if(data.trim()!="1"){
+                            modalAlert("Ошибка записи заказа: \n"+data);
+                        }
+                        else{
+                            if (fromCart == 'true'){
+                                deleteCookie('cart');
+                            }
+                            jqAlert('Заказ добавлен', reload);
+                            
+                        }
+                     }
+                     });             
+                     //*/      
+        }catch (e){console.log(e);}
+        
+    }
+    
+    function reload(){
+    location.reload();
+    }
+    
+    function refreshControlDig(cntrldg){    
+        $('#'+cntrldg).attr("src", host+"/icons/ajax-loader.gif");
+        $('#'+cntrldg).attr("src", host+"/controldig.php?r=" + Math.random());
+    }
+
+    function showAuthorisationFromLogin(loginMsgId, msgPlace){
+         showAuthorisationFE(msgPlace,"","");
+        $(loginMsgId).dialog( "close" ); 
+    
+    }
+    function showAuthorisationFE(msgPlace, userId){
+        var id = Math.floor(Math.random(1,1000000)*1000);
+        URL = host+"/modules/FRONTEND/dlgMessages/userSide/registation.php?id="+id+"&userId="+userId+"&successFnc=showAuthorisationBE&successFncParam="+id+",'"+userId+"'&isXML=1&r=" + Math.random();                                                                                             
+        //alert(URL+'\n'+msgPlace);
+        runAJAXXML(URL,msgPlace);
+        return;        
+        // формируем AJAX запрос
+        try{
+        $.ajax({
+            url: URL,                                                                                                                                          
+            dataType: (jQuery.browser.msie) ? "text" : "xml", // проверка IE и выбор типа данных
+            success: function(xmlData){
+                var data;
+                if ( typeof xmlData == "string") {
+                    // если это IE то создаем ActiveX объект и приобразуем строковую переменную в XML
+                    data = new ActiveXObject( "Microsoft.XMLDOM");
+                    data.async = false;
+                    data.loadXML( xmlData);
+                } else {
+                    data = xmlData;
+                }
+            // генерация HTML кода
+            var _result = "";
+            var res = parseMsgXML(data);
+            document.getElementById(msgPlace).innerHTML = res[0];
+            //$('#'+msgPlace).html(res[0]);
+            setTimeout(res[1],0)
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+               // alert('add order error \n'+xhr.statusText );
+            }
+        });
+        }catch (e){console.log(e);}    
+    } 
+    function showAuthorisationBE(id,userId){
+        URL = host+"modules/BACKEND/userSide/registration_be.php";
+        //alert(URL);
+        var mode;
+        var oldPwd;
+        var successMsg;
+        if (userId==""){
+            mode = 0;
+            oldPwd = "";
+            successMsg = 'Вы успешно зарегистрированы!';
+        }
+        else{
+            mode = 3;
+            oldPwd =$('#oldpwdid'+id).val();
+            successMsg = 'Регистрационные данные успешно изменены!';
+        }
+        try{   
+                     $.ajax({
+                     type: "POST",
+                     url: URL,             // указываем URL и
+                     data:{'mode': mode,
+                        'userId': userId,
+                        'rcontrdig': $('#rcontrdig'+id).val(),  
+                        'name': $('#firstnameid'+id).val(), 
+                       'lastname': $('#lastеnameid'+id).val(),
+                       'tel':$('#telid'+id).val(),
+                       'email':$('#emailid'+id).val(),
+                       'adress':$('#adresid'+id).val(),
+                       'login':$('#loginid'+id).val(),
+                       'pwd':$('#pwdid'+id).val(),
+                       'oldpwd':oldPwd,
+                       'repwd':$('#repwdid'+id).val()},
+                     success: function (data, textStatus) { // вешаем свой обработчик на функцию success*
+                        if(data!="1"){
+                            modalAlert("Ошибка регистрации: \n"+data);
+                            $("#message"+id).dialog(); 
+                        }
+                        else{
+                            modalAlert(successMsg);
+                        }
+                     },
+                     error: function(xhr, ajaxOptions, thrownError){
+                        modalAlert("Ошибка регистрации"); 
+                        }
+                     
+                     });             
+                     //*/      
+        }catch (e){console.log(e);}    
+    }
+    function showLogin(msgPlace){
+        var id = Math.floor(Math.random(1,1000000)*1000);
+        URL = host+"/modules/FRONTEND/dlgMessages/userSide/login.php?id="+id+"&successFnc=showLoginBE&successFncParam="+id+"&isXML=1&r=" + Math.random();                                                                                             
+        runAJAXXML(URL,msgPlace);
+        return;        
+        //alert(URL+'\n'+msgPlace);
+        // формируем AJAX запрос
+        try{
+        $.ajax({
+            url: URL,
+            dataType: (jQuery.browser.msie) ? "text" : "xml", // проверка IE и выбор типа данных
+            success: function(xmlData){
+                var data;
+                if ( typeof xmlData == "string") {
+                    // если это IE то создаем ActiveX объект и приобразуем строковую переменную в XML
+                    data = new ActiveXObject( "Microsoft.XMLDOM");
+                    data.async = false;
+                    data.loadXML( xmlData);
+                } else {
+                    data = xmlData;
+                }
+            // генерация HTML кода
+            var _result = "";
+            var res = parseMsgXML(data);
+            document.getElementById(msgPlace).innerHTML = res[0];
+            //$('#'+msgPlace).html(res[0]);
+            setTimeout(res[1],0)
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+                alert('add order error \n'+xhr.statusText );
+            }
+        });
+        }catch (e){console.log(e);}    
+    }    
+    function showLoginBE(id){
+        URL = host+"modules/BACKEND/userSide/registration_be.php";
+        try{   
+                     $.ajax({
+                     type: "POST",
+                     url: URL,             // указываем URL и
+                     data:{'mode': 1,
+                       'login':$('#login'+id).val(),
+                       'pwd':$('#pwd'+id).val()},
+                     success: function (data, textStatus) { // вешаем свой обработчик на функцию success*
+                        if(data=="1"){
+                            modalAlert("Ошибка авторизации: \n"+data);
+                            location.href = host;
+                            return;
+                        }
+                        if(data=="0"){
+                            modalAlert("Ошибка пары логин/пароль");
+                            return;
+                        }                        
+                        else{
+                            modalAlert("Ошибка авторизации");
+                        }
+                     },
+                     error: function(xhr, ajaxOptions, thrownError){
+                        alert('Ошибка ' );
+                        }
+                     });             
+                     //*/      
+        }catch (e){console.log(e);}
+    }
+        
+    function logOut(){
+        URL = host+"modules/BACKEND/userSide/registration_be.php";
+        try{   
+                     $.ajax({
+                     type: "POST",
+                     url: URL,             // указываем URL и
+                     data:{'mode': 2},
+                     success: function (data, textStatus) { // вешаем свой обработчик на функцию success*
+                        if(data!="1"){
+                            modalAlert("Ошибка выхода: \n"+data);
+                        }
+                        else{
+                            location.href = host;
+                        }
+                     },
+                     error: function(xhr, ajaxOptions, thrownError){
+                        alert('Ошибка ' );
+                        }
+                     });             
+                     //*/      
+        }catch (e){console.log(e);}
+    
+    }
+
+    function showBuySelectDlg(text, id, addCallBack, cb11, cb12, buyCallBack, cb21, cb22, cb23, cb24 ){
+        $(function() {
+        id = ("aada"+Math.random()+"_").replace(".", "");
+        console.log("id", id);
+           $("body").append('<div id="'+id+'"><p class="validateTips">'+text+'</p></div>');
+        $( "#"+id ).dialog( "destroy" );
+                
+        
+        
+        $( "#"+id ).dialog({
+            autoOpen: false,
+            height: 160,
+            width: 350,
+            modal: true,
+            title:"Покупка",
+            buttons: {   
+            /*
+                "Купить сейчас": function() {
+                  console.log("buy");
+                  $( this ).dialog( "close" );
+                  buyCallBack(id, cb21, cb22, cb23, cb24);
+                  
+                },
+            */
+                "В корзину":function() {
+                   console.log("add to card");  
+                   $( this ).dialog( "close" );
+                   addCallBack(cb11,cb12)
+                    
+                  
+                },
+                "Отмена": function() {
+                    
+                    $( this ).dialog( "close" );
+                }   
+            },
+            
+            close: function() {            
+            $("body").remove("#"+id);
+                //allFields.val( "" ).removeClass( "ui-state-error" );
+            }
+        });
+
+    });
+    $( "#"+id ).dialog( "open" );                                                                                                                          
+
+    }
+    
+    
+    function showCartValue(){    
+        showCartValueNum(readCart().length);
+    }
+                                          
+    function showCartValueNum(cartVal){ 
+        $("#cart_value").text(cartVal);
+    }
+    
+    function afterAddToCartDialog(url){
+    console.log("afterAddToCartDialog", url);
+        var id = ("aada"+Math.random()+"_").replace(".", "");           
+        console.log("afterAddToCartDialog", id);
+        $("body").append('<div id="'+id+'"><p class="validateTips">Успешно добавленно а корзину</p></div>');
+                
+        
+        
+        $( "#"+id ).dialog({
+            autoOpen: false,
+            height: 160,
+            width: 350,
+            modal: true,
+            title:"Покупка",
+            buttons: {   
+                "Продолжить покупки": function() {
+                  console.log("buy");
+                  $( this ).dialog( "close" );
+                  
+                },
+                "Перейти в корзину":function() {
+                   console.log("add to card");  
+                   $( this ).dialog( "close" );
+                   window.open(url+"?show=cart","_self");
+                    
+                  
+                }
+            },
+            
+            close: function() {            
+            $("body").remove("#"+id);
+                //allFields.val( "" ).removeClass( "ui-state-error" );
+            }
+        });
+
+    $( "#"+id ).dialog( "open" );                                                                                                                          
+
+    }

@@ -1,0 +1,4 @@
+AuthType Basic  
+AuthName "Private zone. Only for administrator!"
+AuthUserFile  /home/e/elitpostel/sleep-vip/public_html/adm/.htpasswd  
+require user admin

@@ -1,0 +1,6 @@
+.message {visibility: hidden;}
+
+.adm_right{
+ overflow: auto;
+max-height: 100vh;
+}
