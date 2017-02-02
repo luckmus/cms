@@ -39,10 +39,10 @@ class CartView{
         
         $res .="</tr>";
         $res .="<tr>";
-        $res .="<td></td>";
-        $res .="<td></td>";
-        $res .="<td></td>";
-        $res .="<td></td>";
+        $res .="<td><span id='promo_text' class='promo_line'></span></td>";
+        $res .="<td><span id='promo_value' class='promo_line'></span></td>";
+        $res .="<td></td>";      
+        $res .="<td><span id='summ_with_promo' class='promo_line'></span></td>";
         $res .="</tr>";     ;                                                                          
         $res .= "</tfoot>";        
         $res .="</table>"; 
@@ -52,10 +52,18 @@ class CartView{
         <label for='promo_check' style=\"cursor: pointer\" >У меня есть промо-код</label>";
         $res .= "<span id='promo' style=\"visibility: hidden\">";
         $res .="<input type='text' id='promo_id' size=10>";
-        $res .="<button onClick=\" console.log($('#promo_id').val());\">Применить промо-код</button>";
+        $res .="<button onClick=\"  console.log($('#promo_id').val()); applyPromo($('#promo_id').val());\">Применить промо-код</button>";
         $res .= "</span>";
         $res .= "</br>";
+        $res .= "Контрольное число";    
+        $res .= " <font color=\"red\">*</font><input type=\"text\" name=\"rcontrdig$id\" id=\"rcontrdig$id\" size=\"4\" maxlength=\"4\"></input>";
+        $cntrlDig = GetHost()."/controldig.php";
+        $cntrldgId = "cntrldg$id";
+        $res .= " <img src=\"$cntrlDig\" id=\"$cntrldgId\"></img><span onclick=\"refreshControlDig('$cntrldgId')\" style=\"cursor:pointer\">Обновить</span>";
+        $res .= "</br>";
+        $res .= "</br>";
         $res .="<button $dis onClick=\"showAddOrderFE_cart('apply_card',null,null,'{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">Оформить</button>";
+        $res .="<input type='hidden' id='promo_name_hidden'>";
         return $res; 
     }
 

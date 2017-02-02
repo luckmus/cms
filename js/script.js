@@ -1,4 +1,5 @@
 
+
     function showAddOrderFE_cart(msgPlace, goodsId, goodsPrice, userId, fromCart, promo){   
 
         //$('#'+msgPlace).empty();
@@ -381,3 +382,42 @@
     $( "#"+id ).dialog( "open" );                                                                                                                          
 
     }
+    
+function applyPromo(name){
+    var URL = SITE_URL+'/modules/FRONTEND/userSide/promo_info.php?promo='+name
+    $.ajax({
+      url: URL,
+      context: document.body,
+      success: function(data){                                                               
+      try
+          {
+                    console.log( data );
+                    var res = jQuery.parseJSON(data);
+                    displayPromoInfo( res);
+          }
+      catch(err)
+          {
+            console.log(err);
+            return false;
+          } 
+      
+                  
+      }
+    });
+}    
+
+function displayPromoInfo(data){
+    if (data.id!=null){
+        $('#promo_text').text('Скидка по промо-коду');
+        $('#promo_value').text(data.value+'%'+' ('+data.minusSum+data.currency+' )');
+        $('#summ_with_promo').text(data.summ+' '+data.currency);
+        $('#promo_name_hidden').val(data.name);
+    }else{
+        
+        $('#promo_text').text('');
+        $('#promo_value').text('');
+        $('#summ_with_promo').text('');
+        $('#promo_name_hidden').val('');
+        modalAlert(data.msg);
+    }
+}

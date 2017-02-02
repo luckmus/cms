@@ -1,3 +1,4 @@
+var SITE_URL = "http://127.0.0.1/cms/";
 function getRandId(){
     return Math.floor(Math.random(1,1000000)*1000);
 }

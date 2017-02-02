@@ -6,7 +6,7 @@ header("Pragma: no-cache");
 @session_start();
 $s=rand(1000,9999);
 $_SESSION['contrdig']=$s;
-$img = imageCreate(150, 65);
+$img = imageCreate(120, 65);
 
 $black = imageColorAllocate($img, 0, 0, 0);
 $white = imageColorAllocate($img, 255, 255, 255);
@@ -14,9 +14,9 @@ $orange = imageColorAllocate($img, 255, 128, 64);
 $green = imageColorAllocate($img, 0, 255, 150);
 $lightorange = imageColorAllocate($img, 255, 220, 164);
 
-imageFilledRectangle($img, 0, 0, 150, 65, $green);
+imageFilledRectangle($img, 0, 0, 120, 65, $green);
 
-imageRectangle($img, 0, 0, 149, 64, $black);
+imageRectangle($img, 0, 0, 119, 64, $black);
 
 //imageRectangle($img, 5, 5, 94, 64, $black);
 
