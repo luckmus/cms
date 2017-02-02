@@ -152,6 +152,7 @@ function ShowAdmPart($show)
                 include "../modules/FRONTEND/skin/common_skin/cabinet_viewer.php";
                 include "../modules/em/usercommunication.php";
                 include "../modules/em/em_accounts.php";
+                include "../modules/em/em_goods.php";
               EditOrders($id);
          break;
          default:
@@ -677,7 +678,7 @@ function EditOrders($id)
   $pname="";
   if ($id!="")
   {
-    $result=mQuery("SELECT o.id,o.goodsId,o.date,o.iscomlete,o.datecomplete,CONCAT(o.firstname,' ',lastname) as FIO,tel,email,adres,o.description,o.managerdesc,goodsprice, userId 
+    $result=mQuery("SELECT o.id,o.goodsId,o.date,o.iscomlete,o.datecomplete,CONCAT(o.firstname,' ',lastname) as FIO,tel,email,adres,o.description,o.managerdesc,goodsprice, userId, totalsum, discount
                 FROM em_order o
                 WHERE o.id = $id");    
     $row=mysql_fetch_array($result);
@@ -722,6 +723,24 @@ function EditOrders($id)
   print "</td>";
   print "<td 'width=300'>";
   print "$sum";
+  print "</td>";  
+  print "</tr>";
+  
+  print "<tr>";
+  print "<td 'width=100'>";
+  print "<b>Скидка</b>";
+  print "</td>";
+  print "<td 'width=300'>";
+  print "{$row[14]}%";
+  print "</td>";  
+  print "</tr>";
+  
+  print "<tr>";
+  print "<td 'width=100'>";
+  print "<b>Сумма со скидкой</b>";
+  print "</td>";
+  print "<td 'width=300'>";
+  print "{$row[13]}";
   print "</td>";  
   print "</tr>";
 

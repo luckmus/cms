@@ -61,7 +61,7 @@
         */
     }
     
-    function showAddOrderBE(goodsId, goodsPriceId,id,userId, fromCart){
+    function showAddOrderBE(goodsId, goodsPriceId,id,userId, fromCart, promo){
         URL = host+"modules/BACKEND/userSide/add_order_be.php";
         console.log("fromCart", fromCart);
         var price = $('#'+goodsPriceId).val();
@@ -81,17 +81,18 @@
                        'descr':$('#descrid'+id).val(),
                        'userId':userId,
                        'price':price,
+                       'promo':promo,
                         'goodsId': goodsId,
                        'fromCart':fromCart},
                      success: function (data, textStatus) { // вешаем свой обработчик на функцию success*
+                     console.log(data);
                         if(data.trim()!="1"){
                             modalAlert("Ошибка записи заказа: \n"+data);
                         }
                         else{
-                            if (fromCart == 'true'){
-                                deleteCookie('cart');
-                            }
+                            deleteCookie('cart');
                             jqAlert('Заказ добавлен', reload);
+                            
                             
                         }
                      }
@@ -102,7 +103,8 @@
     }
     
     function reload(){
-    location.reload();
+        console.log("reload");
+        location.reload();
     }
     
     function refreshControlDig(cntrldg){    

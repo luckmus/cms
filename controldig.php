@@ -26,10 +26,10 @@ for ($i=0; $i<4; $i++)
 switch (rand(0,1))
 {
        case 0:
-        imagettftext ($img, 20, rand(0,70), 20+(20*$i), 40, $white, "font/arial.ttf", substr($s,$i,1));
+        imagettftext ($img, 20, rand(0,40), 20+(20*$i), 40, $white, "font/arial.ttf", substr($s,$i,1));
        break;
        case 1:
-        imagettftext ($img, 20, rand(290,360), 20+(20*$i), 40, $white, "font/arial.ttf", substr($s,$i,1));
+        imagettftext ($img, 20, rand(320,360), 20+(20*$i), 40, $white, "font/arial.ttf", substr($s,$i,1));
        break;
 }
 imagePNG($img);

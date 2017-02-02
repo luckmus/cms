@@ -45,6 +45,14 @@ class Cart{
         public function clearCart(){
             setcookie ("cart","cart",time()-3600,"/");   
         }
+        
+        public function calcDiscountSum($percent){
+            return ($this->getTotal()*$percent)/100;
+        }
+        
+        public function getTotalWithDiscount($percent){
+            return ($this->getTotal() - $this->calcDiscountSum($percent));
+        }
 }
 
 class CartItem{

@@ -55,14 +55,117 @@ class CartView{
         $res .="<button onClick=\"  console.log($('#promo_id').val()); applyPromo($('#promo_id').val());\">Применить промо-код</button>";
         $res .= "</span>";
         $res .= "</br>";
+        /*
         $res .= "Контрольное число";    
         $res .= " <font color=\"red\">*</font><input type=\"text\" name=\"rcontrdig$id\" id=\"rcontrdig$id\" size=\"4\" maxlength=\"4\"></input>";
         $cntrlDig = GetHost()."/controldig.php";
         $cntrldgId = "cntrldg$id";
         $res .= " <img src=\"$cntrlDig\" id=\"$cntrldgId\"></img><span onclick=\"refreshControlDig('$cntrldgId')\" style=\"cursor:pointer\">Обновить</span>";
         $res .= "</br>";
+        */
         $res .= "</br>";
-        $res .="<button $dis onClick=\"showAddOrderFE_cart('apply_card',null,null,'{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">Оформить</button>";
+    
+    $id = "postfix";
+    $descrCode = "<table>";
+    
+    $descrCode .= "<tr>";
+    
+    $descrCode .= "<td>";
+    $descrCode .= "Контрольное число:<font color=\"red\">*</font>";
+    $descrCode .= "</td>";
+    
+    $descrCode .= "<td>";
+    $descrCode .= "<input type=\"text\" name=\"rcontrdig$id\" id=\"rcontrdig$id\" size=\"4\" maxlength=\"4\"></input>";
+    $cntrlDig = GetHost()."/controldig.php";
+    $cntrldgId = "cntrldg$id";
+    $descrCode .= " <img src=\"$cntrlDig\" id=\"$cntrldgId\"></img><span onclick=\"refreshControlDig('$cntrldgId')\" style=\"cursor:pointer\">Обновить</span>";
+    $descrCode .= "</td>";
+    
+    $descrCode .= "</tr>";
+    
+    $descrCode .= "<tr>";
+    
+    $descrCode .= "<td>";
+    $descrCode .= "Примечание:";
+    $descrCode .= "</td>";
+    
+    $descrCode .= "<td>";
+    $descrCode .= "<textarea name=\"descr\" id=\"descrid$id\" class=\"address_elem\" rows=\"4\" cols=\"30\" >$descr</textarea>";
+    $descrCode .= "</td>";
+    
+    $descrCode .= "</tr>";
+    $msgText = "";
+    $userId = $_SESSION[_LOGIN_ID];
+    if ($userId==null){
+ 
+        $msgText .= "<tr>";
+        
+        $msgText .= "<td>";
+        $msgText .= "Имя:";
+        $msgText .= "</td>";
+        
+        $msgText .= "<td>";
+        $msgText .= "<input id=\"firstnameid$id\" name=\"firstname\" value=\"$firstname\"  size=\"33\" class=\"inputtext\" type=\"text\"></input>";
+        $msgText .= "</td>";
+        
+        $msgText .= "</tr>";
+        
+        $msgText .= "<tr>";
+        
+        $msgText .= "<td>";
+        $msgText .= "Фамилия:";
+        $msgText .= "</td>";
+        
+        $msgText .= "<td>";
+        $msgText .= "<input id=\"lastеnameid$id\" name=\"lastname\" value=\"$lastname\"  size=\"33\"  class=\"inputtext\" type=\"text\"></input>";
+        $msgText .= "</td>";
+        
+        $msgText .= "</tr>";
+        
+        $msgText .= "<tr>";
+        
+        $msgText .= "<td>";
+        $msgText .= "Телефон:<font color='red'>*</font>";
+        $msgText .= "</td>";
+        
+        $msgText .= "<td>";
+        $msgText .= "<input id=\"telid$id\" name=\"tel\"  value=\"$tel\"  size=\"33\" class=\"inputtext\" type=\"text\"></input>";
+        $msgText .= "</td>";
+        
+        $msgText .= "</tr>";
+        
+        $msgText .= "<tr>";
+        
+        $msgText .= "<td>";
+        $msgText .= "e-mail:";
+        $msgText .= "</td>";
+        
+        $msgText .= "<td>";
+        $msgText .= "<input id=\"emailid$id\" name=\"email\" value=\"$email\" size=\"33\" class=\"inputtext\" type=\"text\"></input>";
+        $msgText .= "</td>";
+        
+        $msgText .= "</tr>";
+        
+        $msgText .= "<tr>";
+        
+        $msgText .= "<td>";
+        $msgText .= "Адрес:";
+        $msgText .= "</td>";
+        
+        $msgText .= "<td>";
+        $msgText .= "<textarea name=\"adres\" id=\"adresid$id\" class=\"address_elem\" rows=\"4\" cols=\"30\">$adres</textarea>";
+        $msgText .= "</td>";
+        
+        $msgText .= "</tr>";
+ 
+    }
+    
+    $descrCode .= $msgText;    
+    $descrCode .= "</table>";
+    $descrCode .= "<br>";
+    $res .= $descrCode;
+        //$res .="<button $dis onClick=\"showAddOrderFE_cart('apply_card',null,null,'{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">Оформить</button>";
+        $res .="<button $dis onClick=\"showAddOrderBE(null, null,'$id','{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">Оформить</button>";
         $res .="<input type='hidden' id='promo_name_hidden'>";
         return $res; 
     }

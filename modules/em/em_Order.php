@@ -35,6 +35,8 @@
        public $description;
        public $managerdesc;
        public $goodsprice;                                     //цена на момент заказа
+       public $totalSum = 0;
+       public $discount = 0;
        public $cnt;
        private $parent;
 
@@ -46,7 +48,7 @@
         }
         
         private function load(){
-            $query = "SELECT id, goodsid, name, firstname, lastname,  date, tel, email, adres, iscomlete, datecomplete, description, managerdesc, goodsprice, userId, id_parent, (select count(*) from em_order where id_parent={$this->id}), cnt FROM em_order WHERE id={$this->id}";    
+            $query = "SELECT id, goodsid, name, firstname, lastname,  date, tel, email, adres, iscomlete, datecomplete, description, managerdesc, goodsprice, userId, id_parent, (select count(*) from em_order where id_parent={$this->id}), cnt, totalsum, discount FROM em_order WHERE id={$this->id}";    
             $res = mQuery($query);
             if ($row = mysql_fetch_row($res)){
                 $this->goodsId      =  $row[1];
@@ -68,6 +70,8 @@
                     $this->loadChild();
                 }
                 $this->cnt = $row[17];
+                $this->totalSum = $row[18]; 
+                $this->discount = $row[19]; 
                 
             }
             else{
@@ -163,6 +167,8 @@
                                description,
                                id_parent,
                                cnt,
+                               totalsum,
+                               discount,
                                userId     
                                )
               VALUES(".($this->goodsId == null ? "null": $this->goodsId).",
@@ -174,13 +180,16 @@
                  \"".addslashes($this->adres)."\",
                  {$this->iscomlete}, 
                  \"".addslashes($this->description)."\",
-                 ". ($this->parent==null? " null ":   addslashes($this->parent)).", 
+                 ". ($this->parent==null? " NULL ":   addslashes($this->parent)).", 
                  ".addslashes($this->cnt).", 
+                 ".addslashes($this->totalSum).", 
+                 ".addslashes($this->discount).", 
                  \"{$this->user->id}\"
               )";
-            //echo($query);      
+                 
             $res = mQuery($query);
             $this->id = mysql_insert_id();
+            //echo($query. " new id: {$this->id} \n ".mysql_info() ."\n"); 
         }
         
         private function update(){
@@ -194,6 +203,7 @@
                  email = \"".addslashes($this->email)."\", 
                  adres = \"".addslashes($this->adres)."\",
                  iscomlete = {$this->iscomlete}, 
+                 
                  description = \"".addslashes($this->description)."\"
                  WHERE id = {$this->id}";
             $res = mQuery($query);

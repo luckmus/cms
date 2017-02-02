@@ -66,6 +66,7 @@ function removeFromCart(goodsId){
 }
 
 function saveCartToCookie(cart){
+console.log(cart);
     setCookie(cookieName, "cart_"+JSON.stringify(cart), {"expired":3600});
 }
 function addGoodToCart(goodId, price){

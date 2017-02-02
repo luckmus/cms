@@ -8,6 +8,7 @@
     Includer::initOrder();
     //include "../../em/em_Order.php";
     include "../../em/em_goods.php"; 
+    include "../../em/em_promo.php"; 
     include "../../../libs/commonfunctions.php"; 
     include "../../../libs/helpers.php";     
     
@@ -29,12 +30,31 @@
     $order->email = convertToWIN1251(stripslashes($_POST['email']));
     $order->adres = convertToWIN1251(stripslashes($_POST['adress']));
     $order->description = convertToWIN1251(stripslashes($_POST['descr']));
+    $promoName = convertToWIN1251(stripslashes($_POST['promo']));
     $order->setUser(stripslashes($_POST['userId']));    
     $order->iscomlete = 0;                                               
     $order->cnt = 0;
     $fromCart = $_POST['fromCart'];
+    
+    $errmsg = $order->checkForm($rcontrdig);
+    if ($errmsg!=''){
+        echo $errmsg;
+        return;
+    }
+    
     if (($fromCart!= null) && ($fromCart=='true')){
         $cart = new Cart();
+        $promo = Promo::getPromoByName($promoName);
+        $totalSumm = 0;
+        $orderDisc = 0; 
+        $goodsPrice = $cart->getTotal();                                            
+        if ($promo!=null){
+            $totalSumm = $cart->getTotalWithDiscount($promo->value);
+            $orderDisc = $promo->value;
+        }
+        else{
+            $totalSumm =  $goodsPrice;
+        }
         foreach($cart->list as $item){
             if ($item->cnt<=0){
                 continue;
@@ -55,6 +75,9 @@
             //$order->child[count($order->child)] = $childOrder;
             array_push($order->child, $childOrder);
         }
+        $order->goodsprice = $goodsPrice;
+        $order->totalSum = $totalSumm;
+        $order->discount = $orderDisc;
     }else{
         //echo "single {$_POST['goodsId']} ";
         $order->goodsId = $_POST['goodsId'];
