@@ -406,7 +406,7 @@ function applyPromo(name){
                   
       }
     });
-}    
+}   
 
 function displayPromoInfo(data){
     if (data.id!=null){
@@ -422,4 +422,66 @@ function displayPromoInfo(data){
         $('#promo_name_hidden').val('');
         modalAlert(data.msg);
     }
+}
+
+function selectDelivery(){
+
+    if ($('[name=delivery]:checked').val()==2){
+        $('#self_descr').hide("slow");
+        $('#cur_descr').show("slow");
+    }
+    else{
+        $('#self_descr').show("slow");
+        $('#cur_descr').hide("slow");
+    }
+    
+}
+
+function searchIndex(name){
+    URL = 'http://127.0.0.1/cms/modules/FRONTEND/userSide/delivery.php?action=zipcity&city='+name;
+    console.log(URL);
+      $.ajax({
+      url: URL,
+      context: document.body,
+      success: function(data){                                                               
+      try
+          {
+                    console.log( data );
+                    var res = jQuery.parseJSON(data);
+                    if (res.flag_error==0){
+                        getDeliveryPosobility(res.zip, 100, 100);
+                    
+                    }
+          }
+      catch(err)
+          {
+            console.log(err);
+          } 
+      
+                  
+      }
+    });
+}
+
+function getDeliveryPosobility(index, price, weight){
+    URL = 'http://127.0.0.1/cms/modules/FRONTEND/userSide/delivery.php?action=tarif&index='+index+'&price='+price+'&weight='+weight;
+    
+    console.log(URL);
+      $.ajax({
+      url: URL,
+      context: document.body,
+      success: function(data){                                                               
+      try
+          {
+                    console.log( data );
+                    var res = jQuery.parseJSON(data);
+          }
+      catch(err)
+          {
+            console.log(err);
+          } 
+      
+                  
+      }
+    });
 }

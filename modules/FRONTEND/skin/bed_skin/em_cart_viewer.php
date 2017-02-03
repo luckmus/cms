@@ -66,42 +66,31 @@ class CartView{
         $res .= "</br>";
     
     $id = "postfix";
-    $descrCode = "<table>";
+    $msgText = "<table>";
     
-    $descrCode .= "<tr>";
+    $msgText .= "<tr>";
     
-    $descrCode .= "<td>";
-    $descrCode .= "Контрольное число:<font color=\"red\">*</font>";
-    $descrCode .= "</td>";
+    $msgText .= "<td>";
+    $msgText .= "Контрольное число:<font color=\"red\">*</font>";
+    $msgText .= "</td>";
     
-    $descrCode .= "<td>";
-    $descrCode .= "<input type=\"text\" name=\"rcontrdig$id\" id=\"rcontrdig$id\" size=\"4\" maxlength=\"4\"></input>";
+    $msgText .= "<td>";
+    $msgText .= "<input type=\"text\" name=\"rcontrdig$id\" id=\"rcontrdig$id\" size=\"4\" maxlength=\"4\"></input>";
     $cntrlDig = GetHost()."/controldig.php";
     $cntrldgId = "cntrldg$id";
-    $descrCode .= " <img src=\"$cntrlDig\" id=\"$cntrldgId\"></img><span onclick=\"refreshControlDig('$cntrldgId')\" style=\"cursor:pointer\">Обновить</span>";
-    $descrCode .= "</td>";
+    $msgText .= " <img src=\"$cntrlDig\" id=\"$cntrldgId\"></img><span onclick=\"refreshControlDig('$cntrldgId')\" style=\"cursor:pointer\">Обновить</span>";
+    $msgText .= "</td>";
     
-    $descrCode .= "</tr>";
+    $msgText .= "</tr>";
     
-    $descrCode .= "<tr>";
-    
-    $descrCode .= "<td>";
-    $descrCode .= "Примечание:";
-    $descrCode .= "</td>";
-    
-    $descrCode .= "<td>";
-    $descrCode .= "<textarea name=\"descr\" id=\"descrid$id\" class=\"address_elem\" rows=\"4\" cols=\"30\" >$descr</textarea>";
-    $descrCode .= "</td>";
-    
-    $descrCode .= "</tr>";
-    $msgText = "";
+
     $userId = $_SESSION[_LOGIN_ID];
     if ($userId==null){
  
         $msgText .= "<tr>";
         
         $msgText .= "<td>";
-        $msgText .= "Имя:";
+        $msgText .= "Имя (Фамилия):";
         $msgText .= "</td>";
         
         $msgText .= "<td>";
@@ -109,7 +98,7 @@ class CartView{
         $msgText .= "</td>";
         
         $msgText .= "</tr>";
-        
+/*        
         $msgText .= "<tr>";
         
         $msgText .= "<td>";
@@ -121,7 +110,7 @@ class CartView{
         $msgText .= "</td>";
         
         $msgText .= "</tr>";
-        
+*/        
         $msgText .= "<tr>";
         
         $msgText .= "<td>";
@@ -145,7 +134,7 @@ class CartView{
         $msgText .= "</td>";
         
         $msgText .= "</tr>";
-        
+/*        
         $msgText .= "<tr>";
         
         $msgText .= "<td>";
@@ -157,13 +146,36 @@ class CartView{
         $msgText .= "</td>";
         
         $msgText .= "</tr>";
- 
+  */
     }
     
-    $descrCode .= $msgText;    
-    $descrCode .= "</table>";
-    $descrCode .= "<br>";
-    $res .= $descrCode;
+    $msgText .= "<tr>";
+    
+    $msgText .= "<td>";
+    $msgText .= "Примечание:";
+    $msgText .= "</td>";
+    
+    $msgText .= "<td>";
+    $msgText .= "<textarea name=\"descr\" id=\"descrid$id\" class=\"address_elem\" rows=\"4\" cols=\"30\" >$descr</textarea>";
+    $msgText .= "</td>";
+    
+    $msgText .= "</tr>";
+        
+    $msgText .= "</table>";
+    
+    $msgText .= "<fieldset style=\"width:350px;\">
+  <legend>Доставка</legend>
+  <input type='radio' name='delivery' value='1' id='self_del' checked onChange=\"selectDelivery();\"> <label for='self_del' style=\"cursor: pointer\" >Самовывоз со склада в Санкт-Петербург</label><br>
+  <div id='self_descr' class='self_del_desc'>Осуществляется в рабочие дни <b>с 10:00 до 20:00</b> по адресу: <b>Кондратьвский пр. д62 корп. 6</b>. Обязательное предварительное согласование.</div>
+  <input type='radio' name='delivery' value='2' id='cur_del'onChange=\"selectDelivery();\"> <label for='cur_del' style=\"cursor: pointer\" >Курьерской службой</label><br>  
+  <div id='cur_descr' class='cur_del_desc'>
+  <span class='delivery_firel_descr'>Индекс или название города куда надо осуществить доставку</span><br>
+    <input type='text' id='delivery_index'><button onClick=\"searchIndex($('#delivery_index').val())\">Проверить</button >
+  </div>
+</fieldset>";
+    
+    $msgText .= "<br>";
+    $res .= $msgText;
         //$res .="<button $dis onClick=\"showAddOrderFE_cart('apply_card',null,null,'{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">Оформить</button>";
         $res .="<button $dis onClick=\"showAddOrderBE(null, null,'$id','{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">Оформить</button>";
         $res .="<input type='hidden' id='promo_name_hidden'>";

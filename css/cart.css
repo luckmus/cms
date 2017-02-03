@@ -6,3 +6,21 @@
 .promo_line{
   font-weight: bold;
 }
+
+.self_del_desc{
+    font-style: italic;
+    visibility: visible;
+    background-color: white;
+    margin-left: 20px;
+}
+
+.cur_del_desc{
+    font-style: italic;
+    display : none;
+    background-color: white;
+    margin-left: 20px;
+}
+
+.delivery_firel_descr{
+    left: 100px;
+}
