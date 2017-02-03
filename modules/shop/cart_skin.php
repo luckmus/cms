@@ -5,7 +5,7 @@
     $cart = new Cart();
     
     $cartView = new CartView($cart);
-    print '<div style="width: 80800px; height: 377px;" id="lcont"> ';
+    //print '<div style="width: 100%; height: 100%;" id="lcont"> ';
     print $cartView->getView();
-    print '</div>';
+    //print '</div>';
 ?>

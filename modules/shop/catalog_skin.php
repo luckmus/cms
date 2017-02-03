@@ -3,7 +3,7 @@
     include "modules/FRONTEND/skin/{$GLOBALS[SKIN_VAR]}/em_goods_viewer.php";
     
     $catalog = new GoodsCatalog($viewCategId);
-    print '<div style="width: 80800px; height: 377px;" id="lcont"> ';
+    //print '<div style="width: 100%; height: 100%;" id="lcont"> ';
     print $catalog->getCatalogView();
-    print '</div>';
+    //print '</div>';
 ?>

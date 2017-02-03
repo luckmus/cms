@@ -325,7 +325,7 @@ input.chb, .chb input, input.radio { vertical-align:middle; width:auto; }
 .ibasket img { margin-right:5px; }
 .basket_items img { display:block; float:right; margin:0 1px 2px 1px; }
 
-#menutop { position:relative; padding:4px 145px 0 300px; width:auto; max-width:1000px; min-width:500px; }
+#menutop { position:relative; padding:4px 145px 0 250px; width:auto; max-width:1000px; min-width:500px; }
 #menutop .menu { line-height:1em; z-index: 10;}
 #menutop .menu p { margin: 0 0 15px 0 !important; }
 #menutop .menu p a {display: block; width: 122px; text-indent: -9999em !important; background-position: 0 0; background-repeat: no-repeat; z-index:10;}

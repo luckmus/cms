@@ -20,59 +20,74 @@
             $price = $this->getViewPrice();
             $num = $this->goodsNum+551;
 //            $this->goodsNum = $this->goodsOne->id;
-            $result .= '    <div style="top: 0px; left: 0px; margin-left: 0px; width: 400px; height: 377px;" class="litem" id="'.$goodsViewId.'">
-        <div class="lview">
-            <div class="limg"><img src="'.$this->goodsOne->imagefile.'"  style=" width: 400px; height: 290px;" alt="" id="limg0"></div>
-            <div style="top: 337px;" class="netshad">
-                <table><tbody><tr>
-                <td><div class="netname">'.$this->goodsOne->name.'</div></td>
-                <td><div class="netprice">'.$price[0].'</div></td>
-                </tr></tbody></table>
-
-                <div class="buy buy_'.$num.'">
-                    <span class="show_txt_bascket">
-                        <img style="cursor: pointer;" src="add_files/i_basket.png" alt="" onClick="'.$this->getAddOrderMsgScript().'">
-                    </span>
-                </div>
-                <div class="buy buy_ok_'.$num.'" style="display:none;">
-                    <span class="show_txt_bascket">
-                        <img src="add_files/i_basket2.png" alt="">
-                    </span>
-                    <!--<span style="color:#bababa;" >Купить</span>-->
-                </div>
-
+            $result .= '  
+<div style="top: 0px; left: 0px; margin-left: 0px; width: 400px; height: 377px;" class="litem" id="'.$goodsViewId.'">
+   <div class="lview">
+      <div class="limg">
+         <img src="'.$this->goodsOne->imagefile.'" style=" width: 400px; height: 290px;" alt="" id="limg0" />
+      </div>
+      <div style="top: 337px;" class="netshad">
+         <table>
+            <tbody>
+               <tr>
+                  <td>
+                     <div class="netname">'.$this->goodsOne->name.'</div>
+                  </td>
+                  <td>
+                     <div class="netprice">'.$price[0].'</div>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+         <div class="buy buy_'.$num.'">
+            <span class="show_txt_bascket">
+               <img style="cursor: pointer;" src="add_files/i_basket.png" alt="" onClick="'.$this->getAddOrderMsgScript().'" />
+            </span>
+         </div>
+         <div class="buy buy_ok_'.$num.'" style="display:none;">
+            <span class="show_txt_bascket">
+               <img src="add_files/i_basket2.png" alt="" />
+            </span>
+            <!--<span style="color:#bababa;" >Купить</span>-->
+         </div>
+      </div>
+   </div>
+   <div class="mdescr">
+      <div class="mdspacer">
+         <div class="netname">'.$this->goodsOne->name.'</div>
+         <div class="netlogo">
+            <a href="'.$this->getLink().'">
+               <img src="add_files/item_incard.gif" alt="Подробно" />
+            </a>
+         </div>
+         <br />
+         <p>'.$descr.'</p>
+         <div class="size_descr" id=".$this->getSizeDesctValueId().">'.$price[2].'</div>
+         '.$this->getViewParams().'
+         <div class="cfx">
+            <div class="belsize">
+               <div class="belsname">
+                  Выберите
+                  <br />
+                  размер:
+               </div>
+               '.$price[1].'
             </div>
-        </div>
-        <div class="mdescr"><div class="mdspacer">
-            <div class="netname">'.$this->goodsOne->name.'</div>
-            <div class="netlogo">
-                <a href="'.$this->getLink().'"><img src="add_files/item_incard.gif" alt="Подробно"></a>
+         </div>
+         <input id="size_card_0" value="35" type="hidden" />
+         <div class="mpriceline">
+            <div class="netprice" id=".$this->getPriceValueId().">'.$price[0].'</div>
+            <div class="buy buy_'.$num.'">
+               <span class="show_txt_bascket">
+                  <img style="cursor: pointer;" src="add_files/i_basket.png" alt="" onclick="'.$this->getAddOrderMsgScript().'" />
+               </span>
+               <a href="#" onClick="'.$this->getAddOrderMsgScript().'">Купить</a>
             </div>
-<br>
-            <p>'.$descr.'</p>
-            <div class="size_descr" id='.$this->getSizeDesctValueId().'>'.$price[2].'</div>
-            '.$this->getViewParams().'
-            <div class="cfx">
-                <div class="belsize">
-                    <div class="belsname">Выберите<br>размер:</div>                                  
-                    '.$price[1].'
-                </div>
-            </div>
-            <input id="size_card_0" value="35" type="hidden">
-            <div class="mpriceline">
-                <div class="netprice" id='.$this->getPriceValueId().'>'.$price[0].'</div>
-
-                <div class="buy buy_'.$num.'">
-                    <span class="show_txt_bascket">
-                        <img style="cursor: pointer;" src="add_files/i_basket.png" alt="" onclick="'.$this->getAddOrderMsgScript().'">
-                    </span>
-                    <a href="#" onClick="'.$this->getAddOrderMsgScript().'">Купить</a>
-                </div>
-                
-            </div>
-            <img src="add_files/b_close.png" alt="" class="mclose">
-        </div></div>
-    </div>
+         </div>
+         <img src="add_files/b_close.png" alt="" class="mclose" />
+      </div>
+   </div>
+</div>
 ';
           return $result;  
         }//getView

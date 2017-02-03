@@ -22,7 +22,7 @@ switch(strtolower($action)){
         echo getDeliveryPosobility($index, $price, $weight );
     break;
     default:
-        echo '{"res": -1, "msg": "Неизвестная операция"';
+        echo '{"flag_error": -1, "comment": "Неизвестная операция"';
     break;
 	
 }

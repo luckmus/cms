@@ -46,7 +46,7 @@ class CartView{
         $res .="</tr>";     ;                                                                          
         $res .= "</tfoot>";        
         $res .="</table>"; 
-        $res .= "</br>";
+        $res .="<div class='apply_promo'>";
         $res .="<input type='checkbox' id='promo_check' 
         onChange=\" $('#promo').css('visibility', this.checked?'visible':'hidden');\">
         <label for='promo_check' style=\"cursor: pointer\" >У меня есть промо-код</label>";
@@ -54,7 +54,7 @@ class CartView{
         $res .="<input type='text' id='promo_id' size=10>";
         $res .="<button onClick=\"  console.log($('#promo_id').val()); applyPromo($('#promo_id').val());\">Применить промо-код</button>";
         $res .= "</span>";
-        $res .= "</br>";
+        $res .="</div>";
         /*
         $res .= "Контрольное число";    
         $res .= " <font color=\"red\">*</font><input type=\"text\" name=\"rcontrdig$id\" id=\"rcontrdig$id\" size=\"4\" maxlength=\"4\"></input>";
