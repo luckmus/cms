@@ -170,7 +170,7 @@ class CartView{
   <input type='radio' name='delivery' value='2' id='cur_del'onChange=\"selectDelivery();\"> <label for='cur_del' style=\"cursor: pointer\" >Курьерской службой</label><br>  
   <div id='cur_descr' class='cur_del_desc'>
   <span class='delivery_firel_descr'>Индекс или название города куда надо осуществить доставку</span><br>
-    <input type='text' id='delivery_index'><button onClick=\"searchIndex($('#delivery_index').val())\">Проверить</button >
+    <input type='text' id='delivery_index'><button onClick=\"getDeliveryPosobility($('#delivery_index').val(), 100, 200)\">Проверить</button >
   </div>
 </fieldset>";
     
