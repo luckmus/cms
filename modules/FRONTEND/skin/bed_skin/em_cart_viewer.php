@@ -171,10 +171,16 @@ class CartView{
   <div id='cur_descr' class='cur_del_desc'>
   <span class='delivery_firel_descr'>Индекс или название города куда надо осуществить доставку</span><br>
     <input type='text' id='delivery_index'><button onClick=\"getDeliveryPosobility($('#delivery_index').val(), 100, 200)\">Проверить</button >
+    
     <div id='delivery_places'></div>
   </div>
-</fieldset>";
-    
+</fieldset> 
+";
+
+    $msgText .='<script type="text/javascript">
+    // Создает обработчик события window.onLoad
+
+</script>';
     $msgText .= "<br>";
     $res .= $msgText;
         //$res .="<button $dis onClick=\"showAddOrderFE_cart('apply_card',null,null,'{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">Оформить</button>";

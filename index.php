@@ -64,6 +64,7 @@ foreach($_COOKIE as $cook){
     <script src="js/common.js"></script>
     <script src="js/script.js"></script>
     <script src="js/cookie.js"></script>
+    <script src="https://api-maps.yandex.ru/1.1/index.xml" type="text/javascript"></script>
     
     <script>
     <?php

@@ -488,7 +488,7 @@ function getDeliveryPosobility(index, price, weight){
 }
 
 function applyDeliveryPlaces(places){
-$('#delivery_places').html('');
+
     if (places.flag_error>0){
         jqAlert(places.comment, null);
         return;
@@ -496,14 +496,49 @@ $('#delivery_places').html('');
     var id = "accordion"+getRandId();
     var accordionText = '';
     
-    
+    var geoSetted = false;
+    var geo1 = 37.64;
+    var geo2 = 55.76;
     for(var i=0; i<places.delivery_ways.length; i++){
         var item = places.delivery_ways[i];
        accordionText += placeView(item, id);
+       if ((geoSetted==false)){
+            var geo = extractGEO(item);
+            if (geo!=null){
+                geo1 = geo[0];
+                geo2 = geo[1];
+                geoSetted = true;
+            }
+       }
     }
-    $('#delivery_places').html('<div id="'+id+'">'+accordionText+' </div>');
+    $('#delivery_places').html("<div id='YMapsID' style='width:600px;height:400px'></div>"+'<div id="'+id+'">'+accordionText+' </div>');
     $( "#"+id ).accordion();
+    $('#delivery_places').html();
+    YMaps.jQuery(function () {
+        // —оздает экземпл€р карты и прив€зывает его к созданному контейнеру
+        console.log("cart setted -1");
+        //var map = new YMaps.Map(YMaps.jQuery("#YMapsID")[0]);
+        var map = new YMaps.Map(document.getElementById("YMapsID"));
+        console.log("cart setted0");    
+        // ”станавливает начальные параметры отображени€ карты: центр карты и коэффициент масштабировани€
+        map.setCenter(new YMaps.GeoPoint(geo1, geo2), 10);
+        console.log("cart setted");
+    });
 
+}
+
+function extractGEO(item){
+       if ((item.GPS!='')){
+            var from = item.GPS.indexOf("lng:")+4;
+            var till = item.GPS.indexOf(";", from);
+            geo1 = item.GPS.substring(from, till);
+            from = item.GPS.indexOf("lat:")+4;
+            till = item.GPS.indexOf(";", from);
+            geo2 = item.GPS.substring(from);
+            console.log(geo2);
+            return new Array(geo1, geo2);
+       }
+       return null;
 }
 
 function placeView(item, id){
