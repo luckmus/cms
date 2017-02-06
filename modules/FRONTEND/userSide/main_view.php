@@ -56,7 +56,7 @@
              mainViewer::initVars();
              require_once "modules/em/init_module.php";
              require_once "modules/FRONTEND/skin/common_skin/common_goodsone.php";
-             echo "<div style='margin: 10px 50px 20px 50px';>";
+             echo "<div style='margin: 10px 50px 20px 50px; width:100%;'>";
              switch(mainViewer::$show){
                 case "":
                     $viewCategId = null;                    

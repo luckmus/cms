@@ -163,7 +163,7 @@ class CartView{
         
     $msgText .= "</table>";
     
-    $msgText .= "<fieldset style=\"width:350px;\">
+    $msgText .= "<fieldset style=\"width:100%;\">
   <legend>Доставка</legend>
   <input type='radio' name='delivery' value='1' id='self_del' checked onChange=\"selectDelivery();\"> <label for='self_del' style=\"cursor: pointer\" >Самовывоз со склада в Санкт-Петербург</label><br>
   <div id='self_descr' class='self_del_desc'>Осуществляется в рабочие дни <b>с 10:00 до 20:00</b> по адресу: <b>Кондратьвский пр. д62 корп. 6</b>. Обязательное предварительное согласование.</div>
@@ -171,6 +171,7 @@ class CartView{
   <div id='cur_descr' class='cur_del_desc'>
   <span class='delivery_firel_descr'>Индекс или название города куда надо осуществить доставку</span><br>
     <input type='text' id='delivery_index'><button onClick=\"getDeliveryPosobility($('#delivery_index').val(), 100, 200)\">Проверить</button >
+    <div id='delivery_places'></div>
   </div>
 </fieldset>";
     

@@ -475,6 +475,7 @@ function getDeliveryPosobility(index, price, weight){
           {
                     console.log( data );
                     var res = jQuery.parseJSON(data);
+                    applyDeliveryPlaces(res);
           }
       catch(err)
           {
@@ -484,4 +485,41 @@ function getDeliveryPosobility(index, price, weight){
                   
       }
     });
+}
+
+function applyDeliveryPlaces(places){
+$('#delivery_places').html('');
+    if (places.flag_error>0){
+        jqAlert(places.comment, null);
+        return;
+    }
+    var id = "accordion"+getRandId();
+    var accordionText = '';
+    
+    
+    for(var i=0; i<places.delivery_ways.length; i++){
+        var item = places.delivery_ways[i];
+       accordionText += placeView(item, id);
+    }
+    $('#delivery_places').html('<div id="'+id+'">'+accordionText+' </div>');
+    $( "#"+id ).accordion();
+
+}
+
+function placeView(item, id){
+    var res = '<h3>'+item.Наименование+'</h3>';
+    res += '<div>';
+    
+    res += '<div><span class="delivery_item">Стоимость:</span>'+item.Стоимость+"</div>";
+    if (item.Адрес!=''){
+        res += '<div><span class="delivery_item">Адрес:</span>'+item.Адрес+"</div>";
+    }
+    if (item['Время работы']!=''){
+        res += '<div><span class="delivery_item">Время работы:</span>'+item['Время работы']+"</div>";
+    }
+    res += "<button onClick=\"$( '#"+id+"' ).accordion( 'option', 'disabled', true );\">Выбрать</button>";
+    
+    
+    res += '</div>';
+    return res;
 }

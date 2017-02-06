@@ -51,6 +51,7 @@ foreach($_COOKIE as $cook){
     <script src="js/ui/jquery.ui.core.js"></script>
     <script src="js/ui/jquery.ui.widget.js"></script>
     <script src="js/ui/jquery.ui.tabs.js"></script>    
+    <script src="js/ui/jquery.ui.accordion.js"></script>    
     <script src="js/external/jquery.bgiframe-2.1.2.js"></script>
     <script src="js/ui/jquery.ui.mouse.js"></script>
     <script src="js/ui/jquery.ui.button.js"></script>
@@ -148,8 +149,8 @@ $(document).ready(function(){
      
        echo getModalAlertPlace();
 //       mainViewer::showCateg();
-       echo "<div style='margin: 10px 50px 20px 50px';>";
-       print '<div style="width: 100%; height: 100%;" id="lcont"> '; 
+       echo "<div style='margin: 100px 50px 20px 100px';>";
+       print '<div style="width:70%; height:100%;" id="lcont1">'; 
        mainViewer::showData();
        print '</div>'; 
      ?> 
