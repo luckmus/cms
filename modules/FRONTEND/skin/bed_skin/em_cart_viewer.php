@@ -47,9 +47,11 @@ class CartView{
         $res .= "</tfoot>";        
         $res .="</table>"; 
         $res .="<div class='apply_promo'>";
+        $res .= "<input type='hidden' value='$summ' id='paymentSum'>";
         $res .="<input type='checkbox' id='promo_check' 
         onChange=\" $('#promo').css('visibility', this.checked?'visible':'hidden');\">
         <label for='promo_check' style=\"cursor: pointer\" >У меня есть промо-код</label>";
+        
         $res .= "<span id='promo' style=\"visibility: hidden\">";
         $res .="<input type='text' id='promo_id' size=10>";
         $res .="<button onClick=\"  console.log($('#promo_id').val()); applyPromo($('#promo_id').val());\">Применить промо-код</button>";
@@ -167,13 +169,14 @@ class CartView{
   <legend>Доставка</legend>
   <input type='radio' name='delivery' value='1' id='self_del' checked onChange=\"selectDelivery();\"> <label for='self_del' style=\"cursor: pointer\" >Самовывоз со склада в Санкт-Петербург</label><br>
   <div id='self_descr' class='self_del_desc'>Осуществляется в рабочие дни <b>с 10:00 до 20:00</b> по адресу: <b>Кондратьвский пр. д62 корп. 6</b>. Обязательное предварительное согласование.</div>
-  <input type='radio' name='delivery' value='2' id='cur_del'onChange=\"selectDelivery();\"> <label for='cur_del' style=\"cursor: pointer\" >Курьерской службой</label><br>  
+  <input type='radio' name='delivery' value='2' id='cur_del'onChange=\"selectDelivery();\"> <label for='cur_del' style=\"cursor: pointer\" >До пункта самовывоза BoxBerry</label><br>  
   <div id='cur_descr' class='cur_del_desc'>
-  <span class='delivery_firel_descr'>Индекс или название города куда надо осуществить доставку</span><br>
-    <input type='text' id='delivery_index'><button onClick=\"getDeliveryPosobility($('#delivery_index').val(), 100, 200)\">Проверить</button >
+       {$this->getDeliveryMethodBoxBerry(1000)}
     
-    <div id='delivery_places'></div>
+    <div id='delivery_places'></div> 
   </div>
+  <input type='radio' name='delivery' value='3' id='bb_del' onChange=\"selectDelivery();\"> <label for='bb_del' style=\"cursor: pointer\" >Курьерской службой</label><br>  
+  {$this->getDeliveryMethodBoxBerryCur(1000)}
 </fieldset> 
 ";
 
@@ -188,7 +191,31 @@ class CartView{
         $res .="<input type='hidden' id='promo_name_hidden'>";
         return $res; 
     }
+    
+    private function getDeliveryMethodb2cl(){
+     return "  <span class='delivery_firel_descr'>Индекс или название города куда надо осуществить доставку</span><br>
+        <input type='text' id='delivery_index'><button onClick=\"getDeliveryPosobility($('#delivery_index').val(), 100, 200)\">Проверить</button >";   
 
+    }
+    
+    private function getDeliveryMethodBoxBerry($weight){
+     return "<a href=\"#\" onclick=\" boxberry.open(widjetCallback, 'm2FltAKjbXQBLa2xqZ4sPQ==', 'Санкт-Петербург', '',$('#paymentSum').val(), $weight, $('#paymentSum').val(),0,0,0  ); return false;\">Выбрать пункт выдачи на карте</a>";   
+
+    }
+    
+    private function getDeliveryMethodBoxBerryCur($weight){
+     return "<div id='bb_descr' class='cur_del_desc'> 
+        <span class='delivery_firel_descr'>Индекс города куда надо осуществить доставку</span><br>
+        <input type='text' id='bb_delivery_index'><button onClick=\"getBBPoints($('#bb_delivery_index').val(),  $('#paymentSum').val(), $weight)\">Проверить</button >
+        <div id='bb_curier_info' class='cur_del_desc'>
+            <table>
+                <tr><td class='delivery_item'>Стоимость достаки:<td><td><span id='bb_cur_del_price'></span><td></tr>
+                <tr><td class='delivery_item'>Срок доставки (дней):<td><td><span id='bb_cur_del_period'></span><td></tr>
+            </table>
+        </div>  
+  </div>";   
+
+    }
     
 }
 

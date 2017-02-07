@@ -5,7 +5,8 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache"); 
 header("Content-type: text/html; charset=windows-1251");
 
-require_once "../../b2cpl/integration.php";    
+//require_once "../../b2cpl/integration.php";    
+require_once "../../boxberry/integration.php";    
 
 
 $action=$_GET['action'];

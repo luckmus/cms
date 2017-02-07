@@ -63,8 +63,14 @@ foreach($_COOKIE as $cook){
     <script src="js/ui/jquery.effects.core.js"></script>
     <script src="js/common.js"></script>
     <script src="js/script.js"></script>
+    
     <script src="js/cookie.js"></script>
+    <!--
+    <script src="js/b2cl.js"></script>
     <script src="https://api-maps.yandex.ru/1.1/index.xml" type="text/javascript"></script>
+    -->
+    <script type="text/javascript" src="//points.boxberry.ru/js/boxberry.js"> </script>
+    <script src="js/boxberry.js"></script>
     
     <script>
     <?php
