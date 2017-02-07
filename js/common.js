@@ -141,7 +141,9 @@ function runAJAXXML1(URL,MsgPlace){
                 
                 close: function() {            
                     $("body").remove("#"+id);
-                    callback(); 
+                    if (callback!=null){
+                        callback(); 
+                    }
                 }
             }
         );
