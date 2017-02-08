@@ -37,7 +37,7 @@ console.log("showCurrierInfo", info );
     if (Array.isArray(info)==true){
         info = info[0];
     }
-    $('#bb_cur_del_price').html(info.price_service);
+    $('#bb_cur_del_price').html(info.price);
     $('#bb_cur_del_period').html(info.delivery_period);
     $('#bb_curier_info').show("slow");
 }
