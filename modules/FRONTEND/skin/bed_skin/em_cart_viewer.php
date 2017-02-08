@@ -167,7 +167,8 @@ class CartView{
     
     $msgText .= "<fieldset style=\"width:100%;\">
   <legend>Доставка</legend>
-  <input type='radio' name='delivery' value='1' id='self_del' checked onChange=\"selectDelivery();\"> <label for='self_del' style=\"cursor: pointer\" >Самовывоз со склада в Санкт-Петербург</label><br>
+  <div id='select_delivery_panel'>
+  <input type='radio' name='delivery' value='1' id='self_del' onChange=\"selectDelivery();\"> <label for='self_del' style=\"cursor: pointer\" >Самовывоз со склада в Санкт-Петербург</label><br>
   <div id='self_descr' class='self_del_desc'>Осуществляется в рабочие дни <b>с 10:00 до 20:00</b> по адресу: <b>Кондратьвский пр. д62 корп. 6</b>. Обязательное предварительное согласование.</div>
   <input type='radio' name='delivery' value='2' id='cur_del'onChange=\"selectDelivery();\"> <label for='cur_del' style=\"cursor: pointer\" >До пункта самовывоза BoxBerry</label><br>  
   <div id='cur_descr' class='cur_del_desc'>
@@ -177,13 +178,12 @@ class CartView{
   </div>
   <input type='radio' name='delivery' value='3' id='bb_del' onChange=\"selectDelivery();\"> <label for='bb_del' style=\"cursor: pointer\" >Курьерской службой</label><br>  
   {$this->getDeliveryMethodBoxBerryCur(1000)}
+  </div>
+  <div id='selected_delivery_method_panel'></div>
 </fieldset> 
+<input type='hidden' id='selected_delivery_method'>
 ";
 
-    $msgText .='<script type="text/javascript">
-    // Создает обработчик события window.onLoad
-
-</script>';
     $msgText .= "<br>";
     $res .= $msgText;
         //$res .="<button $dis onClick=\"showAddOrderFE_cart('apply_card',null,null,'{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">Оформить</button>";
@@ -212,6 +212,7 @@ class CartView{
                 <tr><td class='delivery_item'>Стоимость достаки:<td><td><span id='bb_cur_del_price'></span><td></tr>
                 <tr><td class='delivery_item'>Срок доставки (дней):<td><td><span id='bb_cur_del_period'></span><td></tr>
             </table>
+            <a id='sel_cur_del' onClick='selectDeleveryMethod(3, null)'>Доставить курьером</a>
         </div>  
   </div>";   
 

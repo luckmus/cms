@@ -79,6 +79,7 @@
                        'email':$('#emailid'+id).val(),
                        'adress':$('#adresid'+id).val(),
                        'descr':$('#descrid'+id).val(),
+                       'delivery':$('#selected_delivery_method').val(),
                        'userId':userId,
                        'price':price,
                        'promo':promo,
@@ -426,24 +427,91 @@ function displayPromoInfo(data){
 }
 
 function selectDelivery(){
-
+    
     if ($('[name=delivery]:checked').val()==2){
         $('#self_descr').hide("slow");
         $('#cur_descr').show("slow");
         $('#bb_descr').hide("slow");
-        $('#bb_curier_info').hide("slow");
-    }
-    else if ($('[name=delivery]:checked').val()==1){ 
+        $('#bb_curier_info').hide("slow");       
+        $('#selected_delivery_method_panel').hide("slow");
+    
+    }else if ($('[name=delivery]:checked').val()==3){
+         $('#self_descr').hide("slow");
+        $('#cur_descr').hide("slow");
+        $('#bb_descr').show("slow");
+        //selectDeleveryMethod(3, null);
+        $('#selected_delivery_method_panel').hide("slow");
+    }else   if ($('[name=delivery]:checked').val()==1){ 
         $('#self_descr').show("slow");
         $('#cur_descr').hide("slow");
         $('#bb_descr').hide("slow");
         $('#bb_curier_info').hide("slow");
-    }else{
-         $('#self_descr').hide("slow");
+        selectDeleveryMethod(1, null);
+          
+    }
+    else{
+       $('#self_descr').show("slow");
         $('#cur_descr').hide("slow");
-        $('#bb_descr').show("slow");
+        $('#bb_descr').hide("slow");
+        $('#bb_curier_info').hide("slow");
     }
     
+}
+/**
+  1-самовывоз
+  2-ПВЗ
+  3-курьер
+*/
+function selectDeleveryMethod(method, pvz){
+
+    $('#selected_delivery_method').val();
+    switch(method){
+        case 1:
+            $('#selected_delivery_method').val('{"method":1}');
+            showDeliveryInfo(method, null);
+        break;
+        case 2:
+            $('#selected_delivery_method').val('{"method":2, "pvzId":"'+pvz.id+'"}');
+            showDeliveryInfo(method, pvz);
+        break;
+        case 3:
+            $('#selected_delivery_method').val('{"method":3}');
+            showDeliveryInfo(method, null);
+        break;
+    }
+    
+}
+function showDeliveryInfo(method, pvz){
+    $('#selected_delivery_method_panel').show("slow");    
+    $('#select_delivery_panel').hide("slow");  
+    var text = '<a href="#" onclick="changeDeleveryMethod()"><img src="icons/Pencil-icon.png" alt="Изменить способ доставки" title="Изменить способ доставки"></a>';
+    switch(method){
+        case 1:
+            text += getDeliveryInfoSelf();
+        break;
+        case 2:
+            text += getDeliveryInfoPVZ(pvz);
+        break;
+    }
+    $('#selected_delivery_method_panel').html(text);
+}
+
+function getDeliveryInfoPVZ(pvz){
+    var text = '<table><tr><td>Город:</td><td>'+pvz.name+'</td></tr><tr><td>Адрес:<td>'+pvz.address+'</td></tr><tr><td>График работы::<td>'+pvz.workschedule+'</td></tr><tr><td>Телефон:<td>'+pvz.phone+'</td></tr><tr><td>Стоимость доставки:<td><b>'+pvz.price+' руб.</b></td></tr><tr><td>Срок доставки:<td><b>'+pvz.period+' дней</b></td></tr></table>';
+    return text;
+}
+
+function getDeliveryInfoSelf(){
+    var text = '<div>Самовывоз</div>';
+    return text;
+}
+
+function changeDeleveryMethod(){
+   $('#selected_delivery_method_panel').hide("slow");    
+   $('#select_delivery_panel').show("slow");  
+   $('#selected_delivery_method').val('');
+   $('[name=delivery]:checked').removeAttr('checked');     
+   selectDelivery();
 }
 
 
