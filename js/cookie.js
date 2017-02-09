@@ -98,7 +98,7 @@ function addGoodToCart(goodId, price){
     showCartValueNum(cart.length);
     console.log("add cookie");
     console.log(getCookie(cookieName));
-    afterAddToCartDialog("http://127.0.0.1/cms/");
+    afterAddToCartDialog(host);
     //console.log(document.cookie); 
 }
 

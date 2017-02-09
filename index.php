@@ -157,7 +157,7 @@ $(document).ready(function(){
        echo getModalAlertPlace();
 //       mainViewer::showCateg();
        echo "<div style='margin: 100px 50px 20px 100px';>";
-       print '<div style="width:70%; height:100%;" id="lcont1">'; 
+       print '<div style="width:70%; height:600px;" id="lcont1">'; 
        mainViewer::showData();
        print '</div>'; 
      ?> 

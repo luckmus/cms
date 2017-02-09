@@ -76,7 +76,7 @@
          </div>
          <input id="size_card_0" value="35" type="hidden" />
          <div class="mpriceline">
-            <div class="netprice" id=".$this->getPriceValueId().">'.$price[0].'</div>
+            <div class="netprice" id='.$this->getPriceValueId().'>'.$price[0].'</div>
             <div class="buy buy_'.$num.'">
                <span class="show_txt_bascket">
                   <img style="cursor: pointer;" src="add_files/i_basket.png" alt="" onclick="'.$this->getAddOrderMsgScript().'" />

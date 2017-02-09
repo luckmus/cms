@@ -471,19 +471,20 @@ function selectDeleveryMethod(method, pvz){
             showDeliveryInfo(method, null);
         break;
         case 2:
-            $('#selected_delivery_method').val('{"method":2, "pvzId":"'+pvz.id+'"}');
+            $('#selected_delivery_method').val('{"method":2, "pvzId":'+JSON.stringify(pvz)+'}');      
             showDeliveryInfo(method, pvz);
         break;
         case 3:
-            $('#selected_delivery_method').val('{"method":3}');
-            showDeliveryInfo(method, null);
+            $('#selected_delivery_method').val('{"method":3, "curr":'+JSON.stringify(pvz)+'}');
+            showDeliveryInfo(method, pvz);
+            
         break;
     }
+    console.log($('#selected_delivery_method').val());
     
 }
 function showDeliveryInfo(method, pvz){
-    $('#selected_delivery_method_panel').show("slow");    
-    $('#select_delivery_panel').hide("slow");  
+    
     var text = '<a href="#" onclick="changeDeleveryMethod()"><img src="icons/Pencil-icon.png" alt="Изменить способ доставки" title="Изменить способ доставки"></a>';
     switch(method){
         case 1:
@@ -492,7 +493,17 @@ function showDeliveryInfo(method, pvz){
         case 2:
             text += getDeliveryInfoPVZ(pvz);
         break;
+        case 3:
+            var res = getDeliveryInfoCur(pvz);
+            if (res!=false){
+                text += res;
+            }else{
+                return;
+            }
+        break;
     }
+    $('#selected_delivery_method_panel').show("slow");    
+    $('#select_delivery_panel').hide("slow");  
     $('#selected_delivery_method_panel').html(text);
 }
 
@@ -512,6 +523,25 @@ function changeDeleveryMethod(){
    $('#selected_delivery_method').val('');
    $('[name=delivery]:checked').removeAttr('checked');     
    selectDelivery();
+}
+
+function getDeliveryInfoCur(info){
+    if ($('#cur_city_name').val().trim()==''){
+        jqAlert('Название населенного пунскта не введено', null);
+        return false;
+    }
+    if ($('#cur_address').val().trim()==''){
+        jqAlert('Адрес, по которому необходимо осуществить доставку, не введен', null);
+        return false;
+    }
+    
+    var text = '<table><tr><td>Населенный пункт:</td><td>'+$('#cur_city_name').val().trim()+'</td></tr><tr><td>Адрес:<td>'+$('#cur_address').val().trim()+'</td></tr><tr><td>Стоимость доставки:<td><b>'+info.price+' руб.</b></td></tr><tr><td>Срок доставки:<td><b>'+info.delivery_period+' дней</b></td></tr></table>';
+    var deliveryDescr = JSON.parse(   $('#selected_delivery_method').val());
+    deliveryDescr.address = $('#cur_address').val().trim();    
+    deliveryDescr.city = $('#cur_city_name').val().trim();
+    $('#selected_delivery_method').val(JSON.stringify(deliveryDescr)); 
+    //console.log($('#selected_delivery_method').val());
+    return text;
 }
 
 

@@ -15,7 +15,11 @@ URL = host+'/modules/FRONTEND/userSide/delivery.php?action=tarif&index='+index+'
           {
                     console.log( data );
                     var res = jQuery.parseJSON(data);
-                    showCurrierInfo(res);
+                    if ((res.price==null) || (res.price==0)){
+                        jqAlert(' урьерска€ доставка по данному адресу невозможна', null);
+                    }else{
+                        showCurrierInfo(res);
+                    }
           }
       catch(err)
           {
@@ -39,5 +43,6 @@ console.log("showCurrierInfo", info );
     }
     $('#bb_cur_del_price').html(info.price);
     $('#bb_cur_del_period').html(info.delivery_period);
-    $('#bb_curier_info').show("slow");
+    $('#bb_curier_info').show("slow");   
+    $( "#select_cur_del" ).click(function() {selectDeleveryMethod(3, info)});
 }

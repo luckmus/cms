@@ -168,15 +168,15 @@ class CartView{
     $msgText .= "<fieldset style=\"width:100%;\">
   <legend>Доставка</legend>
   <div id='select_delivery_panel'>
-  <input type='radio' name='delivery' value='1' id='self_del' onChange=\"selectDelivery();\"> <label for='self_del' style=\"cursor: pointer\" >Самовывоз со склада в Санкт-Петербург</label><br>
+  <input $dis type='radio' name='delivery' value='1' id='self_del' onChange=\"selectDelivery();\"> <label for='self_del' style=\"cursor: pointer\" >Самовывоз со склада в Санкт-Петербург</label><br>
   <div id='self_descr' class='self_del_desc'>Осуществляется в рабочие дни <b>с 10:00 до 20:00</b> по адресу: <b>Кондратьвский пр. д62 корп. 6</b>. Обязательное предварительное согласование.</div>
-  <input type='radio' name='delivery' value='2' id='cur_del'onChange=\"selectDelivery();\"> <label for='cur_del' style=\"cursor: pointer\" >До пункта самовывоза BoxBerry</label><br>  
+  <input $dis type='radio' name='delivery' value='2' id='cur_del'onChange=\"selectDelivery();\"> <label for='cur_del' style=\"cursor: pointer\" >До пункта самовывоза BoxBerry</label><br>  
   <div id='cur_descr' class='cur_del_desc'>
        {$this->getDeliveryMethodBoxBerry(1000)}
     
     <div id='delivery_places'></div> 
   </div>
-  <input type='radio' name='delivery' value='3' id='bb_del' onChange=\"selectDelivery();\"> <label for='bb_del' style=\"cursor: pointer\" >Курьерской службой</label><br>  
+  <input $dis type='radio' name='delivery' value='3' id='bb_del' onChange=\"selectDelivery();\"> <label for='bb_del' style=\"cursor: pointer\" >Курьерской службой</label><br>  
   {$this->getDeliveryMethodBoxBerryCur(1000)}
   </div>
   <div id='selected_delivery_method_panel'></div>
@@ -212,7 +212,17 @@ class CartView{
                 <tr><td class='delivery_item'>Стоимость достаки:<td><td><span id='bb_cur_del_price'></span><td></tr>
                 <tr><td class='delivery_item'>Срок доставки (дней):<td><td><span id='bb_cur_del_period'></span><td></tr>
             </table>
-            <a id='sel_cur_del' onClick='selectDeleveryMethod(3, null)'>Доставить курьером</a>
+            <div id='curier_delivery_address'>
+            <div>
+            <label for='cur_city_name'>Название населенного пункта:<font color=\"red\">*</font><label><br>
+            <input type='text' id='cur_city_name'>
+            </div>
+            <div>
+            <label for='cur_address'>Адрес доставки:<font color=\"red\">*</font><label><br>
+            <textarea  id='cur_address'  rows=\"4\" cols=\"30\"></textarea>
+            </div>
+            </div>
+            <button id='select_cur_del' onClick=\"\">Доставить курьером</button >
         </div>  
   </div>";   
 
