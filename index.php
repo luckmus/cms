@@ -26,10 +26,10 @@ foreach($_COOKIE as $cook){
 	<title><?php echo mainViewer::getTitle(); ?></title>
 	<meta http-equiv="content-type" content="text/html; charset=windows-1251">
     <meta name="keywords" content="магазин постельного белья">
-    <meta name="description" content="магазин постельного белья">        
-	<script type="text/javascript" src="add_files/jquery_003.js"></script>
-    <script type="text/javascript" src="add_files/jquery-ui.js"></script>
-    <script type="text/javascript" src="add_files/jquery_002.js"></script>
+    <meta name="description" content="магазин постельного белья">                                
+	<!--<script type="text/javascript" src="add_files/jquery_003.js"></script>
+    <script type="text/javascript" src="add_files/jquery-ui.js"></script>      
+    <script type="text/javascript" src="add_files/jquery_002.js"></script>  --> 
     <script type="text/javascript" src="add_files/swfupload_002.js"></script>
     <link href="add_files/default.css" rel="stylesheet" media="all">
     <script type="text/javascript" src="add_files/handlers.js"></script>
@@ -45,9 +45,9 @@ foreach($_COOKIE as $cook){
      <!--<link rel="icon" type="image/jpg" href="ico.jpg" />-->
      
     <link rel="stylesheet" href="themes/base/jquery.ui.all.css">
-    <script src="js/jquery-1.6.2.js"></script>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
     <script src="js/jquery-ui-1.8.16.custom.min.js"></script>
-    
+               
     <script src="js/ui/jquery.ui.core.js"></script>
     <script src="js/ui/jquery.ui.widget.js"></script>
     <script src="js/ui/jquery.ui.tabs.js"></script>    
@@ -58,7 +58,7 @@ foreach($_COOKIE as $cook){
     <script src="js/ui/jquery.ui.draggable.js"></script>
     <script src="js/ui/jquery.ui.position.js"></script>
     <script src="js/ui/jquery.ui.resizable.js"></script>
-
+    
     <script src="js/ui/jquery.ui.dialog.js"></script>
     <script src="js/ui/jquery.effects.core.js"></script>
     <script src="js/common.js"></script>

@@ -442,8 +442,7 @@ function selectDelivery(){
     }else if ($('[name=delivery]:checked').val()==3){
          $('#self_descr').hide("slow");
         $('#cur_descr').hide("slow");
-        $('#bb_descr').show("slow");
-        //selectDeleveryMethod(3, null);
+        $('#bb_descr').show("slow");   
         $('#selected_delivery_method_panel').hide("slow");
     }else   if ($('[name=delivery]:checked').val()==1){ 
         $('#self_descr').show("slow");
@@ -543,11 +542,13 @@ function getDeliveryInfoCur(info){
     var deliveryDescr = JSON.parse(   $('#selected_delivery_method').val());
     deliveryDescr.address = $('#cur_address').val().trim();    
     deliveryDescr.city = $('#cur_city_name').val().trim();
-    deliveryDescr.index = $('#bb_delivery_index').val().trim();
+    deliveryDescr.index = $('#bb_delivery_index').val().trim();    
     $('#selected_delivery_method').val(JSON.stringify(deliveryDescr)); 
     //console.log($('#selected_delivery_method').val());
     return text;
 }
+
+
 
 
 

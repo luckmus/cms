@@ -6,6 +6,7 @@ function widjetCallback(result){
 function getBBPoints(index, price, weigth){
 
 $('#bb_curier_info').hide("slow");
+$( "#select_cur_del" ).off('click');
 URL = host+'/modules/FRONTEND/userSide/delivery.php?action=tarif&index='+index+'&price='+price+'&weight='+weigth;
       $.ajax({
       url: URL,
@@ -44,5 +45,14 @@ console.log("showCurrierInfo", info );
     $('#bb_cur_del_price').html(info.price);
     $('#bb_cur_del_period').html(info.delivery_period);
     $('#bb_curier_info').show("slow");   
-    $( "#select_cur_del" ).click(function() {selectDeleveryMethod(3, info)});
+    $( "#select_cur_del" ).on('click',function() {selectDeleveryMethod(3, info)});
+    $( "#bb_delivery_index" ).on('input', function() { clearDeliveryInfoOnChangeIndexAfterCalculatePrice() });
+}
+
+function clearDeliveryInfoOnChangeIndexAfterCalculatePrice(){
+$( "#bb_delivery_index" ).off('input');
+    jqAlert('ѕроизведено изменение индекса курьерской доставки. ¬о избежание не точных расчетов, необходимо вновь выбрать способ доставки',null);
+    $('#selected_delivery_method').val('');
+    
+    changeDeleveryMethod();
 }
