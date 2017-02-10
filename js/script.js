@@ -62,6 +62,10 @@
     }
     
     function showAddOrderBE(goodsId, goodsPriceId,id,userId, fromCart, promo){
+        if ($('#selected_delivery_method').val().trim()==''){
+            jqAlert('Способ доставки не выбран.', null);
+            return;
+        }
         URL = host+"modules/BACKEND/userSide/add_order_be.php";
         console.log("fromCart", fromCart);
         var price = $('#'+goodsPriceId).val();
@@ -77,13 +81,13 @@
                        'lastname': $('#lastеnameid'+id).val(),
                        'tel':$('#telid'+id).val(),
                        'email':$('#emailid'+id).val(),
-                       'adress':$('#adresid'+id).val(),
+                       //'adress':$('#adresid'+id).val(),
                        'descr':$('#descrid'+id).val(),
                        'delivery':$('#selected_delivery_method').val(),
                        'userId':userId,
                        'price':price,
                        'promo':promo,
-                        'goodsId': goodsId,
+                       'goodsId': goodsId,
                        'fromCart':fromCart},
                      success: function (data, textStatus) { // вешаем свой обработчик на функцию success*
                      console.log(data);
@@ -539,6 +543,7 @@ function getDeliveryInfoCur(info){
     var deliveryDescr = JSON.parse(   $('#selected_delivery_method').val());
     deliveryDescr.address = $('#cur_address').val().trim();    
     deliveryDescr.city = $('#cur_city_name').val().trim();
+    deliveryDescr.index = $('#bb_delivery_index').val().trim();
     $('#selected_delivery_method').val(JSON.stringify(deliveryDescr)); 
     //console.log($('#selected_delivery_method').val());
     return text;

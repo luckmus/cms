@@ -28,7 +28,7 @@
     $order->lastname = convertToWIN1251(stripslashes($_POST['lastname']));
     $order->tel = convertToWIN1251(stripslashes($_POST['tel']));
     $order->email = convertToWIN1251(stripslashes($_POST['email']));
-    $order->adres = convertToWIN1251(stripslashes($_POST['adress']));
+    $order->adres = convertToWIN1251(stripslashes($_POST['delivery']));
     $order->description = convertToWIN1251(stripslashes($_POST['descr']));
     $promoName = convertToWIN1251(stripslashes($_POST['promo']));
     $order->setUser(stripslashes($_POST['userId']));    
@@ -66,7 +66,7 @@
             $childOrder->lastname = convertToWIN1251(stripslashes($_POST['lastname']));
             $childOrder->tel = convertToWIN1251(stripslashes($_POST['tel']));
             $childOrder->email = convertToWIN1251(stripslashes($_POST['email']));
-            $childOrder->adres = convertToWIN1251(stripslashes($_POST['adress']));
+            //$childOrder->adres = convertToWIN1251(stripslashes($_POST['delivery']));
             $childOrder->description = convertToWIN1251(stripslashes($_POST['descr']));
             
             $childOrder->cnt = $item->cnt;

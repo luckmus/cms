@@ -806,10 +806,11 @@ function EditOrders($id)
   
   print "<tr>";
   print "<td 'width=100'>";
-  print "<b>Адрес</b>";
+  print "<b>Доставка</b>";
   print "</td>";
   print "<td 'width=300'>";
-  print "$row[8]";
+  //print "$row[8]";
+  print getDeliveryInfo($row[8], $row[2]);
   print "</td>";  
   print "</tr>";
 
@@ -869,6 +870,49 @@ function EditOrders($id)
 
 }
 
+function getDeliveryInfo($info, $orderDate){
+    $info = iconv("windows-1251", "UTF-8", $info);
+    $info = json_decode(htmlspecialchars_decode($info));
+    //var_dump($info);
+    switch($info->method){
+        case 3:
+            return getCurrierDelivery($info, $orderDate);
+        case 2:
+            return getPVZDelivery($info, $orderDate);
+        case 1:
+            return getSelfDelivery($info);
+    }
+}
+
+function getCurrierDelivery($info, $orderDate){
+    $res = "<b>Способ выдачи:</b> <u>Доставка курьером</u><br>";
+    $res .= "<b>Адрес:</b> {$info->index}, {$info->city}, {$info->address}<br>";
+    $res .= "<b>Стоимость доставки:</b> {$info->curr->price}<br>";
+    $orderDate = new DateTime($orderDate);
+    $orderDate->modify("+{$info->curr->delivery_period} day");
+    $res .= "<b>Срок доставки:</b> {$info->curr->delivery_period} дн.  ({$orderDate->format('Y-m-d')})<br>";
+    return $res;
+}
+
+function getPVZDelivery($info, $orderDate){
+    $res = "<b>Способ выдачи:</b> <u>Доставка в пункт выдачи № {$info->pvzId->id}</u><br>";
+    //$city = iconv("UTF-8", "windows-1251", $info->pvzId->name); 
+    $address = iconv("UTF-8", "windows-1251", $info->pvzId->address); 
+    $res .= "<b>Адрес ПВЗ:</b> $address <br>";
+    $res .= "<b>Телефон:</b> {$info->pvzId->phone} <br>";
+    $workschedule = iconv("UTF-8", "windows-1251", $info->pvzId->workschedule); 
+    $res .= "<b>График работы:</b> $workschedule <br>";
+    $res .= "<b>Только предоплаченные:</b> {$info->pvzId->prepaid} <br>";                                
+    $res .= "<b>Стоимость доставки:</b> {$info->pvzId->price} <br>";
+    $orderDate = new DateTime($orderDate);
+    $orderDate->modify("+{$info->pvzId->period} day");
+    $res .= "<b>Срок доставки:</b> {$info->pvzId->period} дн.  ({$orderDate->format('Y-m-d')})<br>";
+    return $res;
+}
+function getSelfDelivery($info){
+    $res = "<b>Способ выдачи:</b> <u>Самовывоз со склада</u><br>";
+    return $res;
+}
 #функция редактирующая справочник pages
 function EditFile($id)
 {
