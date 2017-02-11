@@ -32,6 +32,29 @@ URL = host+'/modules/FRONTEND/userSide/delivery.php?action=tarif&index='+index+'
     });
 }
 
+function declineParsel(trackNum, onExec){
+
+URL = host+'/modules/FRONTEND/userSide/delivery.php?action=decline&track_num='+trackNum;
+      $.ajax({
+      url: URL,
+      context: document.body,
+      success: function(data){                                                               
+      try
+          {
+                    console.log( data );
+                    var res = jQuery.parseJSON(data);
+                    onExec(data);
+          }
+      catch(err)
+          {
+            console.log(err);
+          } 
+      
+                  
+      }
+    });
+}
+
 function showCurrierInfo(info){
 console.log("showCurrierInfo", info );  
     if ((Array.isArray(info)==true) && ((info.length<=0) || (info[0].err!=null))){

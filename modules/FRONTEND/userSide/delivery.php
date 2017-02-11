@@ -22,6 +22,10 @@ switch(strtolower($action)){
         $weight= strip_tags($_GET['weight']);  
         echo getDeliveryPosobility($index, $price, $weight );
     break;
+    case "decline":
+        $trackNum= strip_tags($_GET['track_num']);  
+        echo parselDel($trackNum);
+    break;
     default:
         echo '{"flag_error": -1, "comment": "Неизвестная операция"';
     break;

@@ -8,6 +8,13 @@
      return  ($res);   
     }
     
+    function parselDel($trackNum){
+    $url = genBaseUrl('ParselDel')."&ImId=$trackNum";
+     //echo "$url";
+     $res = file_get_contents($url);
+     return  ($res);
+    }
+    
     function genBaseUrl($func){
         //return "http://127.0.0.1/cms/bb_emul.php?token=".getToken()."&method=$func";
         return "http://api.boxberry.de/json.php?token=".getToken()."&method=$func";

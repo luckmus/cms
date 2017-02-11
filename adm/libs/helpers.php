@@ -678,7 +678,7 @@ function EditOrders($id)
   $pname="";
   if ($id!="")
   {
-    $result=mQuery("SELECT o.id,o.goodsId,o.date,o.iscomlete,o.datecomplete,CONCAT(o.firstname,' ',lastname) as FIO,tel,email,adres,o.description,o.managerdesc,goodsprice, userId, totalsum, discount
+    $result=mQuery("SELECT o.id,o.goodsId,o.date,o.iscomlete,o.datecomplete,CONCAT(o.firstname,' ',lastname) as FIO,tel,email,adres,o.description,o.managerdesc,goodsprice, userId, totalsum, discount, track_number
                 FROM em_order o
                 WHERE o.id = $id");    
     $row=mysql_fetch_array($result);
@@ -810,7 +810,7 @@ function EditOrders($id)
   print "</td>";
   print "<td 'width=300'>";
   //print "$row[8]";
-  print getDeliveryInfo($row[8], $row[2]);
+  print getDeliveryInfo($row[8], $row[2], $row[15]);
   print "</td>";  
   print "</tr>";
 
@@ -870,23 +870,31 @@ function EditOrders($id)
 
 }
 
-function getDeliveryInfo($info, $orderDate){
-    $info = iconv("windows-1251", "UTF-8", $info);
-    $info = json_decode(htmlspecialchars_decode($info));
+function getDeliveryInfo($info, $orderDate, $trackNum){
+    $trackNum = "wwe";
+    $infoDec = iconv("windows-1251", "UTF-8", $info);
+    $infoDec = json_decode(htmlspecialchars_decode($infoDec));
     //var_dump($info);
-    switch($info->method){
-        case 3:
-            return getCurrierDelivery($info, $orderDate);
+    $res = '';
+    switch($infoDec->method){
+        case 3: 
+            $res .= getCurrierDelivery($infoDec, $orderDate);
         case 2:
-            return getPVZDelivery($info, $orderDate);
+            $res .= getPVZDelivery($infoDec, $orderDate);
         case 1:
-            return getSelfDelivery($info);
+            $res .= getSelfDelivery($infoDec);
     }
+    if ($trackNum!=null){
+        $res .= "<b>Трековый номерТр:</b> <u>$trackNum</u><a href='#' onClick=\"declineParsel('$trackNum',jqAlert)\">Отменить</a><br>"; ;
+    }
+    return $res;
 }
 
 function getCurrierDelivery($info, $orderDate){
     $res = "<b>Способ выдачи:</b> <u>Доставка курьером</u><br>";
-    $res .= "<b>Адрес:</b> {$info->index}, {$info->city}, {$info->address}<br>";
+    $addres = iconv("UTF-8", "windows-1251", $info->address);
+    $city = iconv("UTF-8", "windows-1251", $info->city);            
+    $res .= "<b>Адрес:</b> {$info->index}, $city, $addres<br>";
     $res .= "<b>Стоимость доставки:</b> {$info->curr->price}<br>";
     $orderDate = new DateTime($orderDate);
     $orderDate->modify("+{$info->curr->delivery_period} day");

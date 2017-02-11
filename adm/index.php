@@ -39,6 +39,7 @@ include "head.php";
     <script src="../js/ui/jquery.ui.dialog.js"></script>
     <script src="../js/ui/jquery.effects.core.js"></script>
     <script src="../js/common.js"></script>
+    <script src="../js/boxberry.js"></script>
     <script src="js/message.js"></script>
 <!--
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

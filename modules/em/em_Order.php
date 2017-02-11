@@ -39,6 +39,7 @@
        public $discount = 0;
        public $cnt;
        private $parent;
+       private $trackNum;
 
         function Order($id){
             if ($id!=null){
@@ -48,7 +49,7 @@
         }
         
         private function load(){
-            $query = "SELECT id, goodsid, name, firstname, lastname,  date, tel, email, adres, iscomlete, datecomplete, description, managerdesc, goodsprice, userId, id_parent, (select count(*) from em_order where id_parent={$this->id}), cnt, totalsum, discount FROM em_order WHERE id={$this->id}";    
+            $query = "SELECT id, goodsid, name, firstname, lastname,  date, tel, email, adres, iscomlete, datecomplete, description, managerdesc, goodsprice, userId, id_parent, (select count(*) from em_order where id_parent={$this->id}), cnt, totalsum, discount, track_number FROM em_order WHERE id={$this->id}";    
             $res = mQuery($query);
             if ($row = mysql_fetch_row($res)){
                 $this->goodsId      =  $row[1];
@@ -72,6 +73,7 @@
                 $this->cnt = $row[17];
                 $this->totalSum = $row[18]; 
                 $this->discount = $row[19]; 
+                $this->trackNum = $row[20];
                 
             }
             else{

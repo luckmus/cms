@@ -530,7 +530,7 @@ function changeDeleveryMethod(){
 
 function getDeliveryInfoCur(info){
     if ($('#cur_city_name').val().trim()==''){
-        jqAlert('Название населенного пунскта не введено', null);
+        jqAlert('Название населенного пункта не введено', null);
         return false;
     }
     if ($('#cur_address').val().trim()==''){
