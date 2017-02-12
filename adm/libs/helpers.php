@@ -885,7 +885,7 @@ function getDeliveryInfo($info, $orderDate, $trackNum){
             $res .= getSelfDelivery($infoDec);
     }
     if ($trackNum!=null){
-        $res .= "<b>Трековый номерТр:</b> <u>$trackNum</u><a href='#' onClick=\"declineParsel('$trackNum',jqAlert)\">Отменить</a><br>"; ;
+        $res .= "<b>Трековый номерТр:</b> <u>$trackNum</u><a href='#' onClick=\"declineParsel('$trackNum',applyDecline)\">Отменить</a><br>"; ;
     }
     return $res;
 }

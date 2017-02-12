@@ -43,7 +43,7 @@ URL = host+'/modules/FRONTEND/userSide/delivery.php?action=decline&track_num='+t
           {
                     console.log( data );
                     var res = jQuery.parseJSON(data);
-                    onExec(data);
+                    onExec(res);
           }
       catch(err)
           {
@@ -53,6 +53,12 @@ URL = host+'/modules/FRONTEND/userSide/delivery.php?action=decline&track_num='+t
                   
       }
     });
+}
+
+function applyDecline(declRes){
+    if (declRes.err!=null){
+        jqAlert(declRes.err, null);
+    }
 }
 
 function showCurrierInfo(info){

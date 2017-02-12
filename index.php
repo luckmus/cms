@@ -45,7 +45,7 @@ foreach($_COOKIE as $cook){
      <!--<link rel="icon" type="image/jpg" href="ico.jpg" />-->
      
     <link rel="stylesheet" href="themes/base/jquery.ui.all.css">
-    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+    <script src="js/jquery-1.7.js"></script>
     <script src="js/jquery-ui-1.8.16.custom.min.js"></script>
                
     <script src="js/ui/jquery.ui.core.js"></script>
