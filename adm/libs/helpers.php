@@ -150,7 +150,7 @@ function ShowAdmPart($show)
       {
          case "edit":
                 include "../modules/FRONTEND/skin/common_skin/cabinet_viewer.php";
-                include "../modules/em/usercommunication.php";
+                //include "../modules/em/usercommunication.php";
                 include "../modules/em/em_accounts.php";
                 include "../modules/em/em_goods.php";
               EditOrders($id);
@@ -872,17 +872,20 @@ function EditOrders($id)
 
 function getDeliveryInfo($info, $orderDate, $trackNum){
     $trackNum = "wwe";
-    $infoDec = iconv("windows-1251", "UTF-8", $info);
-    $infoDec = json_decode(htmlspecialchars_decode($infoDec));
-    //var_dump($info);
+    //$infoDec = iconv("windows-1251", "UTF-8", $info);
+    //$infoDec = json_decode(htmlspecialchars_decode($infoDec));
+    $infoDec = new DeliveryInfo($info);
     $res = '';
     switch($infoDec->method){
         case 3: 
             $res .= getCurrierDelivery($infoDec, $orderDate);
+        break;
         case 2:
             $res .= getPVZDelivery($infoDec, $orderDate);
+        break;
         case 1:
             $res .= getSelfDelivery($infoDec);
+        break;
     }
     if ($trackNum!=null){
         $res .= "<b>Трековый номерТр:</b> <u>$trackNum</u><a href='#' onClick=\"declineParsel('$trackNum',applyDecline)\">Отменить</a><br>"; ;
@@ -894,27 +897,24 @@ function getCurrierDelivery($info, $orderDate){
     $res = "<b>Способ выдачи:</b> <u>Доставка курьером</u><br>";
     $addres = iconv("UTF-8", "windows-1251", $info->address);
     $city = iconv("UTF-8", "windows-1251", $info->city);            
-    $res .= "<b>Адрес:</b> {$info->index}, $city, $addres<br>";
-    $res .= "<b>Стоимость доставки:</b> {$info->curr->price}<br>";
+    $res .= "<b>Адрес:</b> {$info->index}, {$info->city}, {$info->address}<br>";
+    $res .= "<b>Стоимость доставки:</b> {$info->deliveryPrice}<br>";
     $orderDate = new DateTime($orderDate);
-    $orderDate->modify("+{$info->curr->delivery_period} day");
-    $res .= "<b>Срок доставки:</b> {$info->curr->delivery_period} дн.  ({$orderDate->format('Y-m-d')})<br>";
+    $orderDate->modify("+{$info->period} day");
+    $res .= "<b>Срок доставки:</b> {$info->period} дн.  ({$orderDate->format('Y-m-d')})<br>";
     return $res;
 }
 
 function getPVZDelivery($info, $orderDate){
-    $res = "<b>Способ выдачи:</b> <u>Доставка в пункт выдачи № {$info->pvzId->id}</u><br>";
-    //$city = iconv("UTF-8", "windows-1251", $info->pvzId->name); 
-    $address = iconv("UTF-8", "windows-1251", $info->pvzId->address); 
-    $res .= "<b>Адрес ПВЗ:</b> $address <br>";
-    $res .= "<b>Телефон:</b> {$info->pvzId->phone} <br>";
-    $workschedule = iconv("UTF-8", "windows-1251", $info->pvzId->workschedule); 
-    $res .= "<b>График работы:</b> $workschedule <br>";
-    $res .= "<b>Только предоплаченные:</b> {$info->pvzId->prepaid} <br>";                                
-    $res .= "<b>Стоимость доставки:</b> {$info->pvzId->price} <br>";
+    $res = "<b>Способ выдачи:</b> <u>Доставка в пункт выдачи № {$info->pvzId}</u><br>";
+    $res .= "<b>Адрес ПВЗ:</b> {$info->address} <br>";
+    $res .= "<b>Телефон:</b> {$info->phone} <br>";
+    $res .= "<b>График работы:</b> {$info->workSchedule} <br>";
+    $res .= "<b>Только предоплаченные:</b> {$info->prepaid} <br>";                                
+    $res .= "<b>Стоимость доставки:</b> {$info->deliveryPrice} <br>";
     $orderDate = new DateTime($orderDate);
-    $orderDate->modify("+{$info->pvzId->period} day");
-    $res .= "<b>Срок доставки:</b> {$info->pvzId->period} дн.  ({$orderDate->format('Y-m-d')})<br>";
+    $orderDate->modify("+{$info->period} day");
+    $res .= "<b>Срок доставки:</b> {$info->period} дн.  ({$orderDate->format('Y-m-d')})<br>";
     return $res;
 }
 function getSelfDelivery($info){

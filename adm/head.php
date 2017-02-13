@@ -127,6 +127,8 @@ switch ($show)
     
   break;
   case "orders":
+  require_once "../modules/em/usercommunication.php";
+  require_once "../modules/em/em_Order.php";
     switch ($action)
     {
       case "addresult":

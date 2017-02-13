@@ -25,60 +25,84 @@
          if ($order->trackNum!=null){
             $SDATA['updateByTrack']='Трекинг-код ранее созданной посылки';
          }
+         $di = new DeliveryInfo($order->adres);
          $SDATA['order_id']=$order->id;
          //$SDATA['barcode']='Штрих-код заказа';
          $SDATA['price']=$order->totalSum;
          $SDATA['payment_sum']=$order->totalSum;
-         $SDATA['delivery_sum']='Стоимость доставки';
-         $SDATA['vid']='Тип доставки (1/2)';
-         $SDATA['shop']=array(
-         'name'=>'Код ПВЗ',
-         'name1'=>'Код пункта поступления'
-         );
-         $SDATA['customer']=array(
-         'fio'=>'ФИО получателя',
-         'phone'=>'Номер телефона',
-         'phone2'=>'Доп. номер телефона',
-         'email'=>'E-mail для оповещений',
-         'name'=>'Наименование организации',
-         'address'=>'Адрес',
-         'inn'=>'ИНН',
-         'kpp'=>'КПП',
-         'r_s'=>'Расчетный счет',
-         'bank'=>'Наименование банка',
-         'kor_s'=>'Кор. счет',
-         'bik'=>'БИК'
-         );
-         $SDATA['kurdost'] = array(
-         'index' => 'Индекс',
-         'citi' => 'Город',
-         'addressp' => 'Адрес получателя',
-         'timesfrom1' => 'Время доставки, от',
-         'timesto1' => 'Время доставки, до',
-         'timesfrom2' => 'Альтернативное время, от',
-         'timesto2' => 'Альтернативное время, до',
-         'timep' => 'Время доставки текстовый формат',
-         'comentk' => 'Комментарий'
-         );
+         $SDATA['delivery_sum']=$di->deliveryPrice;
+         //$SDATA['vid']='Тип доставки (1/2)';
+         if ($di->method==2){
+            $SDATA['shop']=array(
+             'name'=>$di->pvzId,
+             //'name1'=>'Код пункта поступления'
+             );
+             $custName = '';
+             $phone = '';
+             $email = '';
+             $address = '';
+             if ($order->user->login==null){
+                 $custName = "{$order->firstName} {$order->lastname}";
+                 $phone = $order->tel;
+                 $email = $order->email;
+             }else{
+                $custName  = "{$order->user->firstName} {$order->user->lastname}";
+                $phone = $order->user->tel;
+                $email = $order->user->email;
+                $address = $order->user->adres;
+             }
+             
+             $SDATA['customer']=array(
+             'fio'=>$custName,
+             'phone'=>$phone,
+             //'phone2'=>'Доп. номер телефона',
+             'email'=>$email,
+             //'name'=>'Наименование организации',
+             'address'=>$address
+             //'inn'=>'ИНН',
+             //'kpp'=>'КПП',
+             //'r_s'=>'Расчетный счет',
+             //'bank'=>'Наименование банка',
+             ///'kor_s'=>'Кор. счет',
+             //'bik'=>'БИК'
+             );
+         }if ($di->method==3){
+             $SDATA['kurdost'] = array(
+             'index' => $di->index,
+             'citi' => $di->city,
+             'addressp' => $di->address,
+             //'timesfrom1' => 'Время доставки, от',
+             //'timesto1' => 'Время доставки, до',
+             //'timesfrom2' => 'Альтернативное время, от',
+             //'timesto2' => 'Альтернативное время, до',
+             //'timep' => 'Время доставки текстовый формат',
+             'comentk' => $order->description
+             );
+         }
+         
 
-         $SDATA['items']=array(
-         array(
-         'id'=>'ID товара в БД ИМ',
-        'name'=>'Наименование товара',
-        'UnitName'=>'Единица измерения',
-        'nds'=>'Процент НДС',
-         'price'=>'Цена товара',
-         'quantity'=>'Количество'
-         )
-         );
-         $SDATA['weights']=array(
-         'weight'=>'Вес 1-ого места',
-         'barcode'=>'Баркод 1-го места',
-         'weight2'=>'Вес 2-ого места',
-         'barcode2'=>'Баркод 2-го места',
-         'weight3'=>'Вес 3-его места',
-         'barcode3'=>'Баркод 3-го места',
-         'weight4'=>'Вес 4-ого места');
+         $SDATA['items']=array();
+         $SDATA['weights']=array( );
+         
+         $dicount = $order->discount;
+         $nds = 18;
+         $price = $goodsOne->goodsprice;
+         $price = $price- ($price*$dicount)/100; 
+         $ndsVal = ($price*$nds)/100;
+         
+         foreach($order->child as $items){
+             $goodsOne = new Goods($item->goodsId); 
+             $gd = array(
+                     'id'=>$items->goodsId,
+                     'name'=>$goodsOne->name,
+                     'UnitName'=>'шт',
+                     'nds'=>$ndsVal,
+                     'price'=>$price,
+                     'quantity'=>$item->cnt
+                 );
+             array_push($SDATA['items'], $gd);
+             array_push($SDATA['weights'], 0);
+         }
                 
     }
     

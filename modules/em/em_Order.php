@@ -237,5 +237,42 @@
         }
 
     }//Order
+
+class DeliveryInfo{
+    public $method;
+    public $address;
+    public $index;
+    public $city;
+    public $deliveryPrice;
+    public $period;
+    public $workSchedule;
+    public $phone;
+    public $prepaid; 
+    public $pvzId;
     
+    function DeliveryInfo($info){
+         $infoDec = iconv("windows-1251", "UTF-8", $info);
+         $infoDec = json_decode(htmlspecialchars_decode($infoDec));
+         $this->method =  $infoDec->method;
+         switch($this->method){
+             case 2:
+                $this->address = iconv("UTF-8", "windows-1251", $infoDec->pvzId->address);
+                $this->phone = $infoDec->pvzId->phone;
+                $this->workSchedule = iconv("UTF-8", "windows-1251", $infoDec->pvzId->workschedule);
+                $this->prepaid = $infoDec->pvzId->prepaid;
+                $this->period = $infoDec->pvzId->period;
+                $this->deliveryPrice =$infoDec->pvzId->price ;
+                $this->pvzId = $infoDec->pvzId->id;
+             break;
+             case 3:
+                $this->address =iconv("UTF-8", "windows-1251", $infoDec->address) ;
+                $this->index = $infoDec->index;
+                $this->city = iconv("UTF-8", "windows-1251", $infoDec->city);
+                $this->period = $infoDec->curr->delivery_period;
+                $this->deliveryPrice =$infoDec->curr->price ;
+             break;
+         }
+    } 
+}    
+
 ?>
