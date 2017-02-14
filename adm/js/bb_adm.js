@@ -1,5 +1,6 @@
 function sendAddParcel(orderId){
 URL = host+'/modules/FRONTEND/userSide/delivery.php?action=add&orderId='+orderId;
+console.log('send order add to bb', orderId);
       $.ajax({
       url: URL,
       context: document.body,
@@ -11,6 +12,8 @@ URL = host+'/modules/FRONTEND/userSide/delivery.php?action=add&orderId='+orderId
             //jqAlert(res.err, null);
             if (res.err!=null){
                 jqAlert(res.err, null);
+            }else{
+                jqAlert("Информация о заказе передана в службу доставки", reload);
             }
           }
       catch(err)

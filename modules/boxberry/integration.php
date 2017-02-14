@@ -8,10 +8,23 @@
      return  ($res);   
     }
     
-    function parselDel($trackNum){
-    $url = genBaseUrl('ParselDel')."&ImId=$trackNum";
+    function parselDel($orderId){
+    $order = new Order($orderId);
+    
+    $url = genBaseUrl('ParselDel')."&ImId=".$order->trackNum;
      //echo "$url";
      $res = file_get_contents($url);
+     $data = json_decode($res,1); 
+     if($data['err'] or count($data)<=0)
+     {
+            return $res;
+     }else{
+        //очистка полей
+        $order->trackNum = null;
+        $order->barCode = null;
+        $order->save();
+     }
+
      return  ($res);
     }
     
@@ -27,28 +40,25 @@
          'sdata'=>json_encode($SDATA)
          ));
          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         //echo json_encode($SDATA)."\n";
          $res = curl_exec($ch);
-         echo json_encode($SDATA)."\n";
          
-         return $res;    
-        /*
-        $url = genBaseUrl('ParselCreate');
-        $data = array('key1' => 'value1', 'key2' => 'value2');
-
-        // use key 'http' even if you send the request to https://...
-        $options = array(
-            'http' => array(
-                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method'  => 'POST',
-                'content' => http_build_query($data)
-            )
-        );
-        $context  = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
-        if ($result === FALSE) {  }
-
-        var_dump($result);       
-        */ 
+         $data = json_decode($res,1);
+         if($data['err'] or count($data)<=0)
+         {
+            return $res;
+         }
+         else{
+             //r_dump($order);
+              $order->trackNum = $data['track'];
+              $order->barCode = $data['label'];  
+              $order->save();
+         }
+         return $res;
+         /*
+           success response
+         {"track":"PHP1431718","label":"http:\/\/test.api.boxberry.de\/?act=build&track=PHP1431718&token=10000.rbpqbafb"}
+         */
         
     }
     
@@ -63,14 +73,13 @@
          $SDATA['price']=$order->totalSum;
          $SDATA['payment_sum']=$order->totalSum+$di->deliveryPrice;
          $SDATA['delivery_sum']=$di->deliveryPrice;
-         //$SDATA['vid']='Тип доставки (1/2)';
              $custName = '';
              $phone = '';
              $email = '';
              $address = '';
              //var_dump($order);
              if ($order->user->login==null){
-                 $custName = $order->firstname;
+                 $custName = $order->firstName;
                  $phone = $order->tel;
                  $email = $order->email;
              }else{
@@ -88,18 +97,20 @@
 
              );         
          if ($di->method==2){
+             $SDATA['vid']=1;
             $SDATA['shop']=array(
              'name'=>$di->pvzId,
              'name1'=>'Код пункта поступления'
              );
 
          }if ($di->method==3){
+             $SDATA['vid']=2;
             $SDATA['shop']=array(
-             'name'=>77571,
-             'name1'=>'77571'
+             //'name'=>77571,
+             'name1'=>77571
              );             
              $SDATA['kurdost'] = array(
-             'index' => $di->index,
+             'index' => intval($di->index),
              'citi' =>iconv("windows-1251", "UTF-8",  $di->city),
              'addressp' => iconv("windows-1251", "UTF-8", $di->address),
              //'timesfrom1' => 'Время доставки, от',
@@ -108,9 +119,9 @@
              //'timesto2' => 'Альтернативное время, до',
              //'timep' => 'Время доставки текстовый формат',
              'comentk' => $order->description
-             );
+             );                                     
          }
-         
+          $SDATA['customer']['address'] = $SDATA['kurdost']['addressp'];
 
          
          
@@ -135,7 +146,8 @@
              }
              
              //$ndsVal = ($price*$nds)/100;
-             $ndsVal = 0;             
+             $ndsVal = 0;    
+
              $gd = array(
                      'id'=>$item->goodsId,
                      'name'=>iconv("windows-1251", "UTF-8", $goodsOne->name),
@@ -146,7 +158,8 @@
                  );
              array_push($SDATA['items'], $gd);
 
-             array_push($SDATA['weights'], 100);
+             //array_push($SDATA['weights'], 100);
+             $SDATA['weights']['weight'] = 100;
          }
          
          return $SDATA;      

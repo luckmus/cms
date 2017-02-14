@@ -59,6 +59,9 @@ function applyDecline(declRes){
     if (declRes.err!=null){
         jqAlert(declRes.err, null);
     }
+    else{
+        jqAlert(declRes.text, reload);
+    }
 }
 
 function showCurrierInfo(info){

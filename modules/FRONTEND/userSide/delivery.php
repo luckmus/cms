@@ -7,7 +7,14 @@ header("Content-type: text/html; charset=windows-1251");
 
 //require_once "../../b2cpl/integration.php";    
 require_once "../../boxberry/integration.php";    
-
+include "../../../libs/db.php";
+        include "../../../config.php";   
+        $dbh=DBConnect($DBHost, $DBUser, $DBPass, $DBName);
+        mQuery("SET NAMES 'cp1251'", $dbh);      
+        require_once "../../em/usercommunication.php";
+        require_once "../../em/em_accounts.php";
+        require_once "../../em/em_goods.php";
+        require_once "../../em/em_Order.php";
 
 $action=$_GET['action'];
 switch(strtolower($action)){
@@ -27,15 +34,7 @@ switch(strtolower($action)){
         echo parselDel($trackNum);
     break;
     case "add":
-        include "../../../libs/db.php";
-        include "../../../config.php";   
-        $dbh=DBConnect($DBHost, $DBUser, $DBPass, $DBName);
-        //mQuery('SET character_set_database = cp1251');
-        mQuery("SET NAMES 'cp1251'", $dbh);      
-        require_once "../../em/usercommunication.php";
-        require_once "../../em/em_accounts.php";
-        require_once "../../em/em_goods.php";
-        require_once "../../em/em_Order.php";
+        
         $id= strip_tags($_GET['orderId']);  
         echo addParcel($id);
     break;

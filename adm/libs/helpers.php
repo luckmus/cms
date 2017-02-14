@@ -678,7 +678,7 @@ function EditOrders($id)
   $pname="";
   if ($id!="")
   {
-    $result=mQuery("SELECT o.id,o.goodsId,o.date,o.iscomlete,o.datecomplete,CONCAT(o.firstname,' ',lastname) as FIO,tel,email,adres,o.description,o.managerdesc,goodsprice, userId, totalsum, discount, track_number
+    $result=mQuery("SELECT o.id,o.goodsId,o.date,o.iscomlete,o.datecomplete,CONCAT(o.firstname,' ',lastname) as FIO,tel,email,adres,o.description,o.managerdesc,goodsprice, userId, totalsum, discount, track_number, bar_code
                 FROM em_order o
                 WHERE o.id = $id");    
     $row=mysql_fetch_array($result);
@@ -810,7 +810,7 @@ function EditOrders($id)
   print "</td>";
   print "<td 'width=300'>";
   //print "$row[8]";
-  print getDeliveryInfo($row[8], $row[2], $row[15], $row[0]);
+  print getDeliveryInfo($row[8], $row[2], $row[15], $row[0], $row[16]);
   print "</td>";  
   print "</tr>";
 
@@ -870,8 +870,7 @@ function EditOrders($id)
 
 }
 
-function getDeliveryInfo($info, $orderDate, $trackNum, $orderId){
-    $trackNum = "wwe";
+function getDeliveryInfo($info, $orderDate, $trackNum, $orderId, $barCode){
     //$infoDec = iconv("windows-1251", "UTF-8", $info);
     //$infoDec = json_decode(htmlspecialchars_decode($infoDec));
     $infoDec = new DeliveryInfo($info);
@@ -887,12 +886,15 @@ function getDeliveryInfo($info, $orderDate, $trackNum, $orderId){
             $res .= getSelfDelivery($infoDec);
         break;
     }
-    if (($infoDec->method ==2) || ($infoDec->method == 3)){
-        $res .= "<br><a href='#' onClick=\"sendAddParcel($orderId)\">Прередать в cлужбу доставки</a><br>";
+    if ((($trackNum==null) || ($trackNum=='')) && (($infoDec->method ==2) || ($infoDec->method == 3))){
+        $res .= "<a href='#' onClick=\"sendAddParcel($orderId)\">Прередать в cлужбу доставки</a><br>";
     }
     
     if ($trackNum!=null){
-        $res .= "<b>Трековый номерТр:</b> <u>$trackNum</u><a href='#' onClick=\"declineParsel('$trackNum',applyDecline)\">Отменить</a><br>"; ;
+        $res .= "<b>Трековый номер:</b> <u>$trackNum</u>&nbsp;<a href='#' onClick=\"declineParsel('$orderId',applyDecline)\">Отменить доставку</a><br>";
+        if (($barCode!=null) && ($barCode!='')){
+            $res .= "<a href='$barCode' target='_blank' >Штрих-код заказа</a><br>";
+        }
     }
     return $res;
 }

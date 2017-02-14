@@ -40,6 +40,7 @@
        public $cnt;
        private $parent;
        public $trackNum;
+       public $barCode;
 
         function Order($id){
             if ($id!=null){
@@ -49,12 +50,12 @@
         }
         
         private function load(){
-            $query = "SELECT id, goodsid, name, firstname, lastname,  date, tel, email, adres, iscomlete, datecomplete, description, managerdesc, goodsprice, userId, id_parent, (select count(*) from em_order where id_parent={$this->id}), cnt, totalsum, discount, track_number FROM em_order WHERE id={$this->id}";    
+            $query = "SELECT id, goodsid, name, firstname, lastname,  date, tel, email, adres, iscomlete, datecomplete, description, managerdesc, goodsprice, userId, id_parent, (select count(*) from em_order where id_parent={$this->id}), cnt, totalsum, discount, track_number, bar_code FROM em_order WHERE id={$this->id}";    
             $res = mQuery($query);
             if ($row = mysql_fetch_row($res)){
                 $this->goodsId      =  $row[1];
                 $this->name         =  $row[2];
-                $this->firstname    =  $row[3];
+                $this->firstName    =  $row[3];
                 $this->lastname     =  $row[4];
                 $this->date         =  $row[5];
                 $this->tel          =  $row[6];
@@ -74,6 +75,7 @@
                 $this->totalSum = $row[18]; 
                 $this->discount = $row[19]; 
                 $this->trackNum = $row[20];
+                $this->barCode = $row[21];
                 
             }
             else{
@@ -195,10 +197,12 @@
         }
         
         private function update(){
+            //echo "on update: \n";
+            //var_dump($this);
             $query = 
                 "UPDATE em_order
                  SET goodsid = ".($this->goodsId == null ? "null": $this->goodsId->id).",
-                 goodsprice = \"".addslashes($this->firstName)."\",
+                 goodsprice = \"".addslashes($this->goodsprice)."\",
                  firstname = \"".addslashes($this->firstName)."\", 
                  lastname = \"".addslashes($this->lastname)."\", 
                  tel = \"".addslashes($this->tel)."\", 
@@ -206,8 +210,11 @@
                  adres = \"".addslashes($this->adres)."\",
                  iscomlete = {$this->iscomlete}, 
                  
-                 description = \"".addslashes($this->description)."\"
+                 description = \"".addslashes($this->description)."\",
+                 bar_code = \"".addslashes($this->barCode)."\",
+                 track_number = \"".addslashes($this->trackNum)."\"
                  WHERE id = {$this->id}";
+                 //echo "$query\n";
             $res = mQuery($query);
         }
         
