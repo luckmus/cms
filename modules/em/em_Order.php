@@ -39,7 +39,7 @@
        public $discount = 0;
        public $cnt;
        private $parent;
-       private $trackNum;
+       public $trackNum;
 
         function Order($id){
             if ($id!=null){
@@ -87,7 +87,7 @@
             $res = mQuery($query);
             while ($row = mysql_fetch_row($res)){
                 $order = new Order($row[0]);
-                $this->child.push($order);
+                array_push($this->child, $order);
                 
             }                          
         }

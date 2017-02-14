@@ -810,7 +810,7 @@ function EditOrders($id)
   print "</td>";
   print "<td 'width=300'>";
   //print "$row[8]";
-  print getDeliveryInfo($row[8], $row[2], $row[15]);
+  print getDeliveryInfo($row[8], $row[2], $row[15], $row[0]);
   print "</td>";  
   print "</tr>";
 
@@ -870,7 +870,7 @@ function EditOrders($id)
 
 }
 
-function getDeliveryInfo($info, $orderDate, $trackNum){
+function getDeliveryInfo($info, $orderDate, $trackNum, $orderId){
     $trackNum = "wwe";
     //$infoDec = iconv("windows-1251", "UTF-8", $info);
     //$infoDec = json_decode(htmlspecialchars_decode($infoDec));
@@ -887,6 +887,10 @@ function getDeliveryInfo($info, $orderDate, $trackNum){
             $res .= getSelfDelivery($infoDec);
         break;
     }
+    if (($infoDec->method ==2) || ($infoDec->method == 3)){
+        $res .= "<br><a href='#' onClick=\"sendAddParcel($orderId)\">Прередать в cлужбу доставки</a><br>";
+    }
+    
     if ($trackNum!=null){
         $res .= "<b>Трековый номерТр:</b> <u>$trackNum</u><a href='#' onClick=\"declineParsel('$trackNum',applyDecline)\">Отменить</a><br>"; ;
     }
