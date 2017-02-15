@@ -100,14 +100,14 @@
              $SDATA['vid']=1;
             $SDATA['shop']=array(
              'name'=>$di->pvzId,
-             'name1'=>'Код пункта поступления'
+             'name1'=>$GLOBALS[_PVZ_BB]
              );
 
          }if ($di->method==3){
              $SDATA['vid']=2;
             $SDATA['shop']=array(
              //'name'=>77571,
-             'name1'=>77571
+             'name1'=>$GLOBALS[_PVZ_BB]
              );             
              $SDATA['kurdost'] = array(
              'index' => intval($di->index),
@@ -178,7 +178,7 @@
     
     function getToken(){
         //return "24349.rrpqdafe";   
-        return '10000.rbpqbafb';
+        return $GLOBALS[_BB_TOKEN];
     }
     
     

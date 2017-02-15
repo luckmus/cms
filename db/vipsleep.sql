@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Фев 15 2017 г., 10:05
+-- Время создания: Фев 15 2017 г., 10:37
 -- Версия сервера: 5.1.37
 -- Версия PHP: 5.3.0
 
@@ -310,13 +310,13 @@ INSERT INTO `em_order` (`id`, `id_parent`, `goodsid`, `cnt`, `goodsprice`, `disc
 (291, 290, 42, 1, '2500', 0, '0.00', 0, '', 'sergey', '', '2017-02-14 15:47:47', '811315316541', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
 (292, NULL, NULL, 0, '', 0, '2000.00', 0, '', '', '', '2017-02-14 15:55:38', '5651135', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:407,&quot;price_base&quot;:170,&quot;price_service&quot;:237,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;тестовая улица д.1&quot;,&quot;city&quot;:&quot;Санкт_Петербург&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', NULL, 'PHP1431726', ''),
 (293, 292, 49, 1, '2000', 0, '0.00', 0, '', 'Тестовая фамилия', '', '2017-02-14 15:55:26', '5651135', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
-(294, NULL, NULL, 0, '', 0, '2500.00', 0, '', 'adasdasd', '', '2017-02-14 16:31:29', '', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:422,&quot;price_base&quot;:170,&quot;price_service&quot;:252,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;улица 1&quot;,&quot;city&quot;:&quot;Санкт-Петербург&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', 'er', 'PHP1431739', 'http://test.api.boxberry.de/?act=build&track=PHP1431739&token=10000.rbpqbafb'),
+(294, NULL, NULL, 0, '', 0, '2500.00', 0, '', 'adasdasd', '', '2017-02-15 10:24:26', '', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:422,&quot;price_base&quot;:170,&quot;price_service&quot;:252,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;улица 1&quot;,&quot;city&quot;:&quot;Санкт-Петербург&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', 'er', 'PHP1431759', 'http://test.api.boxberry.de/?act=build&track=PHP1431759&token=10000.rbpqbafb'),
 (295, 294, 42, 1, '2500', 0, '0.00', 0, '', 'йцуйцуйцуйцу', '', '2017-02-14 15:59:01', '51515313', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
 (296, NULL, NULL, 0, '2000', 0, '2000.00', 0, '', 'тест', '', '2017-02-14 16:33:12', '51311', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78461&quot;,&quot;zip&quot;:&quot;199155&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;199155, Санкт-Петербург г, Одоевского ул, д.27, литер А, сек. 212&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-вс: 11.00-21.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;197.96&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431740', 'http://test.api.boxberry.de/?act=build&track=PHP1431740&token=10000.rbpqbafb'),
 (297, 296, 49, 1, '2000', 0, '0.00', 0, '', 'тест', '', '2017-02-14 16:33:03', '51311', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
 (298, NULL, NULL, 0, '2500', 2, '2450.00', 0, '', 'проверочная', '', '2017-02-15 08:29:49', '654654', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78061&quot;,&quot;zip&quot;:&quot;190031&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;190031, Санкт-Петербург г, Московский пр-кт, д.3а&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00, вс: 11.00-19.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;211.19&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431746', 'http://test.api.boxberry.de/?act=build&track=PHP1431746&token=10000.rbpqbafb'),
 (299, 298, 42, 1, '2500', 0, '0.00', 0, '', 'проверочная', '', '2017-02-15 08:29:41', '654654', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
-(300, NULL, NULL, 0, '10000', 2, '9800.00', 0, '', 'проверка', '', '2017-02-15 10:00:46', '4567890', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78511&quot;,&quot;zip&quot;:&quot;195009&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;195009, Санкт-Петербург г, Комсомола ул, д.16&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;433.16&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, '', ''),
+(300, NULL, NULL, 0, '10000', 2, '9800.00', 0, '', 'проверка', '', '2017-02-15 10:20:41', '4567890', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78511&quot;,&quot;zip&quot;:&quot;195009&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;195009, Санкт-Петербург г, Комсомола ул, д.16&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;433.16&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431758', 'http://test.api.boxberry.de/?act=build&track=PHP1431758&token=10000.rbpqbafb'),
 (301, 300, 42, 4, '2500', 0, '0.00', 0, '', 'проверка', '', '2017-02-15 09:47:04', '4567890', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -546,7 +546,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `name` varchar(255) NOT NULL,
   `type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=17 ;
 
 --
 -- Дамп данных таблицы `settings`
@@ -564,7 +564,10 @@ INSERT INTO `settings` (`id`, `description`, `value`, `ordinal`, `name`, `type`)
 (9, 'Скин отображения', 'bed_skin', 9, 'skin', 0),
 (10, 'Валюта', 'RUB', 10, 'currency', 0),
 (11, 'Email отправителя  рассылки', 'luckmus@inbox.ru', 11, 'email_sender', 0),
-(12, 'email Менеждера', 'luckmus@inbox.ru', 12, 'manager_email', 0);
+(12, 'email Менеждера', 'luckmus@inbox.ru', 12, 'manager_email', 0),
+(13, 'Код ПВЗ, в который сдаются отправления', '250', 13, 'PVZ', 0),
+(15, 'Код интергации ББ', 'FowvSdr40RP45k4dseELqg==', 14, 'bb_int_code', 0),
+(16, 'Токен ББ', '10000.rbpqbafb', 15, 'bb_token', 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -27,6 +27,9 @@ define("SKIN_VAR","skin");
 define("MANAGER_EMAIL","manager_email");
 define("SENDER_EMAIL","email_sender");
 define("_CURRENCY","currency");
+define("_PVZ_BB","PVZ");
+define("_BB_INT_CODE","bb_int_code");
+define("_BB_TOKEN","bb_token");
 #папка в которую загружаются файлы
 define ('_UploadDir', 'uploadfiles');
 define ('_SmallFoto', 'smallimg');

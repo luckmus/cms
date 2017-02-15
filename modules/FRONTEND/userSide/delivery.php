@@ -16,6 +16,9 @@ include "../../../libs/db.php";
         require_once "../../em/parameter.php";
         require_once "../../em/em_goods.php";
         require_once "../../em/em_Order.php";
+        require_once "../../../libs/vars.php";
+        require_once "../../../libs/init_settings_var.php";
+        
 
 $action=$_GET['action'];
 switch(strtolower($action)){

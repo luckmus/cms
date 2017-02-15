@@ -16,8 +16,8 @@ URL = host+'/modules/FRONTEND/userSide/delivery.php?action=tarif&index='+index+'
           {
                     console.log( data );
                     var res = jQuery.parseJSON(data);
-                    if (res.err != null){
-                    jqAlert(res.err, null);   
+                    if ( Array.isArray(res) && (res[0].err != null)){
+                        jqAlert(res[0].err, null);   
                     }else
                     if ((res.price==null) || (res.price==0)){
                         jqAlert(' урьерска€ доставка по данному адресу невозможна', null);
