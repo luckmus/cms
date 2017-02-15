@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Фев 15 2017 г., 10:37
+-- Время создания: Фев 15 2017 г., 17:18
 -- Версия сервера: 5.1.37
 -- Версия PHP: 5.3.0
 
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `em_goods` (
 --
 
 INSERT INTO `em_goods` (`id`, `categoryid`, `name`, `description`, `imagefile`, `price`, `ordinal`, `isarchivate`, `metadescription`, `metakeywords`, `updatedate`) VALUES
-(12, 61, 'Матрац', '<p>Белье премиум класса. Комбинация жаккардового шелка с хлопком не только красива, но и практична - к телу 100% хлопок. Простынь из 100% хлопка с шелковым купоном. Нижняя сторона пододеяльника 100% хлопок.</p>', 'uploadfiles/satin2.jpg', 0, 8, 0, '', '', '2011-08-21 22:10:33'),
+(12, 61, 'Матрац', '<p>Белье премиум класса. Комбинация жаккардового шелка с хлопком не только красива, но и практична - к телу 100% хлопок. Простынь из 100% хлопка с шелковым купоном. Нижняя сторона пододеяльника 100% хлопок.</p>\n<script type="text/javascript">// <![CDATA[\nalert(''text from goods description'');\n// ]]></script>', 'uploadfiles/satin2.jpg', 0, 8, 0, '', '', '2011-08-21 22:10:33'),
 (51, 61, 'насос', '<p>Насос для накачивания бицух</p>', 'uploadfiles/bravo.jpg', NULL, 14, 0, '', '', '2015-02-14 21:29:31'),
 (41, 61, 'Сатин', '<p>Привет</p>', 'uploadfiles/sation1.jpg', NULL, 9, 0, 'wd', 'wewe', '2011-09-11 14:43:17'),
 (42, 61, 'Одеяло', '<p>Шерстянное одеяло</p>', 'uploadfiles/odeylo 1.jpg', NULL, 10, 0, '', '', '2011-10-17 12:30:55'),
@@ -261,6 +261,27 @@ INSERT INTO `em_goods_params` (`id`, `parentid`, `gid`, `pvid`, `paramid`, `valu
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `em_goods_photo`
+--
+
+CREATE TABLE IF NOT EXISTS `em_goods_photo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_goods` int(11) NOT NULL,
+  `link` varchar(100) NOT NULL,
+  `ordinal` int(11) NOT NULL DEFAULT '0',
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_goods` (`id_goods`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Дамп данных таблицы `em_goods_photo`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `em_order`
 --
 
@@ -316,7 +337,7 @@ INSERT INTO `em_order` (`id`, `id_parent`, `goodsid`, `cnt`, `goodsprice`, `disc
 (297, 296, 49, 1, '2000', 0, '0.00', 0, '', 'тест', '', '2017-02-14 16:33:03', '51311', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
 (298, NULL, NULL, 0, '2500', 2, '2450.00', 0, '', 'проверочная', '', '2017-02-15 08:29:49', '654654', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78061&quot;,&quot;zip&quot;:&quot;190031&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;190031, Санкт-Петербург г, Московский пр-кт, д.3а&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00, вс: 11.00-19.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;211.19&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431746', 'http://test.api.boxberry.de/?act=build&track=PHP1431746&token=10000.rbpqbafb'),
 (299, 298, 42, 1, '2500', 0, '0.00', 0, '', 'проверочная', '', '2017-02-15 08:29:41', '654654', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
-(300, NULL, NULL, 0, '10000', 2, '9800.00', 0, '', 'проверка', '', '2017-02-15 10:20:41', '4567890', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78511&quot;,&quot;zip&quot;:&quot;195009&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;195009, Санкт-Петербург г, Комсомола ул, д.16&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;433.16&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431758', 'http://test.api.boxberry.de/?act=build&track=PHP1431758&token=10000.rbpqbafb'),
+(300, NULL, NULL, 0, '10000', 2, '9800.00', 0, '', 'проверка', '', '2017-02-15 10:39:37', '4567890', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78511&quot;,&quot;zip&quot;:&quot;195009&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;195009, Санкт-Петербург г, Комсомола ул, д.16&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;433.16&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431760', 'http://test.api.boxberry.de/?act=build&track=PHP1431760&token=10000.rbpqbafb'),
 (301, 300, 42, 4, '2500', 0, '0.00', 0, '', 'проверка', '', '2017-02-15 09:47:04', '4567890', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL);
 
 -- --------------------------------------------------------

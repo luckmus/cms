@@ -448,7 +448,7 @@ function EditGoods($id)
   print "<b>Стоимость товара:</b><br>";
   print "<input type=\"TEXT\" name=\"price\" size=\"40\" maxlength=\"50\" value=\"{$price}\"><br>";
   printMetaInput($metadescr,$metawords);       
-  print "<b>Изображение товара</b>:<br>";
+  print "<b>Изображение товара</b>:<br>";      
   $url = $_SERVER['DOCUMENT_ROOT']."/".getUri()._UploadDir;
   print "<select name='imagefile' style='width:400px'>";
   $AllFilesList = LoadFromDir($url);

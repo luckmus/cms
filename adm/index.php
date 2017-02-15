@@ -35,6 +35,7 @@ include "head.php";
     <script src="../js/ui/jquery.ui.position.js"></script>
     <script src="../js/ui/jquery.ui.resizable.js"></script>
     <script src="../js/ui/jquery.ui.datepicker.js"></script>
+    <script src="../js/ui/jquery.ui.accordion.js"></script>    
     
     <script src="../js/ui/jquery.ui.dialog.js"></script>
     <script src="../js/ui/jquery.effects.core.js"></script>

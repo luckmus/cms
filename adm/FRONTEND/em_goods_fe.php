@@ -101,6 +101,22 @@ echo "<tr><td>";
  echo "</td></tr>";
  echo "<tr><td>"; 
   print "<b>Изображение товара</b>:<br>";
+  $imagesId = "accordion{$goodsOne->id}";
+  
+  $photos =  $goodsOne->getPhotos();
+  $pc = '';
+  foreach ($photos as $photo){
+     $pc .= "<tr><td>{$photo->url}</td></tr>";
+  }
+  print "<div id='$imagesId' class='ui-accordion-header-collapsed'>
+  <h3>Изображения</h3>
+  <div>
+    <p>
+    <table>$pc</table>
+    <button id='id_add_photo_$id'>Добавить</button>
+    </p>
+  </div>
+  <div>";  
   $url = $_SERVER['DOCUMENT_ROOT']."/".getUri()._UploadDir;
   $imgCont = "goods-img-$id";
   print "<select name='imagefile' id='$imgCont' style='width:400px'>";
@@ -165,7 +181,15 @@ echo "<tr><td>";
             .click(function() {     
                     archivateGoodsFE($id,'$goodsEdtMagPlcId','"._ALL_GOODS_CONT."');
             }); 
+            \$( '#id_add_photo_$id' )
+            .button()
+            .click(function() {     
+                    alert(1);
+            });
+            
             tinyMCE.execCommand('mceAddControl', false, '$descCont');
+            
+            $( '#$imagesId' ).accordion({ header: 'h3', collapsible: true, active: false });
 ";  
   }
   else{

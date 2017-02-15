@@ -133,6 +133,7 @@
         public $metadescription;
         public $metakeywords;
         public $isArchivate;
+        private $photos;
         var $goodsParameter;                        //параметрвы описывающие товар
         
         function Goods($id){
@@ -156,6 +157,22 @@
             $this->isArchivate  = $row[9];
             #определю параметры товара
             //$this->LoadGoodsParams();
+        }
+        
+        private function loadPhotos(){
+            $this->photos = array();
+            $query = "SELECT id, id_goods, link, ordinal, description from em_goods_photo where id_goods={$this->id}  order by ordinal"   ;
+            $res = mQuery($query);
+            while ($row=mysql_fetch_row($res)){
+                 array_push( $this->photos, new GoodsPhoto($row[0],$row[1], $row[2], $row[3], $row[4]));   
+            }
+        }
+        
+        public  function getPhotos(){
+            if ($this->photos == null){
+                $this->loadPhotos();
+            }
+            return $this->photos;
         }
        
        public function save(){
@@ -324,5 +341,131 @@
             $res = mQuery($query);
         
         }          
+    }
+    
+    class GoodsPhoto{
+        public $id;
+        public $url;
+        public $ordinal;
+        public $description;
+        public $goodsId;
+        
+        function GoodsPhoto($id, $goodsId, $link, $ordinal, $description){
+            $this->id = $id;
+            $this->goodsId = $goodsId;           
+            $this->url = $link;
+            $this->ordinal = $ordinal;
+            $this->description = $description;
+        }
+        
+        public static function load($id){
+            $query = "SELECT id, id_goods, link, ordinal, description from em_goods_photo where id=$id "   ;
+            $res = mQuery($query);
+            if ($row=mysql_fetch_row($res)){
+                return new GoodsPhoto($row[0],$row[1], $row[2], $row[3], $row[4]);   
+            }
+            return null;
+        }
+        
+        public function save(){
+            if ($this->id == null){
+                $this->insert();
+            }else{
+                $this->update();
+            }
+        }
+        
+        public function insert(){
+            $descr = addslashes($this->description);
+            $query = "insert into em_goods_photo(id_goods, link, ordinal, descriptin)
+            values({$this->goodsId}, '{$this->url}', {$this->ordinal}, \"$descr\")";
+            $res = mQuery($query);
+            $this->id = mysql_insert_id();
+        }
+                                                   
+        public function update(){
+            $descr = addslashes($this->description);
+            $query = "UPDATE em_goods_photo SET descriptin = \"$descr\" where id = {$this->id} ";
+            mQuery($query);
+        }
+        
+        public static function getParamOrdinal($id){
+            $query = "SELECT ordinal FROM em_goods_photo WHERE id= $id";
+            $res = mQuery($query);
+            $row = mysql_fetch_row($res);
+            $moveParamOrd = $row[0];
+            return $moveParamOrd;             
+        }
+        public function downParam($pid){
+            $msg = "Нельзя сдвинуть параметр ниже";
+            $moveParamOrd = GoodsPhoto::getParamOrdinal($pid);
+            if($moveParamOrd==$this->getNextOrdinal()-1){
+                return $msg;
+            }
+            //полу id параметра скоторым буду менять местами
+                  
+            $query = "SELECT id,ordinal from em_goods_photo WHERE id_goods = {$this->goodsId} 
+                      AND ordinal=(SELECT MIN(ordinal) from em_goods_photo WHERE ordinal>$moveParamOrd)";
+            $res = mQuery($query);
+            if (!$row = mysql_fetch_row($res)){
+                return $msg."error";
+            }
+            $newOrd = $row[1];
+            $neighbourId = $row[0];
+            $query = "UPDATE em_goods_photo 
+                      SET ordinal = $newOrd
+                      WHERE id_goods = {$this->goodsId} AND id=$pid";
+            $res = mQuery($query);
+            $query = "UPDATE em_category_parameters 
+                      SET ordinal = $moveParamOrd
+                      WHERE id= $neighbourId";
+            $res = mQuery($query);
+            return 1;
+        }
+        public function upParam($pid){
+            $msg = "Нельзя сдвинуть параметр выше";
+            $query = "SELECT min(ordinal) from em_goods_photo WHERE id_goods = {$this->goodsId}";
+            $res = mQuery($query);
+            $row = mysql_fetch_row($res);
+            $moveParamOrd = $this->getParamOrdinal($pid);
+            if($moveParamOrd==$row[0]){
+                return $msg;
+            }
+
+                  
+            $query = "SELECT id,ordinal from em_goods_photo ec WHERE id_goods = {$this->goodsId} 
+                      AND ec.ordinal=(SELECT MAX(ordinal) from em_goods_photo WHERE . ordinal<$moveParamOrd)";
+            $res = mQuery($query);
+            if (!$row = mysql_fetch_row($res)){
+                return $msg."error";
+            }
+            $newOrd = $row[1];
+            $neighbourId = $row[0];
+            $query = "UPDATE em_goods_photo 
+                      SET ordinal = $newOrd
+                      WHERE id_goods = {$this->goodsId} AND id=$pid";
+            $res = mQuery($query);
+            $query = "UPDATE em_goods_photo 
+                      SET ordinal = $moveParamOrd
+                      WHERE id= $neighbourId";
+            $res = mQuery($query);
+            return 1;
+        } 
+        
+        public function getNextOrdinal(){
+            $query = "SELECT max(ordinal)+1 from em_goods_photo WHERE categoryid = {$this->goodsId}";
+            $res = mQuery($query);
+            $row = mysql_fetch_row($res);
+            if ($row[0]==null){
+                $row[0] = 1;
+            }
+            return $row[0];
+        }
+        
+        public function moveDown(){
+            
+        }
+        
+        
     }
 ?>
