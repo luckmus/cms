@@ -42,6 +42,14 @@ class Cart{
             return count($this->list);   
         }
         
+        public function getTotalWeight(){
+            $total = 0;
+            foreach($this->list as $item){   
+                $total += $item->goods->getWeight()*$item->cnt;
+            }
+            return $total;
+        }
+        
         public function clearCart(){
             setcookie ("cart","cart",time()-3600,"/");   
         }

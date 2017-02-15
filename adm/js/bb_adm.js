@@ -26,3 +26,35 @@ console.log('send order add to bb', orderId);
     });
 
 }
+
+function declineParsel(trackNum, onExec){
+
+URL = host+'/modules/FRONTEND/userSide/delivery.php?action=decline&track_num='+trackNum;
+      $.ajax({
+      url: URL,
+      context: document.body,
+      success: function(data){                                                               
+      try
+          {
+                    console.log( data );
+                    var res = jQuery.parseJSON(data);
+                    onExec(res);
+          }
+      catch(err)
+          {
+            console.log(err);
+          } 
+      
+                  
+      }
+    });
+}
+
+function applyDecline(declRes){
+    if (declRes.err!=null){
+        jqAlert(declRes.err, null);
+    }
+    else{
+        jqAlert(declRes.text, reload);
+    }
+}

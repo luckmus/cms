@@ -7,7 +7,8 @@ class CartView{
     }
     
     public function getView(){
-        $res = "В корзине {$this->cart->itemsCount()} </br>";           
+        $totalWeight = $this->cart->getTotalWeight();    
+        $res = "В корзине: <b>{$this->cart->itemsCount()}</b> наименований. Вес заказа (гр.): <b>$totalWeight</b></br>";           
         $res .= "<div style=\"visibility:hidden\" id='apply_card'></div>";   
         $res .="<table class='cart-table'>"; 
          
@@ -48,6 +49,8 @@ class CartView{
         $res .="</table>"; 
         $res .="<div class='apply_promo'>";
         $res .= "<input type='hidden' value='$summ' id='paymentSum'>";
+        
+        $res .= "<input type='hidden' value='$totalWeight' id='totalWeight'>";
         $res .="<input type='checkbox' id='promo_check' 
         onChange=\" $('#promo').css('visibility', this.checked?'visible':'hidden');\">
         <label for='promo_check' style=\"cursor: pointer\" >У меня есть промо-код</label>";
@@ -172,12 +175,12 @@ class CartView{
   <div id='self_descr' class='self_del_desc'>Осуществляется в рабочие дни <b>с 10:00 до 20:00</b> по адресу: <b>Кондратьвский пр. д62 корп. 6</b>. Обязательное предварительное согласование.</div>
   <input $dis type='radio' name='delivery' value='2' id='cur_del'onChange=\"selectDelivery();\"> <label for='cur_del' style=\"cursor: pointer\" >До пункта самовывоза BoxBerry</label><br>  
   <div id='cur_descr' class='cur_del_desc'>
-       {$this->getDeliveryMethodBoxBerry(1000)}
+       {$this->getDeliveryMethodBoxBerry($totalWeight)}
     
     <div id='delivery_places'></div> 
   </div>
   <input $dis type='radio' name='delivery' value='3' id='bb_del' onChange=\"selectDelivery();\"> <label for='bb_del' style=\"cursor: pointer\" >Курьерской службой</label><br>  
-  {$this->getDeliveryMethodBoxBerryCur(1000)}
+  {$this->getDeliveryMethodBoxBerryCur($totalWeight)}
   </div>
   <div id='selected_delivery_method_panel'></div>
 </fieldset> 
@@ -206,7 +209,7 @@ class CartView{
     private function getDeliveryMethodBoxBerryCur($weight){
      return "<div id='bb_descr' class='cur_del_desc'> 
         <span class='delivery_firel_descr'>Индекс города куда надо осуществить доставку</span><br>
-        <input type='text' id='bb_delivery_index'><button onClick=\"getBBPoints($('#bb_delivery_index').val(),  $('#paymentSum').val(), $weight)\">Проверить</button >
+        <input type='text' id='bb_delivery_index'><button onClick=\"getBBPoints($('#bb_delivery_index').val(),  $('#paymentSum').val(),  $weight)\">Проверить</button >
         <div id='bb_curier_info' class='cur_del_desc'>
             <table>
                 <tr><td class='delivery_item'>Стоимость достаки:<td><td><span id='bb_cur_del_price'></span><td></tr>

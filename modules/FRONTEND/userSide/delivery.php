@@ -13,6 +13,7 @@ include "../../../libs/db.php";
         mQuery("SET NAMES 'cp1251'", $dbh);      
         require_once "../../em/usercommunication.php";
         require_once "../../em/em_accounts.php";
+        require_once "../../em/parameter.php";
         require_once "../../em/em_goods.php";
         require_once "../../em/em_Order.php";
 

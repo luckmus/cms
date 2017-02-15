@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Фев 14 2017 г., 16:40
+-- Время создания: Фев 15 2017 г., 10:05
 -- Версия сервера: 5.1.37
 -- Версия PHP: 5.3.0
 
@@ -129,18 +129,14 @@ CREATE TABLE IF NOT EXISTS `em_category` (
   `ordinal` int(11) NOT NULL DEFAULT '0',
   `isarchivate` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=61 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=62 ;
 
 --
 -- Дамп данных таблицы `em_category`
 --
 
 INSERT INTO `em_category` (`id`, `name`, `description`, `imagefile`, `ordinal`, `isarchivate`) VALUES
-(1, 'Постель', 'Элитное постельное белье', 'null', 1, 0),
-(2, 'Одеяла', 'Одеяла', 'C:/xampplite/htdocs/vipsleep/uploadfiles/bravo.jpg', 2, 0),
-(6, 'Подушки', '', 'null', 3, 0),
-(7, 'Покрывала', 'Покрывала', 'null', 4, 0),
-(60, 'awdasd', '', '', 5, 0);
+(61, 'Игрушки', '', '', 6, 0);
 
 -- --------------------------------------------------------
 
@@ -154,28 +150,17 @@ CREATE TABLE IF NOT EXISTS `em_category_parameters` (
   `parameterid` int(11) NOT NULL,
   `ordinal` int(11) NOT NULL DEFAULT '0' COMMENT 'порядок паораметров в категории',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 COMMENT='связка категорий и параметров' AUTO_INCREMENT=37 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 COMMENT='связка категорий и параметров' AUTO_INCREMENT=41 ;
 
 --
 -- Дамп данных таблицы `em_category_parameters`
 --
 
 INSERT INTO `em_category_parameters` (`id`, `categoryid`, `parameterid`, `ordinal`) VALUES
-(1, 1, 1, 0),
-(13, 1, 2, 1),
-(17, 1, 3, 2),
-(18, 1, 4, 3),
-(19, 2, 3, 0),
-(20, 2, 4, 0),
-(21, 6, 3, 0),
-(22, 6, 4, 0),
-(23, 7, 4, 0),
-(24, 7, 2, 0),
-(25, 7, 3, 0),
-(26, 2, 1, 0),
-(27, 2, 2, 0),
-(29, 2, 5, 0),
-(36, 1, 5, 4);
+(37, 61, 1, 1),
+(38, 61, 4, 2),
+(39, 61, 3, 3),
+(40, 61, 5, 4);
 
 -- --------------------------------------------------------
 
@@ -203,16 +188,15 @@ CREATE TABLE IF NOT EXISTS `em_goods` (
 --
 
 INSERT INTO `em_goods` (`id`, `categoryid`, `name`, `description`, `imagefile`, `price`, `ordinal`, `isarchivate`, `metadescription`, `metakeywords`, `updatedate`) VALUES
-(12, 1, 'Матрац', '<p>Белье премиум класса. Комбинация жаккардового шелка с хлопком не только красива, но и практична - к телу 100% хлопок. Простынь из 100% хлопка с шелковым купоном. Нижняя сторона пододеяльника 100% хлопок.</p>', 'uploadfiles/satin2.jpg', 0, 8, 0, '', '', '2011-08-21 22:10:33'),
-(51, 1, 'насос', '<p>Насос для накачивания бицух</p>', 'uploadfiles/bravo.jpg', NULL, 14, 0, '', '', '2015-02-14 21:29:31'),
-(11, 1, 'Насос', '<p>qierhewfrgiq<strong>eruh</strong></p>\n<p><img title="Smile" src="/vipsleep/adm/tiny_mce/plugins/emotions/img/smiley-smile.gif" border="0" alt="Smile" /></p>', 'uploadfiles/orang.jpg', 10, 7, 1, '', '', '0000-00-00 00:00:00'),
-(41, 1, 'Сатин', '<p>Привет</p>', 'uploadfiles/sation1.jpg', NULL, 9, 0, 'wd', 'wewe', '2011-09-11 14:43:17'),
-(42, 2, 'Одеяло', '<p>Шерстянное одеяло</p>', 'uploadfiles/odeylo 1.jpg', NULL, 10, 0, '', '', '2011-10-17 12:30:55'),
-(43, 2, 'Другое одеяло', '<p>Шерстянное одеяло</p>', 'uploadfiles/odeylo 2.jpg', NULL, 11, 0, '', '', '2011-10-17 12:32:37'),
-(49, 7, 'Покрывало цветастое', '<p>Разноцветное покрывало</p>', 'uploadfiles/BS84-3.jpg', NULL, 12, 0, '', '', '2011-10-17 14:09:09'),
-(50, 1, 'архив', '', 'uploadfiles/BS84-3.jpg', NULL, 13, 1, '', '', '2011-10-21 14:01:03'),
-(52, 2, 'лого', '<p>крутой логотип</p>', 'uploadfiles/logo.jpg', NULL, 15, 0, '', '', '2015-02-14 21:46:01'),
-(53, 6, 'нечто', '<p>Титаник<span style="text-decoration: line-through;"> наших</span> дней</p>', 'uploadfiles/breeze2.jpg', NULL, 16, 0, '', '', '2015-02-14 21:47:27');
+(12, 61, 'Матрац', '<p>Белье премиум класса. Комбинация жаккардового шелка с хлопком не только красива, но и практична - к телу 100% хлопок. Простынь из 100% хлопка с шелковым купоном. Нижняя сторона пододеяльника 100% хлопок.</p>', 'uploadfiles/satin2.jpg', 0, 8, 0, '', '', '2011-08-21 22:10:33'),
+(51, 61, 'насос', '<p>Насос для накачивания бицух</p>', 'uploadfiles/bravo.jpg', NULL, 14, 0, '', '', '2015-02-14 21:29:31'),
+(41, 61, 'Сатин', '<p>Привет</p>', 'uploadfiles/sation1.jpg', NULL, 9, 0, 'wd', 'wewe', '2011-09-11 14:43:17'),
+(42, 61, 'Одеяло', '<p>Шерстянное одеяло</p>', 'uploadfiles/odeylo 1.jpg', NULL, 10, 0, '', '', '2011-10-17 12:30:55'),
+(43, 61, 'Другое одеяло', '<p>Шерстянное одеяло</p>', 'uploadfiles/odeylo 2.jpg', NULL, 11, 0, '', '', '2011-10-17 12:32:37'),
+(49, 61, 'Покрывало цветастое', '<p>Разноцветное покрывало</p>', 'uploadfiles/BS84-3.jpg', NULL, 12, 0, '', '', '2011-10-17 14:09:09'),
+(50, 61, 'архив', '', 'uploadfiles/BS84-3.jpg', NULL, 13, 1, '', '', '2011-10-21 14:01:03'),
+(52, 61, 'лого', '<p>крутой логотип</p>', 'uploadfiles/logo.jpg', NULL, 15, 0, '', '', '2015-02-14 21:46:01'),
+(53, 61, 'нечто', '<p>Титаник<span style="text-decoration: line-through;"> наших</span> дней</p>', 'uploadfiles/breeze2.jpg', NULL, 16, 0, '', '', '2015-02-14 21:47:27');
 
 -- --------------------------------------------------------
 
@@ -228,44 +212,51 @@ CREATE TABLE IF NOT EXISTS `em_goods_params` (
   `paramid` int(11) NOT NULL COMMENT 'id  параметра зависимого от параметра описаного в parentId',
   `value` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 COMMENT='Хранит значения параметров описывающих единицу товара из em_' AUTO_INCREMENT=85 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 COMMENT='Хранит значения параметров описывающих единицу товара из em_' AUTO_INCREMENT=98 ;
 
 --
 -- Дамп данных таблицы `em_goods_params`
 --
 
 INSERT INTO `em_goods_params` (`id`, `parentid`, `gid`, `pvid`, `paramid`, `value`) VALUES
-(1, 0, 11, 16, 0, ''),
+(95, 0, 50, 16, 0, ''),
 (48, 0, 42, 16, 0, ''),
 (3, 0, 12, 16, 0, ''),
-(75, 0, 51, 2, 0, ''),
 (5, 0, 12, 14, 0, ''),
 (8, 0, 11, 55, 0, '1111'),
 (11, 0, 12, 55, 0, '1240'),
 (46, 0, 41, 3, 0, ''),
-(17, 0, 16, 2, 0, ''),
-(16, 0, 15, 2, 0, ''),
 (43, 0, 41, 19, 0, ''),
 (44, 0, 41, 64, 0, '3500'),
+(86, 0, 41, 65, 0, ''),
 (47, 0, 11, 56, 0, '1000'),
 (49, 0, 42, 57, 0, ''),
 (50, 0, 42, 64, 0, '2500'),
 (51, 0, 43, 16, 0, ''),
 (52, 0, 43, 57, 0, ''),
 (53, 0, 43, 64, 0, '2500'),
+(85, 0, 12, 59, 0, ''),
 (70, 0, 49, 64, 0, '2000'),
 (69, 0, 49, 14, 0, ''),
-(72, 0, 50, 2, 0, ''),
 (74, 0, 43, 59, 0, ''),
 (73, 0, 42, 59, 0, ''),
 (79, 0, 51, 59, 0, ''),
 (84, 0, 12, 64, 0, '1200'),
 (77, 0, 51, 64, 0, '1000'),
 (76, 0, 51, 57, 0, ''),
-(80, 0, 52, 2, 0, ''),
 (81, 0, 52, 57, 0, ''),
 (82, 0, 52, 64, 0, '5000'),
-(83, 0, 53, 64, 0, '1000000');
+(83, 0, 53, 64, 0, '1000000'),
+(87, 0, 52, 65, 0, ''),
+(88, 0, 53, 59, 0, ''),
+(89, 0, 49, 65, 0, ''),
+(90, 0, 41, 16, 0, ''),
+(91, 0, 49, 16, 0, ''),
+(92, 0, 51, 16, 0, ''),
+(93, 0, 52, 66, 0, ''),
+(94, 0, 53, 66, 0, ''),
+(96, 0, 50, 64, 0, '500'),
+(97, 0, 50, 59, 0, '');
 
 -- --------------------------------------------------------
 
@@ -296,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `em_order` (
   `track_number` varchar(50) DEFAULT NULL,
   `bar_code` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=298 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=302 ;
 
 --
 -- Дамп данных таблицы `em_order`
@@ -322,7 +313,11 @@ INSERT INTO `em_order` (`id`, `id_parent`, `goodsid`, `cnt`, `goodsprice`, `disc
 (294, NULL, NULL, 0, '', 0, '2500.00', 0, '', 'adasdasd', '', '2017-02-14 16:31:29', '', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:422,&quot;price_base&quot;:170,&quot;price_service&quot;:252,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;улица 1&quot;,&quot;city&quot;:&quot;Санкт-Петербург&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', 'er', 'PHP1431739', 'http://test.api.boxberry.de/?act=build&track=PHP1431739&token=10000.rbpqbafb'),
 (295, 294, 42, 1, '2500', 0, '0.00', 0, '', 'йцуйцуйцуйцу', '', '2017-02-14 15:59:01', '51515313', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
 (296, NULL, NULL, 0, '2000', 0, '2000.00', 0, '', 'тест', '', '2017-02-14 16:33:12', '51311', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78461&quot;,&quot;zip&quot;:&quot;199155&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;199155, Санкт-Петербург г, Одоевского ул, д.27, литер А, сек. 212&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-вс: 11.00-21.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;197.96&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431740', 'http://test.api.boxberry.de/?act=build&track=PHP1431740&token=10000.rbpqbafb'),
-(297, 296, 49, 1, '2000', 0, '0.00', 0, '', 'тест', '', '2017-02-14 16:33:03', '51311', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL);
+(297, 296, 49, 1, '2000', 0, '0.00', 0, '', 'тест', '', '2017-02-14 16:33:03', '51311', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
+(298, NULL, NULL, 0, '2500', 2, '2450.00', 0, '', 'проверочная', '', '2017-02-15 08:29:49', '654654', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78061&quot;,&quot;zip&quot;:&quot;190031&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;190031, Санкт-Петербург г, Московский пр-кт, д.3а&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00, вс: 11.00-19.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;211.19&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431746', 'http://test.api.boxberry.de/?act=build&track=PHP1431746&token=10000.rbpqbafb'),
+(299, 298, 42, 1, '2500', 0, '0.00', 0, '', 'проверочная', '', '2017-02-15 08:29:41', '654654', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
+(300, NULL, NULL, 0, '10000', 2, '9800.00', 0, '', 'проверка', '', '2017-02-15 10:00:46', '4567890', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78511&quot;,&quot;zip&quot;:&quot;195009&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;195009, Санкт-Петербург г, Комсомола ул, д.16&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;433.16&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, '', ''),
+(301, 300, 42, 4, '2500', 0, '0.00', 0, '', 'проверка', '', '2017-02-15 09:47:04', '4567890', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -344,10 +339,9 @@ CREATE TABLE IF NOT EXISTS `em_parameters` (
 
 INSERT INTO `em_parameters` (`id`, `relationfrom`, `name`, `ordinal`) VALUES
 (1, NULL, 'Материал', 1),
-(2, NULL, 'Цвет', 2),
 (3, NULL, 'Размер', 3),
 (4, 3, 'Цена', 5),
-(5, NULL, 'Вес кг.', 4);
+(5, NULL, 'Вес гр.', 4);
 
 -- --------------------------------------------------------
 
@@ -362,24 +356,17 @@ CREATE TABLE IF NOT EXISTS `em_param_value` (
   `description` text NOT NULL,
   `ordinal` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=65 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=67 ;
 
 --
 -- Дамп данных таблицы `em_param_value`
 --
 
 INSERT INTO `em_param_value` (`id`, `pid`, `value`, `description`, `ordinal`) VALUES
-(2, 1, 'Cotton', 'Cotton', 1),
-(3, 2, 'Red', '', 0),
-(19, 1, 'шелк', '', 5),
-(14, 2, 'Green', '', 1),
-(16, 1, 'шерсть', '', 3),
-(32, 1, 'Сатин', '', 6),
-(40, 2, 'black', '', 2),
-(57, 2, 'Желтый', '', 3),
+(16, 1, 'фанера 3 мм', '', 3),
+(66, 1, 'фанера 3/6мм', '', 4),
 (59, 5, '120', '', 0),
-(60, 1, 'Жакард', 'Суппер крутой жаккард', 7),
-(63, 2, 'болотный', '''', 4),
+(65, 5, '200', '', 1),
 (64, 3, 'обычный', '', 3);
 
 -- --------------------------------------------------------

@@ -215,6 +215,11 @@
             return $this->goodsParameter; 
         }        
         
+        public function getWeight(){
+            $res = $this->getGoodsParam(5);   
+            return intval($res[0][0]->parameter->value);
+        }
+        
         function addParam($pvid, $value){
             $insValue = stripslashes($value);
             $query = "INSERT INTO em_goods_params(gid,pvid,value) 

@@ -159,7 +159,7 @@
              array_push($SDATA['items'], $gd);
 
              //array_push($SDATA['weights'], 100);
-             $SDATA['weights']['weight'] = 100;
+             $SDATA['weights']['weight'] = $goodsOne->getWeight()*$item->cnt;
          }
          
          return $SDATA;      

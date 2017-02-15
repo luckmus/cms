@@ -16,6 +16,9 @@ URL = host+'/modules/FRONTEND/userSide/delivery.php?action=tarif&index='+index+'
           {
                     console.log( data );
                     var res = jQuery.parseJSON(data);
+                    if (res.err != null){
+                    jqAlert(res.err, null);   
+                    }else
                     if ((res.price==null) || (res.price==0)){
                         jqAlert(' урьерска€ доставка по данному адресу невозможна', null);
                     }else{
@@ -32,37 +35,7 @@ URL = host+'/modules/FRONTEND/userSide/delivery.php?action=tarif&index='+index+'
     });
 }
 
-function declineParsel(trackNum, onExec){
 
-URL = host+'/modules/FRONTEND/userSide/delivery.php?action=decline&track_num='+trackNum;
-      $.ajax({
-      url: URL,
-      context: document.body,
-      success: function(data){                                                               
-      try
-          {
-                    console.log( data );
-                    var res = jQuery.parseJSON(data);
-                    onExec(res);
-          }
-      catch(err)
-          {
-            console.log(err);
-          } 
-      
-                  
-      }
-    });
-}
-
-function applyDecline(declRes){
-    if (declRes.err!=null){
-        jqAlert(declRes.err, null);
-    }
-    else{
-        jqAlert(declRes.text, reload);
-    }
-}
 
 function showCurrierInfo(info){
 console.log("showCurrierInfo", info );  
