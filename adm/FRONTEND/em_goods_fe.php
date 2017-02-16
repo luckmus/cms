@@ -184,7 +184,7 @@ echo "<tr><td>";
             \$( '#id_add_photo_$id' )
             .button()
             .click(function() {     
-                    alert(1);
+                   addPhotoGalFE('$goodsEdtMagPlcId', $id);
             });
             
             tinyMCE.execCommand('mceAddControl', false, '$descCont');

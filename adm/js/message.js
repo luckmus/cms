@@ -538,3 +538,9 @@ function savePromoBE(id, aname, adescr, avalue, adate, tabId, mode){
                      }
                      });    
     }
+    
+    function addPhotoGalFE(delMsgPlace,goodsId){        
+        URL = host+"/modules/FRONTEND/dlgMessages/selectGoodsPhotos.php?mode=1&id="+Math.floor(Math.random(1,1000000)*1000)+"&goods_id="+goodsId+"&isXML=1";        
+        console.log(URL);
+        runAJAXXML(URL,delMsgPlace);
+    }    
