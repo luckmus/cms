@@ -27,6 +27,7 @@ URL = host+'/modules/FRONTEND/userSide/delivery.php?action=tarif&index='+index+'
           }
       catch(err)
           {
+          jqAlert('Ошибка получения инофрмации от службы доставки, попробуйте позже или свяжитесь с нами', null);
             console.log(err);
           } 
       

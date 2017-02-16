@@ -18,6 +18,7 @@ console.log('send order add to bb', orderId);
           }
       catch(err)
           {
+          jqAlert("Ошибка подключения к серверу ББ", null);
             console.log(err);
           } 
       
