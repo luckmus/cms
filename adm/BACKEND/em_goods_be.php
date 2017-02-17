@@ -50,7 +50,12 @@
     $metakeywords = $_GET['metakeywords'];
     if ($metakeywords==""){
         $metakeywords = $_POST['metakeywords'];    
-    }    
+    }
+    
+    $photo = $_GET['photo'];
+    if ($photo==""){
+        $photo = $_POST['photo'];    
+    }   
     
     $name               = convertToWIN1251($name);
     $metaDescription    = convertToWIN1251($metaDescription); 
@@ -76,8 +81,17 @@
         case 6:
             echo unArchGood($id);        
         break;        
+        case 7:
+            echo addGalleryPhoto($goodId, $photo, $descr);        
+        break;  
     }
     
+    function addGalleryPhoto($goodsId, $photo, $descr){
+        //echo "не реализовано $goodsId, $photo, $descr";
+         $gp = new GoodsPhoto(null, $goodsId, $photo, null, $descr);
+         $gp->save();
+         return 1;
+    }
     function addGood($catId, $name){
         $goodsLost = new GoodsList();
         $goodsLost->LoadAll();

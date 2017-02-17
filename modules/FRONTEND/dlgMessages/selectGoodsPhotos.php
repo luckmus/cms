@@ -8,6 +8,8 @@
     $goodsId = $_GET['goods_id'];
     $isXML = $_GET['isXML']; 
      $randId = $_GET['id'];
+     $tabId = $_GET['tabId'];
+     $msgId = $_GET['msgId'];
     $imgCont = "goods-gal-img-$goodsId-$randId";
       $AllFilesList = LoadFromDir($url);
       //var_dump($AllFilesList);
@@ -23,7 +25,7 @@
       $content.= "<img id='$imgId' src='$first' style=\"width: 110px;height: 110px;\"/><br/>";
       $descr = "gf-descr-$id";
       $content.= "<label for='$descr'>Описание</label><textarea id='$descr' cols=40 rows=10></textarea>";
-      $msg = new Message($id,"Фото для галлереи",$content,"alert",'1',"");
+      $msg = new Message($id,"Фото для галлереи",$content,"addGalleryPhotoBE","$goodsId, '$imgCont', '$descr', '$tabId', '$msgId'","");
       $msg->setHeight(400);
       //$msg->setWidth(400);
     #если xml, то сформирую ее

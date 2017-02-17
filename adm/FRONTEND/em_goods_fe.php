@@ -106,7 +106,7 @@ echo "<tr><td>";
   $photos =  $goodsOne->getPhotos();
   $pc = '';
   foreach ($photos as $photo){
-     $pc .= "<tr><td>{$photo->url}</td></tr>";
+     $pc .= "<tr><td>{$photo->url}</td><td><img title=\"{$photo->description}\"  style=\"width: 50px;height: 50px;\"  src='../{$photo->url}'/></td><td><a href='#' onClick=\"deleteGalPhoto({$photo->id}, '"._MAIN_GOODS_CONT."')\">Удалить</a></td></tr>";
   }
   print "<div id='$imagesId' class='ui-accordion-header-collapsed'>
   <h3>Изображения</h3>
@@ -183,8 +183,10 @@ echo "<tr><td>";
             }); 
             \$( '#id_add_photo_$id' )
             .button()
-            .click(function() {     
-                   addPhotoGalFE('$goodsEdtMagPlcId', $id);
+            .click(function() {   
+                    //var id = ('adagf'+Math.random()+'_').replace('.', '');
+                    //$('body').append('<div id=\"'+id+'\"></div>');   
+                   addPhotoGalFE('$goodsEdtMagPlcId', $id, '"._MAIN_GOODS_CONT."');
             });
             
             tinyMCE.execCommand('mceAddControl', false, '$descCont');

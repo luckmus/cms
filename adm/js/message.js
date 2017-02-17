@@ -288,6 +288,8 @@ function addCategParam(backUrl, id, dialogId,tabId){
                      }
                      });    
     }
+    
+   
 
 
     function unArchivateGoodsFE(goodid,delMsgPlace,tabId){        
@@ -539,8 +541,40 @@ function savePromoBE(id, aname, adescr, avalue, adate, tabId, mode){
                      });    
     }
     
-    function addPhotoGalFE(delMsgPlace,goodsId){        
-        URL = host+"/modules/FRONTEND/dlgMessages/selectGoodsPhotos.php?mode=1&id="+Math.floor(Math.random(1,1000000)*1000)+"&goods_id="+goodsId+"&isXML=1";        
+    function addPhotoGalFE(delMsgPlace,goodsId, tabId){        
+        URL = host+"/modules/FRONTEND/dlgMessages/selectGoodsPhotos.php?mode=1&id="+Math.floor(Math.random(1,1000000)*1000)+"&tabId="+tabId+"&goods_id="+goodsId+"&isXML=1&msgId="+delMsgPlace;        
         console.log(URL);
         runAJAXXML(URL,delMsgPlace);
     }    
+    
+     function addGalleryPhotoBE(goodId, photo, descr, tabId, msgId){      
+     console.log("tabId", tabId);
+      //$("body").remove("#"+msgId);
+        URL = host+"adm/BACKEND/em_goods_be.php";
+        try{   
+                     descr = $('#'+descr).val();
+                     photo = $('#'+photo).val();
+                     $.ajax({
+                     type: "POST",
+                     url: URL,             // указываем URL и
+                     data:{'mode': 7,
+                       'photo': photo, 
+                       'descr': descr,
+                       'goodId':goodId},
+                     success: function (data, textStatus) { // вешаем свой обработчик на функцию success*
+                        if(data!="1"){
+                            alert("Ошибка  добавления "+data);
+                        }
+                        else{                         
+                            $('#'+tabId).tabs("load", $('#'+tabId).tabs("option", "selected"));
+                        }
+                     }
+                     });             
+                     //*/      
+        }catch (e){alert(e);}  
+    }
+    
+    function deleteGalPhoto(id, tabId){
+        alert('реализовать удаление '+id);
+        $('#'+tabId).tabs("load", $('#'+tabId).tabs("option", "selected"));
+    }

@@ -377,10 +377,23 @@
         
         public function insert(){
             $descr = addslashes($this->description);
-            $query = "insert into em_goods_photo(id_goods, link, ordinal, descriptin)
-            values({$this->goodsId}, '{$this->url}', {$this->ordinal}, \"$descr\")";
+            if ($this->ordinal==null){
+                 $res = mQuery("select count(*) from em_goods_photo where id_goods={$this->goodsId}");
+                 if ($row = mysql_fetch_row($res)){
+                     $ordinal = $row[0];
+                 }else{
+                    $ordinal = 0;   
+                 }
+                
+            }else{
+                $ordinal = $this->ordinal;
+            }
+            $query = "insert into em_goods_photo(id_goods, link, ordinal, description)
+            values({$this->goodsId}, '{$this->url}', $ordinal, \"$descr\")";
+            
             $res = mQuery($query);
             $this->id = mysql_insert_id();
+            //echo "$query id={$this->id}";
         }
                                                    
         public function update(){
