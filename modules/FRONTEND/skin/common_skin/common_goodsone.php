@@ -10,10 +10,33 @@
 
     public function getView(){
         
+        $res = '';
+         
         $res = "<div>";
         $res .= "<h1>".$this->goodsOne->name."</h1>";                
+        $gal =$this->goodsOne->getPhotos();
+        if ($gal==null){
+            $gal = array();
+            array_push($gal, new  GoodsPhoto(null, $this->goodsOne->id, $this->goodsOne->imagefile, 0, ""));
+        }
+                    $res .= ' 
+            <ul class="bxslider">';
+
+            foreach($gal as $photo){
+              $res .="<li><img src='{$photo->url}' /></li>";
+            }
+            $res .='</ul>        
+
+                <script>
+            $(".bxslider").bxSlider({
+              auto: true,
+              autoControls: true
+            });
+              </script>';
+  
+        
         //$res .= "<p>";
-        $res .= "<img align='left' style=\" width: 400px; height: 290px; margin: 10px 15px 20px 7px\"  src='{$this->goodsOne->imagefile}'>";
+        //$res .= "<img align='left' style=\" width: 400px; height: 290px; margin: 10px 15px 20px 7px\"  src='{$this->goodsOne->imagefile}'>";
         $res .= $this->goodsOne->desc;
         //$res .= "</p>";
         $res .="</div>";
@@ -24,7 +47,8 @@
         //$res .= "<div>";
         $res .= $this->getBuyButton();
         $res .= "</div>";        
-        $res .= $this->getPlaceForOrderMsg();
+        //$res .= $this->getPlaceForOrderMsg();
+        //http://bxslider.com/examples/auto-show-start-stop-controls
         return $res;
     }
 

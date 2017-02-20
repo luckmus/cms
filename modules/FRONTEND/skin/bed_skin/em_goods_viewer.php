@@ -57,7 +57,7 @@
          <div class="netname">'.$this->goodsOne->name.'</div>
          <div class="netlogo">
             <a href="'.$this->getLink().'">
-               <img src="add_files/item_incard.gif" alt="Подробно" />
+               <img src="add_files/item_incard.gif" title="Подробное описание товара" />
             </a>
          </div>
          <br />

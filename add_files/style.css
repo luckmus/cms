@@ -385,7 +385,7 @@ padding: 0; }
 
 .netname { font-size:16.5px; font-weight:bold; font-family:'ConstantiaBoldItalic', 'Georgia', sans-serif; font-style:italic; }
 .netprice { position:relative; float:left; margin-top:0px !important; font-size:24px; z-index:10; font-weight:bold;  padding-right:24px; background:url('../images/rub.png') 100% 8px no-repeat; font-family:'ConstantiaBoldItalic', 'Georgia', sans-serif; font-style:italic; }
-.netlogo img { margin-bottom:8px; }
+.netlogo img { margin-bottom:8px; width: 80px; }
 .netlogo a { float:right; margin-bottom:8px; }
 
 

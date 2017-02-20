@@ -32,6 +32,7 @@ foreach($_COOKIE as $cook){
     <script type="text/javascript" src="add_files/jquery_002.js"></script>  --> 
     <script type="text/javascript" src="add_files/swfupload_002.js"></script>
     <link href="add_files/default.css" rel="stylesheet" media="all">
+    
     <script type="text/javascript" src="add_files/handlers.js"></script>
     <script type="text/javascript" src="add_files/swfupload_004.js"></script>
     <script type="text/javascript" src="add_files/swfupload_005.js"></script>
@@ -72,6 +73,9 @@ foreach($_COOKIE as $cook){
     <script type="text/javascript" src="//points.boxberry.ru/js/boxberry.js"> </script>
     <script src="js/boxberry.js"></script>
     
+    <script src="js/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <link rel="stylesheet" href="css/gallery.css">
     <script>
     <?php
       include "modules/FRONTEND/skin/bed_skin/skinscript.js";

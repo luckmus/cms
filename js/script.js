@@ -391,7 +391,7 @@
     }
     
 function applyPromo(name){
-    var URL = SITE_URL+'/modules/FRONTEND/userSide/promo_info.php?promo='+name
+    var URL = host+'/modules/FRONTEND/userSide/promo_info.php?promo='+name;
     $.ajax({
       url: URL,
       context: document.body,
@@ -404,6 +404,7 @@ function applyPromo(name){
           }
       catch(err)
           {
+          jqAlert(err, null);
             console.log(err);
             return false;
           } 
