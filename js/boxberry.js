@@ -7,6 +7,7 @@ function getBBPoints(index, price, weigth){
 
 $('#bb_curier_info').hide("slow");
 $( "#select_cur_del" ).off('click');
+$('#currier_loader').show("slow");
 URL = host+'/modules/FRONTEND/userSide/delivery.php?action=tarif&index='+index+'&price='+price+'&weight='+weigth;
       $.ajax({
       url: URL,
@@ -14,6 +15,7 @@ URL = host+'/modules/FRONTEND/userSide/delivery.php?action=tarif&index='+index+'
       success: function(data){                                                               
       try
           {
+                    $('#currier_loader').hide("slow");
                     console.log( data );
                     var res = jQuery.parseJSON(data);
                     if ( Array.isArray(res) && (res[0].err != null)){
@@ -27,6 +29,7 @@ URL = host+'/modules/FRONTEND/userSide/delivery.php?action=tarif&index='+index+'
           }
       catch(err)
           {
+          $('#currier_loader').hide("slow");
           jqAlert('Ошибка получения инофрмации от службы доставки, попробуйте позже или свяжитесь с нами', null);
             console.log(err);
           } 

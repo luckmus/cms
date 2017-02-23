@@ -1,6 +1,7 @@
 <?php
     //include "modules/em/init_module.php"; 
-    include "modules/FRONTEND/skin/{$GLOBALS[SKIN_VAR]}/em_cart_viewer.php";
+    //include "modules/FRONTEND/skin/{$GLOBALS[SKIN_VAR]}/em_cart_viewer.php";
+    include "modules/FRONTEND/skin/common_skin/em_cart_viewer.php";
     
     $cart = new Cart();
     

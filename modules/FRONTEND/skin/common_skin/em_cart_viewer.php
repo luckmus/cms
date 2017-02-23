@@ -56,8 +56,9 @@ class CartView{
         <label for='promo_check' style=\"cursor: pointer\" >У меня есть промо-код</label>";
         
         $res .= "<span id='promo' style=\"visibility: hidden\">";
-        $res .="<input type='text' id='promo_id' size=10>";
+        $res .="<input type='text' id='promo_id' size=10 onkeydown=\"if (event.keyCode==13){applyPromo($('#promo_id').val());}\">";
         $res .="<button onClick=\"  console.log($('#promo_id').val()); applyPromo($('#promo_id').val());\">Применить промо-код</button>";
+        $res .= "<img src='css/images/bx_loader.gif' style='width:25px; visibility:hidden;' id='promo_loader'> ";
         $res .= "</span>";
         $res .="</div>";
         /*
@@ -209,7 +210,9 @@ class CartView{
     private function getDeliveryMethodBoxBerryCur($weight){
      return "<div id='bb_descr' class='cur_del_desc'> 
         <span class='delivery_firel_descr'>Индекс города куда надо осуществить доставку</span><br>
-        <input type='text' id='bb_delivery_index'><button onClick=\"getBBPoints($('#bb_delivery_index').val(),  $('#paymentSum').val(),  $weight)\">Проверить</button >
+        <input type='text' id='bb_delivery_index' onkeydown=\"if (event.keyCode==13){ getBBPoints($('#bb_delivery_index').val(),  $('#paymentSum').val(),  $weight)}\">
+        <button onClick=\"getBBPoints($('#bb_delivery_index').val(),  $('#paymentSum').val(),  $weight)\">Проверить</button >
+        <img src='css/images/bx_loader.gif' style='width:25px; visibility:hidden;' id='currier_loader'>
         <div id='bb_curier_info' class='cur_del_desc'>
             <table>
                 <tr><td class='delivery_item'>Стоимость достаки:<td><td><span id='bb_cur_del_price'></span><td></tr>

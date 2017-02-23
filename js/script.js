@@ -392,18 +392,21 @@
     
 function applyPromo(name){
     var URL = host+'/modules/FRONTEND/userSide/promo_info.php?promo='+name;
+    $('#promo_loader').show("slow");          
     $.ajax({
       url: URL,
       context: document.body,
       success: function(data){                                                               
       try
           {
+                    $('#promo_loader').hide("slow");          
                     console.log( data );
                     var res = jQuery.parseJSON(data);
                     displayPromoInfo( res);
           }
       catch(err)
           {
+          $('#promo_loader').hide("slow");          
           jqAlert(err, null);
             console.log(err);
             return false;
