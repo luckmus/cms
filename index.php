@@ -78,7 +78,7 @@ foreach($_COOKIE as $cook){
     <link rel="stylesheet" href="css/gallery.css">
     <script>
     <?php
-      include "modules/FRONTEND/skin/bed_skin/skinscript.js";
+      include "modules/FRONTEND/skin/{$GLOBALS[SKIN_VAR]}/skinscript.js";
     ?>
     </script>
     

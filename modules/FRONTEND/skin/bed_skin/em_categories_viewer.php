@@ -35,7 +35,7 @@
         public static function getViewStatic($categories,$viewCategId){
             $Categs = new CategoriesViewer($categories);
             $Categs->activeCat = $viewCategId;
-            return $Categs->getView();
+            return '<div id="sc1">'.$Categs->getView()."<div>";
         }
              
     }

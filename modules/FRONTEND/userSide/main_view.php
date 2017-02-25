@@ -11,6 +11,16 @@
             include "modules/FRONTEND/skin/{$GLOBALS[SKIN_VAR]}/main_menu.php";           
 
         }
+        
+        static public function getLoginDlg(){
+            include "modules/FRONTEND/skin/{$GLOBALS[SKIN_VAR]}/loginDlg.php";           
+
+        }
+        
+        static public function getParts(){
+            include "modules/content/parts_skin.php"; 
+        }
+                
         static public function getTitle(){
             mainViewer::initVars();
             $title = _title.' ';
@@ -48,15 +58,35 @@
                 break;
             }
             if ((mainViewer::$show=="") ||(mainViewer::$show==_CATEGORY)){
-            include "modules/shop/categories_skin.php";
+                include "modules/shop/categories_skin.php";
             }
             
         }
+        
+                /**
+        * @desc формирует описание категории
+        */
+        static public function showCategoryDescription(){
+            mainViewer::initVars(); 
+            switch(mainViewer::$show){
+                case _CATEGORY:                    
+                    $viewCategId = mainViewer::$id;
+                break;
+                default:
+                    $viewCategId = null;
+                break;
+            }
+            if ((mainViewer::$show=="") ||(mainViewer::$show==_CATEGORY)){
+            include "modules/shop/categories_descr_skin.php";
+            }
+        }
+        
+        
         static public function showData(){
              mainViewer::initVars();
              require_once "modules/em/init_module.php";
              require_once "modules/FRONTEND/skin/common_skin/common_goodsone.php";
-             echo "<div style='margin: 10px 50px 20px 50px; width:100%;'>";
+             //echo "<div style='margin: 10px 50px 20px 50px; width:100%;'>";
              switch(mainViewer::$show){
                 case "":
                     $viewCategId = null;                    
@@ -92,7 +122,7 @@
                 break;                
                 
              }
-             echo "</div>";
+             //echo "</div>";
         }
     
         static private function initVars(){

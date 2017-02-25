@@ -20,5 +20,9 @@
         public static function initCartFromRoot(){
             require_once "modules/em/em_cart.php";
         }
+        public static function initSkins(){
+            require_once "modules/FRONTEND/skin/{$GLOBALS[SKIN_VAR]}/em_goods_viewer.php"; 
+
+        }
     }
 ?>
