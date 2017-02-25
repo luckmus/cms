@@ -18,6 +18,7 @@
             $viewLeft = $this->goodsNum*400;
             $descr = $this->goodsOne->desc;
             $price = $this->getViewPrice();
+            //var_dump($price);
             $num = $this->goodsNum+551;
 //            $this->goodsNum = $this->goodsOne->id;
             $result .= '  
@@ -145,7 +146,7 @@
             return $res;
         }           
         private function getViewPrice(){
-            
+            //var_dump($this->goodsOne);
             $params = $this->goodsOne->getGoodsParam(Parameters::$priceParam);  
             $res="";
             $firstPrice = 0;
@@ -154,7 +155,7 @@
                 $param->Load();
                 if ($i==0){
                     $className = 'card_size  price_select';
-                    $firstPrice = $param->value;   
+                    $firstPrice = $param->value."***";   
                     $firstDescr = $param->parameter->descr;   
                 }
                 else{

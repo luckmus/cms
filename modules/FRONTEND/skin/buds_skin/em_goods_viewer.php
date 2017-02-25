@@ -13,19 +13,21 @@
         public function getView(){
             $res = '<li>';
             $price = $this->getViewPrice() ;
+            $priceVal = $this->goodsOne->getPrice();
+            //var_dump($price);
             $res .= "<a href='{$this->getLink()}'>";
             $res .= "<div class='product_photo'>";
             
             $res .= " <img src='{$this->goodsOne->imagefile}' alt=''   style=' width: 220px; height: 220px;'>";
             $res .= '
            <div class="preview" rel="7466">
-              <span>Кликните здесь для <br> быстрогопросмотра</span>                                                                
+              <span>Кликните здесь для <br> быстрого просмотра</span>                                                                
            </div>
            <div title="Кликните здесь для просмотра" class="onlyinternet">
            </div>
            </div>';
            $res .= "<h3>{$this->goodsOne->name}</h3>";
-           $res .= "<div class='price'>{$price[0]}р. &nbsp;&nbsp;</div>Купить";
+           $res .= "<div class='price'>{$priceVal}р. &nbsp;&nbsp;</div>Купить";
            $res .= '</a></li>';
            //addLog($res);
            return $res;
@@ -84,7 +86,7 @@
             return $res;
         }           
         private function getViewPrice(){
-            
+            //var_dump($this->goodsOne);
             $params = $this->goodsOne->getGoodsParam(Parameters::$priceParam);  
             $res="";
             $firstPrice = 0;
@@ -103,7 +105,7 @@
                 $res .= '<div class="'.$className.'" style="font-size:1.5em;">'.$param->parameter->value.'</div>';    
             }
             
-            return Array($firstPrice, $res, $firstDescr);            
+            return Array($firstPrice, $res, $firstDescr, $firstPrice);            
         }
         
         function getSizeDesctValueId(){

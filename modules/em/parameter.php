@@ -2,6 +2,7 @@
 #класс описывает таблицу em_parameters
     class Parameters{
         public static $priceParam = 3;
+        public static $weightParam = 5;
         public $parameters;                                                                 //array of value table em_parameters
        
        

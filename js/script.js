@@ -362,7 +362,7 @@
         $( "#"+id ).dialog({
             autoOpen: false,
             height: 160,
-            width: 350,
+            width: 400,
             modal: true,
             title:"Покупка",
             buttons: {   
@@ -448,6 +448,7 @@ function selectDelivery(){
         $('#cur_descr').hide("slow");
         $('#bb_descr').show("slow");   
         $('#selected_delivery_method_panel').hide("slow");
+        $('#bb_delivery_index').focus();
     }else   if ($('[name=delivery]:checked').val()==1){ 
         $('#self_descr').show("slow");
         $('#cur_descr').hide("slow");

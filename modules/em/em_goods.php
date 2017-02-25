@@ -233,8 +233,13 @@
         }        
         
         public function getWeight(){
-            $res = $this->getGoodsParam(5);   
+            $res = $this->getGoodsParam(Parameters::$weightParam);   
             return intval($res[0][0]->parameter->value);
+        }
+        
+        public function getPrice(){
+            $res = $this->getGoodsParam(Parameters::$priceParam);   
+            return intval($res[0][1]);
         }
         
         function addParam($pvid, $value){

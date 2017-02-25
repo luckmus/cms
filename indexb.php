@@ -140,59 +140,7 @@ $(document).ready(function(){
           </div>
 
     </div>
-<!--
-    	<script type="text/javascript">
-    $(function()
-    {
-        $('.scroll_top').css('display', 'none');
-        /* Infinite scroll */
-        $(window).scroll(function(){
-            if  ($(window).scrollTop() >= ($(document).height() - $(window).height() - 450)){
-                infinitescroll();
-            }
-        });
-        var ofset = 9;
-        function infinitescroll(){
-            var category = 26;
-            var pricesort = 'exp';
-            var url = 'http://www.conceptclub.ru/ru/catalog/get_ajax_goods';
-            $.post(url+'/'+category+'/'+ofset+'/'+pricesort+'', {ajax:"true"}, function(data){
-                $('.product_list').append(data);
-            });
-            ofset = ofset + 3;
 
-        };
-
-        var top = $('.scroll_top').offset().top - parseFloat($('.scroll_top').css('marginTop').replace(/auto/, 0));
-        $(window).scroll(function (event) {
-            // what the y position of the scroll is
-            var y = $(this).scrollTop() - 600;
-
-            // whether that's below the form
-            if (y >= top) {
-                // if so, ad the fixed class
-                $('.scroll_top').addClass('fixed');
-                $('.scroll_top').css('display', 'block');
-            } else {
-                // otherwise remove it
-                $('.scroll_top').removeClass('fixed');
-                $('.scroll_top').css('display', 'none');
-            }
-        });
-
-
-        var hh = $('#sidebar').height();
-        var pp = $('.page_info').height();
-        var cc = $('.product_list').height();
-        if(hh > cc){
-            hh = hh - pp -cc - 129;
-            $('.page_info').css({"margin-top":hh});
-        }
-        
-    });
-</script>
-
-  -->
 <div class="promo">
         <a href="?show=category&id=62">
         <img src="templ_files/buds/ru-promo.jpg" alt="">
@@ -226,10 +174,11 @@ $(document).ready(function(){
                                                                         
           
 <div id="sidebar" class="left_sidebar">
-     <?php
+     <?php     
        mainViewer::showCateg();
-       //echo mainViewer::getMainMenu();        
+       echo '<fieldset><legend>Корзина</legend><div class="cart-link"><a href="?show=cart">Товаров в корзине: <span id="cart_value">0</span></a></div></fieldset>';        
      ?>                   
+     
 </div>
 
     

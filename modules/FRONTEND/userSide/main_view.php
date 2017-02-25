@@ -57,9 +57,9 @@
                     $viewCategId = null;
                 break;
             }
-            if ((mainViewer::$show=="") ||(mainViewer::$show==_CATEGORY)){
+            //if ((mainViewer::$show=="") ||(mainViewer::$show==_CATEGORY)){
                 include "modules/shop/categories_skin.php";
-            }
+            //}
             
         }
         

@@ -176,10 +176,6 @@ body, input, select, textarea { font-family:Arial, Helvetica, sans-serif; }
 .mmitem a{
 	color: black;
 }
-.cart-link a{
-    color: red;
-    text-decoration: none;
-}
 
 @font-face {
 	font-family: 'ConstantiaBoldItalic';
