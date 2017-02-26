@@ -38,7 +38,7 @@
                 $res .= "<dt>{$part->name}</dt> ";
                 $res .= "<dd><ul>";
                 $pages =   $part->loadPages();
-                addLog(' pages cnt = '.count($pages));
+                //addLog(' pages cnt = '.count($pages));
                 foreach($pages as $page){
                     $res .= "<li><a href='$host?show=info&id={$page->id}'>{$page->name}</a></li>\n";
                 }                                                                                
@@ -46,7 +46,7 @@
                 $res .= '<img src="templ_files/buds/footer-column-line.png" style="float: left;" height="77px" width="1px">';
                 $i++;
             }
-            addLog($res);
+            //addLog($res);
             return $res;
         }
         /**

@@ -56,7 +56,7 @@ if ((!isset($issend)) || ($stop==1))
    print " <textarea name='qtext' rows=\"7\" cols=\"50\" class=\"textareabig\" >$qtext</textarea><br>";
    //print "Контрольное число <font color='red'>*</font><br><input type='text' name='contrdig' size=5 maxlength=5>  <img src='http://127.0.0.1/altera/controldig.php'><a onclick='document.forms[0].submit();' style='cursor:hand'>Обновить</a>";
    $cntrlDig = GetHost()."controldig.php";
-   print "Контрольное число <font color='red'>*</font><br><input type='text' name='contrdig' size=5 maxlength=5>  <img src=\"$cntrlDig\" id=\"cntrldg\"></img><span onclick=\"refreshControlDig('cntrldg')\" style=\"cursor:pointer\">Обновить</span>";
+   print "Контрольное число <font color='red'>*</font><br><input type='text' name='contrdig' size=4 maxlength=4>  <img src=\"$cntrlDig\" id=\"cntrldg\"></img><span onclick=\"refreshControlDig('cntrldg')\" style=\"cursor:pointer\">Обновить</span>";
   # print "<div style='cursor:hand' id='im'   onclick=\"document.forms[0].submit();\">Обновить</div> <br><br>";
    print "<br><br>";
    print "<input type='SUBMIT' id='idsave' name='issend'   class=\"submitbig\" value='Отправить'>";

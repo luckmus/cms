@@ -758,7 +758,7 @@ function EditOrders($id)
   print "<b>ФИО заказчика</b>";
   print "</td>";
   print "<td 'width=300'>";
-  print "$row[5]";
+  print "<input type='text' value='$row[5]' name='client_name'>";
   print "</td>";  
   print "</tr>";
     
@@ -767,7 +767,7 @@ function EditOrders($id)
   print "<b>Телефон</b>";
   print "</td>";
   print "<td 'width=300'>";
-  print "$row[6]";
+  print "<input type='text' value='$row[6]' name='client_phone'>";
   print "</td>";  
   print "</tr>";
             
@@ -776,7 +776,8 @@ function EditOrders($id)
   print "<b>email</b>";
   print "</td>";
   print "<td 'width=300'>";
-  print"<a href='mailto:$row[7]'>$row[7]</a>"; 
+  //print"<a href='mailto:$row[7]'>$row[7]</a>"; 
+  print "<input type='text' value='$row[7]' name='client_email'>";
   print "</td>";  
   print "</tr>";
   }
@@ -846,7 +847,6 @@ function EditOrders($id)
       $managerdesc=addslashes($managerdesc);
       $res = mQuery("SELECT iscomlete FROM em_order where id=$id");
       $row=mysql_fetch_row($res);
-
       if (($iscomplete=="") && ($row[0]==1))
       {
         $iscomplPart= ", iscomlete = 0, dateComplete=NULL ";
@@ -861,7 +861,18 @@ function EditOrders($id)
       {
         $iscomplPart= ", iscomlete = 1, dateComplete=now() ";
       }
-      
+      $name = $_POST['client_name'];
+      if (($name!=null)&&(trim($name)!='')){
+            $iscomplPart .= ", firstname = \"".addslashes($name)."\"";
+      }
+      $phone = $_POST['client_phone'];
+      if (($phone!=null)&&(trim($phone)!='')){
+            $iscomplPart .= ", tel = \"".addslashes($phone)."\"";
+      }
+      $email = $_POST['client_email'];
+      if (($email!=null)&&(trim($email)!='')){
+            $iscomplPart .= ", email = \"".addslashes($email)."\"";
+      }
       if ($id!="") 
       {
          $result=mQuery("UPDATE em_order SET managerdesc='$managerdesc' $iscomplPart WHERE id=$id");
@@ -887,7 +898,7 @@ function getDeliveryInfo($info, $orderDate, $trackNum, $orderId, $barCode){
         break;
     }
     if ((($trackNum==null) || ($trackNum=='')) && (($infoDec->method ==2) || ($infoDec->method == 3))){
-        $res .= "<a href='#' onClick=\"sendAddParcel($orderId)\">Прередать в cлужбу доставки</a><br>";
+        $res .= "<a href='#' onClick=\"sendAddParcel($orderId)\">Передать в cлужбу доставки</a><br>";
     }
     
     if ($trackNum!=null){

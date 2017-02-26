@@ -7,6 +7,6 @@
     $catalog = new GoodsCatalog($viewCategId);
     $parts = new Parts();
     $arrayOfParts = $parts->getParts();
-    addLog($arrayOfParts);
+    //addLog($arrayOfParts);
     print PartsViewer::getViewer($arrayOfParts);
 ?>

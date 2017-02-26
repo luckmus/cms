@@ -96,7 +96,7 @@ class CartView{
         $msgText .= "<tr>";
         
         $msgText .= "<td>";
-        $msgText .= "Имя (Фамилия):";
+        $msgText .= "Имя (Фамилия):<font color=\"red\">*</font>";
         $msgText .= "</td>";
         
         $msgText .= "<td>";
@@ -212,7 +212,7 @@ class CartView{
         <span class='delivery_firel_descr'>Индекс города куда надо осуществить доставку</span><br>
         <input type='text' id='bb_delivery_index' onkeydown=\"if (event.keyCode==13){ getBBPoints($('#bb_delivery_index').val(),  $('#paymentSum').val(),  $weight)}\">
         <button onClick=\"getBBPoints($('#bb_delivery_index').val(),  $('#paymentSum').val(),  $weight)\">Проверить</button >
-        <img src='css/images/bx_loader.gif' style='width:25px; visibility:hidden;' id='currier_loader'>
+        <img src='css/images/bx_loader.gif' style='width:25px; visibility:hidden;' id='currier_loader'/>
         <div id='bb_curier_info' class='cur_del_desc'>
             <table>
                 <tr><td class='delivery_item'>Стоимость достаки:<td><td><span id='bb_cur_del_price'></span><td></tr>

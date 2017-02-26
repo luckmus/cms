@@ -124,7 +124,7 @@ function ShowData($show,$id)
 
                 
                     print "<td>"; 
-                        print "<a href='?show=goods&id=$r[0]' alt=''><li><i>$r[1]</i></li></a>";  
+                        print "<a href='?show=goodsone&id=$r[0]' alt=''><li><i>$r[1]</i></li></a>";  
                     print "</td>"; 
   
                     print "<td>"; 
@@ -729,7 +729,7 @@ function ShortString ($searchArray,$string,$ClauseCount)
                 $secondField="";
             break;
             case  "em_goods":
-                $show="goods";
+                $show="goodsone";
                 $parts="Товары";
                 $title="Искать в ноименованиях товаров\"";
                 $href="stext=$searchString&show=search&smode=goods";
@@ -820,7 +820,8 @@ function GetHost()
  }
  else
     return "http://$server/$uri/";
-} 
+}
+ 
 function addLog($s)
 {
     $logFile = 'CMS_LOG.log';
@@ -851,7 +852,7 @@ function PrintGoodsList($list)
     foreach($list as $l)
     {
         print "<li class=\"parent\">";
-        print "<span class=\"bullet\">&nbsp;</span><a href=\"?show=goods&id={$l[0]}\">{$l[1]}</a>";
+        print "<span class=\"bullet\">&nbsp;</span><a href=\"?show=goodsone&id={$l[0]}\">{$l[1]}</a>";
         print "</li>";
         $i++;
     }       

@@ -13,7 +13,7 @@ $host = rtrim(GetHost(), "/");
 //$ImgSrc=$host._domen."/"._UploadDir."/$ImgSrc";
 $ImgSrc=$host."/"._UploadDir."/$ImgSrc";
 //$ImgSrc=$host."/"._UploadDir."/$ImgSrc";
-addLog($ImgSrc);
+//addLog($ImgSrc);
 if (($Imgwdth!='') && ($Imghght!=''))
     print "<img id='img_' height='$Imghght' width='$Imgwdth' src='$ImgSrc'>";
 else

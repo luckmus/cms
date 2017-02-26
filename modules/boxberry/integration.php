@@ -30,7 +30,8 @@
     
     function addParcel($orderId){
         $order = new Order($orderId);
-        $SDATA = prepareData($order);
+        $order->user->load();
+        $SDATA = prepareData($order);       
         $ch = curl_init();
          curl_setopt($ch, CURLOPT_URL, genBaseUrl(null));
          curl_setopt($ch, CURLOPT_POST, true);

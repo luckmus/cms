@@ -109,7 +109,7 @@
             else{
                 $this->update();
             }
-            /*
+            
             UserCommunication::init();
             $userMail = $this->geuUserMail();
             UserCommunication::sendMailToManager("Новый заказ", "На сайте ".GetHost()." совершен новый заказ №".$this->id);
@@ -117,7 +117,7 @@
             if ($userMail!=null){
                 UserCommunication::sendMailFmooManager($userMail,"Заказ на сайте "._title, $this->generateMailMsg());    
             }
-            */
+            
             
         }
         
@@ -230,6 +230,8 @@
                         $ErrMes .= 'Указан некорректный email. ';
                     }
                 }
+                if (trim($this->firstName)=='')
+                    $ErrMes .= 'Имя/фамилия не указаны. ';
             }
                                                     
             if ($ErrMes=='')   

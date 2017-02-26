@@ -17,6 +17,7 @@ include "../../../libs/db.php";
         require_once "../../em/em_goods.php";
         require_once "../../em/em_Order.php";
         require_once "../../../libs/vars.php";
+        require_once "../../../libs/helpers.php";
         require_once "../../../libs/init_settings_var.php";
         
 

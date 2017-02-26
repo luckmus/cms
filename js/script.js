@@ -392,21 +392,21 @@
     
 function applyPromo(name){
     var URL = host+'/modules/FRONTEND/userSide/promo_info.php?promo='+name;
-    $('#promo_loader').show("slow");          
+    $('#promo_loader').attr("style", "visibility:visible");
     $.ajax({
       url: URL,
       context: document.body,
       success: function(data){                                                               
       try
           {
-                    $('#promo_loader').hide("slow");          
+                    $('#promo_loader').attr("style", "visibility:hidden");
                     console.log( data );
                     var res = jQuery.parseJSON(data);
                     displayPromoInfo( res);
           }
       catch(err)
           {
-          $('#promo_loader').hide("slow");          
+          $('#promo_loader').attr("style", "visibility:hidden");
           jqAlert(err, null);
             console.log(err);
             return false;
@@ -472,7 +472,7 @@ function selectDelivery(){
 */
 function selectDeleveryMethod(method, pvz){
 
-    $('#selected_delivery_method').val();
+    $('#selected_delivery_method').val('');
     switch(method){
         case 1:
             $('#selected_delivery_method').val('{"method":1}');
@@ -506,13 +506,14 @@ function showDeliveryInfo(method, pvz){
             if (res!=false){
                 text += res;
             }else{
-                return;
+                return false;
             }
         break;
     }
     $('#selected_delivery_method_panel').show("slow");    
     $('#select_delivery_panel').hide("slow");  
     $('#selected_delivery_method_panel').html(text);
+    return true;
 }
 
 function getDeliveryInfoPVZ(pvz){
@@ -536,10 +537,12 @@ function changeDeleveryMethod(){
 function getDeliveryInfoCur(info){
     if ($('#cur_city_name').val().trim()==''){
         jqAlert('Название населенного пункта не введено', null);
+        $('#selected_delivery_method').val('');
         return false;
     }
     if ($('#cur_address').val().trim()==''){
         jqAlert('Адрес, по которому необходимо осуществить доставку, не введен', null);
+        $('#selected_delivery_method').val('');
         return false;
     }
     

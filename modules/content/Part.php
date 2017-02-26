@@ -18,7 +18,7 @@
                 return $this->pages;
             }
             $query = "SELECT id, name FROM pages WHERE pid={$this->id}";
-            addLog($query);
+            //addLog($query);
             $res = mQuery($query);
             $this->pages = Array();
             while ($row = mysql_fetch_row($res)){
@@ -26,7 +26,7 @@
                 $page->id = $row[0];
                 $page->name = $row[1];
                 $this->pages[count($this->pages)] = $page;
-                addLog(count($this->pages));
+                //addLog(count($this->pages));
             }
             return $this->pages;
         }
