@@ -142,7 +142,7 @@ $(document).ready(function(){
     </div>
 
 <div class="promo">
-        <a href="?show=category&id=62">
+        <a href="?show=info&id=21">
         <img src="templ_files/buds/ru-promo.jpg" alt="">
     </a>
     <span id="change_catalog_baner"></span>
