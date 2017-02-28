@@ -44,6 +44,7 @@ define ('_CATEGORY','category');
 define ('_GOODSONE','goodsone');
 define ('_CABINET','cabinet'); 
 define ('_CART','cart'); 
+define ('_CL_ORDER','cl_order'); 
 $width_n  = 266;
 $height_n = 200;
 

@@ -678,7 +678,7 @@ function EditOrders($id)
   $pname="";
   if ($id!="")
   {
-    $result=mQuery("SELECT o.id,o.goodsId,o.date,o.iscomlete,o.datecomplete,CONCAT(o.firstname,' ',lastname) as FIO,tel,email,adres,o.description,o.managerdesc,goodsprice, userId, totalsum, discount, track_number, bar_code
+    $result=mQuery("SELECT o.id,o.goodsId,o.date,o.iscomlete,o.datecomplete,CONCAT(o.firstname,' ',lastname) as FIO,tel,email,adres,o.description,o.managerdesc,goodsprice, userId, totalsum, discount, track_number, bar_code, token
                 FROM em_order o
                 WHERE o.id = $id");    
     $row=mysql_fetch_array($result);
@@ -692,7 +692,8 @@ function EditOrders($id)
   print "<b>Заказ №</b>";
   print "</td>";
   print "<td 'width=300'>";
-  print "$row[0]";
+  $url = "..\\?show=cl_order&id={$row[0]}&token={$row[17]}";
+  print "$row[0]&nbsp;<a href='$url' target='blank'>Ссылка для клиента</a>";
   print "</td>";  
   print "</tr>";
   

@@ -41,6 +41,13 @@
                        Includer::initGoodsFromRoot(); 
                        $title .= "Корзина";
                 break;
+                case _CL_ORDER:
+                       Includer::initGoodsFromRoot(); 
+                       require_once "modules/em/usercommunication.php";
+                       require_once "modules/em/em_Order.php";
+                       require_once "modules/em/em_accounts.php";
+                       $title .= "Заказ";
+                break;
                 default:
                     $title .= getTitle(mainViewer::$show,mainViewer::$id);
                 break;
@@ -111,6 +118,9 @@
                 case _CART:
                     require_once "modules/em/em_cart.php";
                     include "modules/shop/cart_skin.php";
+                break;
+                case _CL_ORDER:
+                    include "modules/shop/cl_order_skin.php";
                 break;
                 
                 default:

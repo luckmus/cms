@@ -41,6 +41,7 @@
        private $parent;
        public $trackNum;
        public $barCode;
+       public $token;
 
         function Order($id){
             if ($id!=null){
@@ -50,7 +51,7 @@
         }
         
         private function load(){
-            $query = "SELECT id, goodsid, name, firstname, lastname,  date, tel, email, adres, iscomlete, datecomplete, description, managerdesc, goodsprice, userId, id_parent, (select count(*) from em_order where id_parent={$this->id}), cnt, totalsum, discount, track_number, bar_code FROM em_order WHERE id={$this->id}";    
+            $query = "SELECT id, goodsid, name, firstname, lastname,  date, tel, email, adres, iscomlete, datecomplete, description, managerdesc, goodsprice, userId, id_parent, (select count(*) from em_order where id_parent={$this->id}), cnt, totalsum, discount, track_number, bar_code, token FROM em_order WHERE id={$this->id}";    
             $res = mQuery($query);
             if ($row = mysql_fetch_row($res)){
                 $this->goodsId      =  $row[1];
@@ -76,12 +77,17 @@
                 $this->discount = $row[19]; 
                 $this->trackNum = $row[20];
                 $this->barCode = $row[21];
+                $this->token = $row[22];
                 
             }
             else{
                 $this->id = null;
                 return false;
             }
+        }
+        
+        public function isParent(){
+            return $this->parent==null;
         }
         
         private function loadChild(){
@@ -98,6 +104,15 @@
             $this->user = new Account($id);
         }
         
+        public function calcToken(){
+            $str = "";
+            if ($this->user->login!=null){
+                $str .=$this->user->login.$this->user->email.$this->user->tel.$this->user->id;  
+            }else{
+                $str .= $this->email.$this->tel.$this->firstName.$this->totalSum;
+            }
+            return md5($str);
+        }
         public function save(){
             if ($this->id == null){
                 $this->insert();
@@ -158,7 +173,11 @@
             }
             return null;
         }
-        private function insert(){            
+        private function insert(){    
+            $t = "";
+            if ($this->parent==null){
+                $t = $this->calcToken();
+            }
         $query = 
             "INSERT INTO em_order(goodsid,
                                goodsprice,
@@ -173,6 +192,7 @@
                                cnt,
                                totalsum,
                                discount,
+                               token,
                                userId     
                                )
               VALUES(".($this->goodsId == null ? "null": $this->goodsId).",
@@ -188,6 +208,7 @@
                  ".addslashes($this->cnt).", 
                  ".addslashes($this->totalSum).", 
                  ".addslashes($this->discount).", 
+                 \"$t\",
                  \"{$this->user->id}\"
               )";
                  
