@@ -122,6 +122,12 @@ include "head.php";
 
 
 <body>
+<div id="overlay">
+    <div style="position: absolute; top: 40%; left:50%">
+    <img src="../css/images/bx_loader.gif" />          
+    </div>
+
+</div> 
 <?php
 echo getJSConst();                                  
 echo getModalAlertPlace();                                  

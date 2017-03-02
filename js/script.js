@@ -66,6 +66,8 @@
             jqAlert('Способ доставки не выбран.', null);
             return;
         }
+        $('#apply_loader').attr("style", "visibility:visible");
+        $( "#apply_order_btn" ).prop( "disabled", true );
         URL = host+"modules/BACKEND/userSide/add_order_be.php";
         console.log("fromCart", fromCart);
         var price = $('#'+goodsPriceId).val();
@@ -90,8 +92,10 @@
                        'goodsId': goodsId,
                        'fromCart':fromCart},
                      success: function (data, textStatus) { // вешаем свой обработчик на функцию success*
+                     $('#apply_loader').attr("style", "visibility:hidden");
                      console.log(data);
                         if(data.trim()!="1"){
+                        $( "#apply_order_btn" ).prop( "disabled", false );
                             modalAlert("Ошибка записи заказа: \n"+data);
                         }
                         else{
@@ -103,7 +107,7 @@
                      }
                      });             
                      //*/      
-        }catch (e){console.log(e);}
+        }catch (e){console.log(e);$('#apply_loader').attr("style", "visibility:hidden");$( "#apply_order_btn" ).prop( "disabled", false );}
         
     }
     

@@ -191,7 +191,8 @@ class CartView{
     $msgText .= "<br>";
     $res .= $msgText;
         //$res .="<button $dis onClick=\"showAddOrderFE_cart('apply_card',null,null,'{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">ќформить</button>";
-        $res .="<button $dis onClick=\"showAddOrderBE(null, null,'$id','{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">ќформить</button>";
+        $res .="<button $dis id='apply_order_btn' onClick=\"showAddOrderBE(null, null,'$id','{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">ќформить</button>";
+        $res .= "<img src='css/images/bx_loader.gif' style='width:25px; visibility:hidden;' id='apply_loader'> "; 
         $res .="<input type='hidden' id='promo_name_hidden'>";
         return $res; 
     }

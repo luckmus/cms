@@ -97,6 +97,10 @@ class ClOrderView{
                 <div  class='div-table-col'>{$info->address}</div>
              </div>
              <div class='div-table-row'>
+                <div class='div-table-col' >Номер ПВЗ:</div>
+                <div  class='div-table-col'>{$info->pvzId}</div>
+             </div>
+             <div class='div-table-row'>
                 <div class='div-table-col' >Телефон:</div>
                 <div  class='div-table-col'>{$info->phone}</div>
              </div>
@@ -117,8 +121,8 @@ class ClOrderView{
              </div>";
              } else{
                  $res .= "<div class='div-table-row'>
-                <div class='div-table-col' >&nbsp;</div>
-                <div  class='div-table-col'>Ожидает передачу в службу доставки</div>
+                <div class='div-table-col' >Статус:</div>
+                <div  class='div-table-col'><b>Ожидает передачу в службу доставки<b></div>
              </div>";
              }
              return $res;
@@ -138,8 +142,8 @@ class ClOrderView{
              </div>";
              } else{
                  $res .= "<div class='div-table-row'>
-                <div class='div-table-col' >&nbsp;</div>
-                <div  class='div-table-col'>Ожидает передачу в службу доставки</div>
+                <div class='div-table-col' >Статус:</div>
+                <div  class='div-table-col'><b>Ожидает передачу в службу доставки<b></div>
              </div>";
              }
              return $res;

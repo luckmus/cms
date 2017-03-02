@@ -23,14 +23,16 @@
             <ul class="bxslider">';
 
             foreach($gal as $photo){
-              $res .="<li><img src='{$photo->url}' /></li>";
+                $title = " title=\"{$photo->description}\"";
+              $res .="<li><img src='{$photo->url}' $title /></li>";
             }
             $res .='</ul>        
 
                 <script>
             $(".bxslider").bxSlider({
               auto: true,
-              autoControls: true
+              autoControls: true,
+              captions: true
             });
               </script>';
   
@@ -79,7 +81,7 @@
             return $res;
         }                       
          private function getBuyButton(){
-            $res = "<input type='button' value='Заказать' onClick=\"{$this->getAddOrderMsgScript()}\">";
+            $res = "<input type='button' value='В корзину' onClick=\"{$this->getAddOrderMsgScript()}\">";
             return $res;
          }
          

@@ -21,7 +21,7 @@
             $res .= " <img src='{$this->goodsOne->imagefile}' alt=''   style=' width: 220px; height: 220px;'>";
             $res .= '
            <div class="preview" rel="7466">
-              <span>Кликните здесь для <br> быстрого просмотра</span>                                                                
+              <span>Кликните здесь для <br>просмотра</span>                                                                
            </div>
            <div title="Кликните здесь для просмотра" class="onlyinternet">
            </div>

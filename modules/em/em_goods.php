@@ -484,6 +484,10 @@
             
         }
         
+        public function remove(){
+            $query = "delete from em_goods_photo WHERE id = {$this->id}";
+            $res = mQuery($query);
+        }
         
     }
 ?>

@@ -1,6 +1,6 @@
 <?php
     #BACKENR редактирование списка товаров
-
+    header("Content-type: text/html; charset=windows-1251");     
     include "../../libs/db.php";    
     include "../../libs/helpers.php";    
     include "../../config.php"; 
@@ -84,6 +84,9 @@
         case 7:
             echo addGalleryPhoto($goodId, $photo, $descr);        
         break;  
+        case 8:
+            echo delGalleryPhoto($id);        
+        break;
     }
     
     function addGalleryPhoto($goodsId, $photo, $descr){
@@ -92,6 +95,14 @@
          $gp->save();
          return 1;
     }
+    
+    function delGalleryPhoto($id){
+        //echo "не реализовано $goodsId, $photo, $descr";
+         $gp = GoodsPhoto::load($id);
+         $gp->remove();
+         return 1;
+    }
+    
     function addGood($catId, $name){
         $goodsLost = new GoodsList();
         $goodsLost->LoadAll();

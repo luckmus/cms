@@ -575,6 +575,24 @@ function savePromoBE(id, aname, adescr, avalue, adate, tabId, mode){
     }
     
     function deleteGalPhoto(id, tabId){
-        alert('реализовать удаление '+id);
-        $('#'+tabId).tabs("load", $('#'+tabId).tabs("option", "selected"));
+        URL = host+"adm/BACKEND/em_goods_be.php";
+        try{   
+                     $.ajax({
+                     type: "POST",
+                     url: URL,             // указываем URL и
+                     data:{'mode': 8,
+                       'id': id},
+                     success: function (data, textStatus) { // вешаем свой обработчик на функцию success*
+                        console.log(data);
+                        if(data!="1"){
+                            alert("Ошибка  удаления "+data);
+                        }
+                        else{                         
+                            $('#'+tabId).tabs("load", $('#'+tabId).tabs("option", "selected"));
+                        }
+                     }
+                     });             
+                     //*/      
+        }catch (e){alert(e);}  
+        //$('#'+tabId).tabs("load", $('#'+tabId).tabs("option", "selected"));
     }
