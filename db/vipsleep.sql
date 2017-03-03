@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Фев 15 2017 г., 17:18
+-- Время создания: Мар 03 2017 г., 11:14
 -- Версия сервера: 5.1.37
 -- Версия PHP: 5.3.0
 
@@ -188,10 +188,10 @@ CREATE TABLE IF NOT EXISTS `em_goods` (
 --
 
 INSERT INTO `em_goods` (`id`, `categoryid`, `name`, `description`, `imagefile`, `price`, `ordinal`, `isarchivate`, `metadescription`, `metakeywords`, `updatedate`) VALUES
-(12, 61, 'Матрац', '<p>Белье премиум класса. Комбинация жаккардового шелка с хлопком не только красива, но и практична - к телу 100% хлопок. Простынь из 100% хлопка с шелковым купоном. Нижняя сторона пододеяльника 100% хлопок.</p>\n<script type="text/javascript">// <![CDATA[\nalert(''text from goods description'');\n// ]]></script>', 'uploadfiles/satin2.jpg', 0, 8, 0, '', '', '2011-08-21 22:10:33'),
+(12, 61, 'Матрац', '<p>Белье премиум класса. Комбинация жаккардового шелка с хлопком не только красива, но и практична - к телу 100% хлопок. Простынь из 100% хлопка с шелковым купоном. Нижняя сторона пододеяльника 100% хлопок.</p>', 'uploadfiles/satin2.jpg', 0, 8, 0, '', '', '2011-08-21 22:10:33'),
 (51, 61, 'насос', '<p>Насос для накачивания бицух</p>', 'uploadfiles/bravo.jpg', NULL, 14, 0, '', '', '2015-02-14 21:29:31'),
 (41, 61, 'Сатин', '<p>Привет</p>', 'uploadfiles/sation1.jpg', NULL, 9, 0, 'wd', 'wewe', '2011-09-11 14:43:17'),
-(42, 61, 'Одеяло', '<p>Шерстянное одеяло</p>', 'uploadfiles/odeylo 1.jpg', NULL, 10, 0, '', '', '2011-10-17 12:30:55'),
+(42, 61, 'Одеяло', '<p>Теплое шерстянное одеяло!</p>', 'uploadfiles/odeylo 1.jpg', NULL, 10, 0, '', '', '2011-10-17 12:30:55'),
 (43, 61, 'Другое одеяло', '<p>Шерстянное одеяло</p>', 'uploadfiles/odeylo 2.jpg', NULL, 11, 0, '', '', '2011-10-17 12:32:37'),
 (49, 61, 'Покрывало цветастое', '<p>Разноцветное покрывало</p>', 'uploadfiles/BS84-3.jpg', NULL, 12, 0, '', '', '2011-10-17 14:09:09'),
 (50, 61, 'архив', '', 'uploadfiles/BS84-3.jpg', NULL, 13, 1, '', '', '2011-10-21 14:01:03'),
@@ -269,15 +269,34 @@ CREATE TABLE IF NOT EXISTS `em_goods_photo` (
   `id_goods` int(11) NOT NULL,
   `link` varchar(100) NOT NULL,
   `ordinal` int(11) NOT NULL DEFAULT '0',
-  `description` text NOT NULL,
+  `description` text CHARACTER SET cp1251 NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_goods` (`id_goods`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Дамп данных таблицы `em_goods_photo`
 --
 
+INSERT INTO `em_goods_photo` (`id`, `id_goods`, `link`, `ordinal`, `description`) VALUES
+(1, 12, 'uploadfiles/bravo.jpg', 0, '2347'),
+(2, 12, 'uploadfiles/orang.jpg', 1, 'asdasdasd'),
+(3, 12, 'uploadfiles/odeylo 2.jpg', 2, ''),
+(6, 12, 'uploadfiles/MMM2011.jpg', 4, 'МММ'),
+(5, 12, 'uploadfiles/satin2.jpg', 4, ''),
+(7, 12, 'uploadfiles/sation1.jpg', 5, ''),
+(9, 41, 'uploadfiles/sation1.jpg', 0, ''),
+(10, 41, 'uploadfiles/satin2.jpg', 1, ''),
+(11, 41, 'uploadfiles/MMM2011.jpg', 2, ''),
+(13, 42, 'uploadfiles/odeylo 1.jpg', 0, 'Теплое одеяло'),
+(14, 42, 'uploadfiles/bravo.jpg', 1, 'Насос'),
+(15, 42, 'uploadfiles/MMM2011.jpg', 2, 'покупка выгоднее чем МММ'),
+(16, 42, 'uploadfiles/breeze.jpg', 3, 'лодка'),
+(17, 42, 'uploadfiles/sation1.jpg', 4, 'постель'),
+(18, 42, 'uploadfiles/odeylo 2.jpg', 5, 'одеялко'),
+(26, 52, 'uploadfiles/logo.jpg', 0, 'супер логотип'),
+(23, 51, 'uploadfiles/breeze.jpg', 1, 'лодка для которой подойдет этот насос'),
+(22, 51, 'uploadfiles/bravo.jpg', 0, 'насос');
 
 -- --------------------------------------------------------
 
@@ -307,38 +326,51 @@ CREATE TABLE IF NOT EXISTS `em_order` (
   `managerdesc` text,
   `track_number` varchar(50) DEFAULT NULL,
   `bar_code` varchar(200) DEFAULT NULL,
+  `token` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=302 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=318 ;
 
 --
 -- Дамп данных таблицы `em_order`
 --
 
-INSERT INTO `em_order` (`id`, `id_parent`, `goodsid`, `cnt`, `goodsprice`, `discount`, `totalsum`, `userid`, `name`, `firstname`, `lastname`, `date`, `tel`, `email`, `adres`, `iscomlete`, `datecomplete`, `description`, `managerdesc`, `track_number`, `bar_code`) VALUES
-(278, NULL, NULL, 0, '2500', 2, '2450.00', 0, '', '', '', '2017-02-14 09:03:24', '564135115', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:365.5,&quot;price_base&quot;:140,&quot;price_service&quot;:225.5,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;qwfwfsdf&quot;,&quot;city&quot;:&quot;464564&quot;,&quot;index&quot;:&quot;190000&quot;}', 1, '2017-02-10', '', '', NULL, NULL),
-(279, 278, 42, 1, '2500', 0, '0.00', 0, '', '', '', '2017-02-10 08:17:16', '564135115', '', '', 0, NULL, '', NULL, NULL, NULL),
-(280, NULL, NULL, 0, '1000000', 0, '1000000.00', 0, '', '', '', '2017-02-10 08:54:38', '3541531351', '', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78061&quot;,&quot;zip&quot;:&quot;190031&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;190031, Санкт-Петербург г, Московский пр-кт, д.3а&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00, вс: 11.00-19.00&quot;,&quot;period&quot;:&quot;2&quot;,&quot;price&quot;:&quot;30142&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', '', NULL, NULL),
-(281, 280, 53, 1, '1000000', 0, '0.00', 0, '', '', '', '2017-02-10 08:32:28', '3541531351', '', '', 0, NULL, '', NULL, NULL, NULL),
-(282, NULL, NULL, 0, '1000', 2, '980.00', 0, '', '', '', '2017-02-10 08:52:59', '5464664', '', '{&quot;method&quot;:1}', 0, NULL, '', NULL, NULL, NULL),
-(283, 282, 51, 1, '1000', 0, '0.00', 0, '', '', '', '2017-02-10 08:52:59', '5464664', '', '', 0, NULL, '', NULL, NULL, NULL),
-(284, NULL, NULL, 0, '3500', 0, '3500.00', 2, '', '', '', '2017-02-10 09:04:01', '', '', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78441&quot;,&quot;zip&quot;:&quot;199397&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;199397, Санкт-Петербург г, Наличная ул, д.44, корпус 2&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-пт: 11.00-20.00, сб-вс: 11.00-19.00&quot;,&quot;period&quot;:&quot;2&quot;,&quot;price&quot;:&quot;247&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, NULL, NULL),
-(285, 284, 41, 1, '3500', 0, '0.00', 2, '', '', '', '2017-02-10 09:04:01', '', '', '', 0, NULL, '', NULL, NULL, NULL),
-(286, NULL, NULL, 0, '2500', 2, '2450.00', 2, '', '', '', '2017-02-10 09:04:49', '', '', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:365.5,&quot;price_base&quot;:140,&quot;price_service&quot;:225.5,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;ewtert&quot;,&quot;city&quot;:&quot;qwewer&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', NULL, NULL, NULL),
-(287, 286, 42, 1, '2500', 0, '0.00', 2, '', '', '', '2017-02-10 09:04:49', '', '', '', 0, NULL, '', NULL, NULL, NULL),
-(288, NULL, NULL, 0, '', 2, '1176.00', 0, '', '', '', '2017-02-14 15:38:15', '88888888888', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:382.28,&quot;price_base&quot;:170,&quot;price_service&quot;:212.28,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;Кондратьевский пр.&quot;,&quot;city&quot;:&quot;Санкт-Петербург&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', NULL, 'PHP1431725', NULL),
-(289, 288, 12, 1, '1200', 0, '0.00', 0, '', 'Ерошевич Сергей', '', '2017-02-14 08:52:51', '88888888888', '', '', 0, NULL, '', NULL, NULL, NULL),
-(290, NULL, NULL, 0, '2500', 0, '2500.00', 0, '', 'sergey', '', '2017-02-14 15:47:47', '811315316541', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:422,&quot;price_base&quot;:170,&quot;price_service&quot;:252,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;адрес&quot;,&quot;city&quot;:&quot;Санкт-Петербург&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', NULL, NULL, NULL),
-(291, 290, 42, 1, '2500', 0, '0.00', 0, '', 'sergey', '', '2017-02-14 15:47:47', '811315316541', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
-(292, NULL, NULL, 0, '', 0, '2000.00', 0, '', '', '', '2017-02-14 15:55:38', '5651135', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:407,&quot;price_base&quot;:170,&quot;price_service&quot;:237,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;тестовая улица д.1&quot;,&quot;city&quot;:&quot;Санкт_Петербург&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', NULL, 'PHP1431726', ''),
-(293, 292, 49, 1, '2000', 0, '0.00', 0, '', 'Тестовая фамилия', '', '2017-02-14 15:55:26', '5651135', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
-(294, NULL, NULL, 0, '', 0, '2500.00', 0, '', 'adasdasd', '', '2017-02-15 10:24:26', '', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:422,&quot;price_base&quot;:170,&quot;price_service&quot;:252,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;улица 1&quot;,&quot;city&quot;:&quot;Санкт-Петербург&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', 'er', 'PHP1431759', 'http://test.api.boxberry.de/?act=build&track=PHP1431759&token=10000.rbpqbafb'),
-(295, 294, 42, 1, '2500', 0, '0.00', 0, '', 'йцуйцуйцуйцу', '', '2017-02-14 15:59:01', '51515313', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
-(296, NULL, NULL, 0, '2000', 0, '2000.00', 0, '', 'тест', '', '2017-02-14 16:33:12', '51311', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78461&quot;,&quot;zip&quot;:&quot;199155&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;199155, Санкт-Петербург г, Одоевского ул, д.27, литер А, сек. 212&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-вс: 11.00-21.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;197.96&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431740', 'http://test.api.boxberry.de/?act=build&track=PHP1431740&token=10000.rbpqbafb'),
-(297, 296, 49, 1, '2000', 0, '0.00', 0, '', 'тест', '', '2017-02-14 16:33:03', '51311', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
-(298, NULL, NULL, 0, '2500', 2, '2450.00', 0, '', 'проверочная', '', '2017-02-15 08:29:49', '654654', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78061&quot;,&quot;zip&quot;:&quot;190031&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;190031, Санкт-Петербург г, Московский пр-кт, д.3а&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00, вс: 11.00-19.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;211.19&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431746', 'http://test.api.boxberry.de/?act=build&track=PHP1431746&token=10000.rbpqbafb'),
-(299, 298, 42, 1, '2500', 0, '0.00', 0, '', 'проверочная', '', '2017-02-15 08:29:41', '654654', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL),
-(300, NULL, NULL, 0, '10000', 2, '9800.00', 0, '', 'проверка', '', '2017-02-15 10:39:37', '4567890', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78511&quot;,&quot;zip&quot;:&quot;195009&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;195009, Санкт-Петербург г, Комсомола ул, д.16&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;433.16&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431760', 'http://test.api.boxberry.de/?act=build&track=PHP1431760&token=10000.rbpqbafb'),
-(301, 300, 42, 4, '2500', 0, '0.00', 0, '', 'проверка', '', '2017-02-15 09:47:04', '4567890', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL);
+INSERT INTO `em_order` (`id`, `id_parent`, `goodsid`, `cnt`, `goodsprice`, `discount`, `totalsum`, `userid`, `name`, `firstname`, `lastname`, `date`, `tel`, `email`, `adres`, `iscomlete`, `datecomplete`, `description`, `managerdesc`, `track_number`, `bar_code`, `token`) VALUES
+(278, NULL, NULL, 0, '2500', 2, '2450.00', 0, '', '', '', '2017-02-14 09:03:24', '564135115', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:365.5,&quot;price_base&quot;:140,&quot;price_service&quot;:225.5,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;qwfwfsdf&quot;,&quot;city&quot;:&quot;464564&quot;,&quot;index&quot;:&quot;190000&quot;}', 1, '2017-02-10', '', '', NULL, NULL, ''),
+(279, 278, 42, 1, '2500', 0, '0.00', 0, '', '', '', '2017-02-10 08:17:16', '564135115', '', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(280, NULL, NULL, 0, '1000000', 0, '1000000.00', 0, '', '', '', '2017-02-10 08:54:38', '3541531351', '', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78061&quot;,&quot;zip&quot;:&quot;190031&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;190031, Санкт-Петербург г, Московский пр-кт, д.3а&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00, вс: 11.00-19.00&quot;,&quot;period&quot;:&quot;2&quot;,&quot;price&quot;:&quot;30142&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', '', NULL, NULL, ''),
+(281, 280, 53, 1, '1000000', 0, '0.00', 0, '', '', '', '2017-02-10 08:32:28', '3541531351', '', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(282, NULL, NULL, 0, '1000', 2, '980.00', 0, '', '', '', '2017-02-10 08:52:59', '5464664', '', '{&quot;method&quot;:1}', 0, NULL, '', NULL, NULL, NULL, ''),
+(283, 282, 51, 1, '1000', 0, '0.00', 0, '', '', '', '2017-02-10 08:52:59', '5464664', '', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(284, NULL, NULL, 0, '3500', 0, '3500.00', 2, '', '', '', '2017-02-10 09:04:01', '', '', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78441&quot;,&quot;zip&quot;:&quot;199397&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;199397, Санкт-Петербург г, Наличная ул, д.44, корпус 2&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-пт: 11.00-20.00, сб-вс: 11.00-19.00&quot;,&quot;period&quot;:&quot;2&quot;,&quot;price&quot;:&quot;247&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, NULL, NULL, ''),
+(285, 284, 41, 1, '3500', 0, '0.00', 2, '', '', '', '2017-02-10 09:04:01', '', '', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(286, NULL, NULL, 0, '2500', 2, '2450.00', 2, '', '', '', '2017-02-10 09:04:49', '', '', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:365.5,&quot;price_base&quot;:140,&quot;price_service&quot;:225.5,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;ewtert&quot;,&quot;city&quot;:&quot;qwewer&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', NULL, NULL, NULL, ''),
+(287, 286, 42, 1, '2500', 0, '0.00', 2, '', '', '', '2017-02-10 09:04:49', '', '', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(288, NULL, NULL, 0, '', 2, '1176.00', 0, '', '', '', '2017-02-14 15:38:15', '88888888888', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:382.28,&quot;price_base&quot;:170,&quot;price_service&quot;:212.28,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;Кондратьевский пр.&quot;,&quot;city&quot;:&quot;Санкт-Петербург&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', NULL, 'PHP1431725', NULL, ''),
+(289, 288, 12, 1, '1200', 0, '0.00', 0, '', 'Ерошевич Сергей', '', '2017-02-14 08:52:51', '88888888888', '', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(290, NULL, NULL, 0, '2500', 0, '2500.00', 0, '', 'sergey', '', '2017-02-14 15:47:47', '811315316541', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:422,&quot;price_base&quot;:170,&quot;price_service&quot;:252,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;адрес&quot;,&quot;city&quot;:&quot;Санкт-Петербург&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', NULL, NULL, NULL, ''),
+(291, 290, 42, 1, '2500', 0, '0.00', 0, '', 'sergey', '', '2017-02-14 15:47:47', '811315316541', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(292, NULL, NULL, 0, '', 0, '2000.00', 0, '', '', '', '2017-02-14 15:55:38', '5651135', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:407,&quot;price_base&quot;:170,&quot;price_service&quot;:237,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;тестовая улица д.1&quot;,&quot;city&quot;:&quot;Санкт_Петербург&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', NULL, 'PHP1431726', '', ''),
+(293, 292, 49, 1, '2000', 0, '0.00', 0, '', 'Тестовая фамилия', '', '2017-02-14 15:55:26', '5651135', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(294, NULL, NULL, 0, '', 0, '2500.00', 0, '', 'adasdasd', '', '2017-02-15 10:24:26', '', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:422,&quot;price_base&quot;:170,&quot;price_service&quot;:252,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;улица 1&quot;,&quot;city&quot;:&quot;Санкт-Петербург&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', 'er', 'PHP1431759', 'http://test.api.boxberry.de/?act=build&track=PHP1431759&token=10000.rbpqbafb', ''),
+(295, 294, 42, 1, '2500', 0, '0.00', 0, '', 'йцуйцуйцуйцу', '', '2017-02-14 15:59:01', '51515313', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(296, NULL, NULL, 0, '2000', 0, '2000.00', 0, '', 'тест', '', '2017-02-14 16:33:12', '51311', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78461&quot;,&quot;zip&quot;:&quot;199155&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;199155, Санкт-Петербург г, Одоевского ул, д.27, литер А, сек. 212&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-вс: 11.00-21.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;197.96&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431740', 'http://test.api.boxberry.de/?act=build&track=PHP1431740&token=10000.rbpqbafb', ''),
+(297, 296, 49, 1, '2000', 0, '0.00', 0, '', 'тест', '', '2017-02-14 16:33:03', '51311', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(298, NULL, NULL, 0, '2500', 2, '2450.00', 0, '', 'проверочная', '', '2017-02-15 08:29:49', '654654', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78061&quot;,&quot;zip&quot;:&quot;190031&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;190031, Санкт-Петербург г, Московский пр-кт, д.3а&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00, вс: 11.00-19.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;211.19&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431746', 'http://test.api.boxberry.de/?act=build&track=PHP1431746&token=10000.rbpqbafb', ''),
+(299, 298, 42, 1, '2500', 0, '0.00', 0, '', 'проверочная', '', '2017-02-15 08:29:41', '654654', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(300, NULL, NULL, 0, '10000', 2, '9800.00', 0, '', 'проверка', '', '2017-02-15 10:39:37', '4567890', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78511&quot;,&quot;zip&quot;:&quot;195009&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;195009, Санкт-Петербург г, Комсомола ул, д.16&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;433.16&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1431760', 'http://test.api.boxberry.de/?act=build&track=PHP1431760&token=10000.rbpqbafb', ''),
+(301, 300, 42, 4, '2500', 0, '0.00', 0, '', 'проверка', '', '2017-02-15 09:47:04', '4567890', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(304, NULL, NULL, 0, '3500', 2, '3430.00', 0, '', 'sergey', '', '2017-02-28 08:27:28', '45625865248625', '79516470475@yandex.ru', '{&quot;method&quot;:1}', 0, NULL, '', NULL, NULL, NULL, '544204013c6e77ca4ef549fc987d3c22'),
+(305, 304, 41, 1, '3500', 0, '0.00', 0, '', 'sergey', '', '2017-02-28 08:27:28', '45625865248625', '79516470475@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(308, NULL, NULL, 0, '1000000', 0, '1000000.00', 0, '', 'Сергей', '', '2017-02-28 08:59:37', '98885556633', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78511&quot;,&quot;zip&quot;:&quot;195009&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;195009, Санкт-Петербург г, Комсомола ул, д.16&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;29539.16&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, NULL, NULL, '03cfee73723f651a20c8afe614a3206a'),
+(309, 308, 53, 1, '1000000', 0, '0.00', 0, '', 'Сергей', '', '2017-02-28 08:59:37', '98885556633', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(310, NULL, NULL, 0, '1200', 2, '1176.00', 0, '', 'Сергей', '', '2017-03-01 08:32:51', '465646546546', 'grace2007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78511&quot;,&quot;zip&quot;:&quot;195009&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;195009, Санкт-Петербург г, Комсомола ул, д.16&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 10.00-21.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;173.7344&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', NULL, 'PHP1432141', 'http://test.api.boxberry.de/?act=build&track=PHP1432141&token=10000.rbpqbafb', '617aeca6f1c7f49b44520fec4f31d954'),
+(311, 310, 12, 1, '1200', 0, '0.00', 0, '', 'Сергей', '', '2017-03-01 08:30:59', '465646546546', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(312, NULL, NULL, 0, '3500', 0, '3500.00', 0, '', 'Сергей', '', '2017-03-01 09:19:38', '665254878', 'grace2007@yandex.ru', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:452,&quot;price_base&quot;:170,&quot;price_service&quot;:282,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;Ленина 1/1&quot;,&quot;city&quot;:&quot;Санкт-Петербург&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', NULL, 'PHP1432151', 'http://test.api.boxberry.de/?act=build&track=PHP1432151&token=10000.rbpqbafb', '84bf0b6548d5d335d09572de4f17316e'),
+(313, 312, 41, 1, '3500', 0, '0.00', 0, '', 'Сергей', '', '2017-03-01 09:03:42', '665254878', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(314, NULL, NULL, 0, '1000', 2, '980.00', 0, '', 'sdfsdf', '', '2017-03-02 08:12:24', 'sdfsdfsf', '', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:376.4,&quot;price_base&quot;:170,&quot;price_service&quot;:206.4,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;asdfjh 1&quot;,&quot;city&quot;:&quot;eqrwi&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', NULL, NULL, NULL, 'e0930f48e15c0035a6b271588558cf36'),
+(315, 314, 51, 1, '1000', 0, '0.00', 0, '', 'sdfsdf', '', '2017-03-02 08:12:25', 'sdfsdfsf', '', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(316, NULL, NULL, 0, '1200', 0, '1200.00', 0, '', 'Ерошевич ', '', '2017-03-02 09:03:29', '45612345', 'grace20007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78141&quot;,&quot;zip&quot;:&quot;190000&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;190000, Санкт-Петербург г, Пискаревский пр-кт, д.25 Лит А&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 11.00-20.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;174.44&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', '', '', '', '26f99fae394db36cb84f5df7aa06cab7'),
+(317, 316, 12, 1, '1200', 0, '0.00', 0, '', 'Ерошевич', '', '2017-03-02 08:17:01', '45612345', '', '', 0, NULL, '', NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -410,7 +442,7 @@ CREATE TABLE IF NOT EXISTS `em_promo` (
 --
 
 INSERT INTO `em_promo` (`id`, `name`, `descr`, `value`, `end_date`) VALUES
-(1, 'test', '<p><em><strong><span style="text-decoration: underline;">ЫВф</span>ЫФыы &nbsp;!</strong></em></p>', 2, '2017-02-28');
+(1, 'test', '<p><em><strong><span style="text-decoration: underline;">ЫВф</span>ЫФыы &nbsp;!</strong></em></p>', 2, '2017-04-28');
 
 -- --------------------------------------------------------
 
@@ -490,18 +522,7 @@ CREATE TABLE IF NOT EXISTS `parts` (
 INSERT INTO `parts` (`id`, `name`, `ordinal`) VALUES
 (1, 'О компании', 3),
 (3, 'Контакты', 0),
-(4, 'Вакансии', 2),
-(18, 'new', NULL),
-(19, 'caterg', NULL),
-(20, NULL, NULL),
-(21, 'sad', NULL),
-(22, 'qqq', NULL),
-(23, 'qqq', NULL),
-(24, 'qqq', NULL),
-(25, 'ddd', NULL),
-(26, 'ddd', NULL),
-(27, 'ddd', NULL),
-(28, 'new1', NULL);
+(4, 'Вакансии', 2);
 
 -- --------------------------------------------------------
 
@@ -582,7 +603,7 @@ INSERT INTO `settings` (`id`, `description`, `value`, `ordinal`, `name`, `type`)
 (6, 'количество новостей в таблице', '5', 6, 'newsCount', 0),
 (7, 'Количество вопросов', '2', 7, 'askCount', 0),
 (8, 'Количество всех вопросов', '4', 8, 'AllaskCount', 0),
-(9, 'Скин отображения', 'bed_skin', 9, 'skin', 0),
+(9, 'Скин отображения', 'buds_skin', 9, 'skin', 0),
 (10, 'Валюта', 'RUB', 10, 'currency', 0),
 (11, 'Email отправителя  рассылки', 'luckmus@inbox.ru', 11, 'email_sender', 0),
 (12, 'email Менеждера', 'luckmus@inbox.ru', 12, 'manager_email', 0),
