@@ -87,11 +87,23 @@
         case 8:
             echo delGalleryPhoto($id);        
         break;
+        case 9:
+            echo edtGalleryPhoto($id, $photo, $descr);        
+        break;
     }
     
     function addGalleryPhoto($goodsId, $photo, $descr){
         //echo "íå ğåàëèçîâàíî $goodsId, $photo, $descr";
          $gp = new GoodsPhoto(null, $goodsId, $photo, null, $descr);
+         $gp->save();
+         return 1;
+    }
+    
+    function edtGalleryPhoto($id, $photo, $descr){
+        //echo "íå ğåàëèçîâàíî $goodsId, $photo, $descr";
+         $gp = GoodsPhoto::load($id);
+         $gp->description = $descr;
+         $gp->url = $photo;
          $gp->save();
          return 1;
     }

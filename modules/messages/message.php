@@ -14,6 +14,7 @@
         private $width = 350;
         private $name;
         private $isAlert = false;
+        private $removeMsgPlace = false;
         
         private $msgHTML;
         private $msgJS = null;
@@ -40,6 +41,10 @@
 </div>';
         }
         
+        public function setRemoveMsgPlace($removeMsgPlace){
+            $this->removeMsgPlace = $removeMsgPlace;
+        }
+        
         public function setHeight($height){
             $this->height = $height;
         }
@@ -60,6 +65,10 @@
         }                      
         public function getJS(){
             if ($this->msgJS==null){
+                $delMsgPl = "";
+                if ($this->removeMsgPlace==true){
+                 $delMsgPl = '$("body").remove("'.Message::processMsgId($this->id).'")';   
+                }
     $this->msgJS = '
     
     $(function() {
@@ -94,7 +103,7 @@
             },
             
             close: function() {            
-/*                allFields.val( "" ).removeClass( "ui-state-error" );*/
+               '.$delMsgPl.'
             }
         });
 

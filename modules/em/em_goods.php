@@ -403,7 +403,7 @@
                                                    
         public function update(){
             $descr = addslashes($this->description);
-            $query = "UPDATE em_goods_photo SET descriptin = \"$descr\" where id = {$this->id} ";
+            $query = "UPDATE em_goods_photo SET description = \"$descr\", link =  '{$this->url}' where id = {$this->id} ";
             mQuery($query);
         }
         
