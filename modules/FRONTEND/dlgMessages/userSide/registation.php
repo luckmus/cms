@@ -166,7 +166,7 @@ $rcontrdig = $_POST['rcontrdig'];
     $msgText .= "<tr>";
     $msgText .= "<td>";
     $msgText .= "Контрольное число";    
-    $msgText .= " <font color='red'>*</font><br></br><input type=\"text\" name=\"rcontrdig$id\" id=\"rcontrdig$id\" size=\"5\" maxlength=\"5\"></input>";
+    $msgText .= " <font color='red'>*</font><br></br><input type=\"text\" name=\"rcontrdig$id\" id=\"rcontrdig$id\" size=\"4\" maxlength=\"4\"></input>";
     $msgText .= "</td>";
     
     $msgText .= "<td>";

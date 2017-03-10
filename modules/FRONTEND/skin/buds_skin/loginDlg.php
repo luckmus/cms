@@ -1,7 +1,8 @@
 <?php
     $host = GetHost();
   if ($_SESSION[_LOGIN_ID]!=null){
-    $lbl = '<a href="#" onclick="logOut();">Выход</a>|<a href="'.$host.'cabinet.php" >Личный кабинет</a>';
+    //$lbl = '<a href="#" onclick="logOut();">Выход</a>|<a href="'.$host.'cabinet.php" >Личный кабинет</a>';
+    $lbl = '<a href="#" onclick="logOut();">Выход</a>|<a href="'.$host.'?show=cabinet" >Личный кабинет</a>';
   }
   else{
       $s=rand(10000,99999); 
