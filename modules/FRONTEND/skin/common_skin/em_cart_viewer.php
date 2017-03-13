@@ -53,7 +53,7 @@ class CartView{
         $res .= "<input type='hidden' value='$totalWeight' id='totalWeight'>";
         $res .="<input type='checkbox' id='promo_check' 
         onChange=\" $('#promo').css('visibility', this.checked?'visible':'hidden'); $('#promo_id').focus();\">
-        <label for='promo_check' style=\"cursor: pointer\" >У меня есть промо-код</label>";
+        <label for='promo_check' style=\"cursor: pointer\" >У меня есть промо-код&nbsp;</label>";
         
         $res .= "<span id='promo' style=\"visibility: hidden\">";
         $res .="<input type='text' id='promo_id' size=10 onkeydown=\"if (event.keyCode==13){applyPromo($('#promo_id').val());}\">";

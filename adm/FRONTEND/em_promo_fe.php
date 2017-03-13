@@ -35,9 +35,11 @@
   $datepicker = "datepicker$id";
   $aname = "promo_name_$id";
   $avalue = "promo_value_$id";
+  $amincnt = "min_cnt_$id";
   print "<label>Наименоание: <input id='$aname' type='text' value='{$promo->name}'></label>";
   print "<label>Величина скидки: <input id='$avalue' type='text' value='{$promo->value}' maxlength='2'></label>";
   print "<label>Дата окончания: <input type='text' value='' id='$datepicker'></label>";
+  print "<label>Минимальное количество товаров: <input type='text' value='{$promo->minOrderCnt}' id='$amincnt'></label>";
   print "<form><label>Описание: <textarea id=\"$descCont\" name=\"goods\" cols=\"70\" rows=\"20\">{$promo->descr}</textarea></label><br></form>";  
   
   $jsScript = "";
@@ -46,7 +48,7 @@
           \$( '#save-btn-$id' )
             .button()
             .click(function() {              
-                    savePromoBE($id, '$aname', '$descCont', '$avalue', '$datepicker', '"._MAIN_PROMO_CONT."', 4);
+                    savePromoBE($id, '$aname', '$descCont', '$avalue', '$datepicker','$amincnt', '"._MAIN_PROMO_CONT."', 4);
             });
           \$( '#add-btn-$id' )
             .button()

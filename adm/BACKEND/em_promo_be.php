@@ -35,7 +35,11 @@
     $date = $_GET['date'];
     if ($date==""){
         $date = $_POST['date'];    
-    }    
+    }  
+    $minOrderCnt = $_GET['minOrderCnt'];
+    if ($minOrderCnt==""){
+        $minOrderCnt = $_POST['minOrderCnt'];    
+    }   
     $name               = convertToWIN1251($name);
     $descr              = convertToWIN1251($descr); 
     $descr = html_entity_decode($descr);
@@ -61,7 +65,7 @@
             echo copyPromo($id,$name);        
         break;
         case 4:
-            echo savePromo($id,$name, $descr, $value, $date);
+            echo savePromo($id,$name, $descr, $value, $date, $minOrderCnt);
         break;
     }
               
@@ -80,12 +84,13 @@
         return 1;
      }
     
-    function savePromo($id,$name, $descr, $value, $date){
+    function savePromo($id,$name, $descr, $value, $date,$minOrderCnt){
         $promo = new Promo($id);
         $promo->name             = $name;
         $promo->descr             = $descr;
         $promo->value        = $value;
         $promo->endDate        = $date;  
+        $promo->minOrderCnt        = $minOrderCnt;  
         $promo->save();
         return 1;
     }
@@ -93,6 +98,7 @@
     function addPromo($name){
         $promo = new Promo(null);
         $promo->name             = $name;
+        $promo->minOrderCnt      = 1;  
         $promo->descr             = "";
         $promo->value        = 0;
         $promo->endDate        = date ("Y-m-d");  

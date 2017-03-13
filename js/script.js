@@ -433,7 +433,9 @@ function displayPromoInfo(data){
         $('#promo_text').text('');
         $('#promo_value').text('');
         $('#summ_with_promo').text('');
-        $('#promo_name_hidden').val('');
+        $('#promo_name_hidden').val('');        
+        $('#promo_id').text('');
+        $('#promo_id').val('');
         modalAlert(data.msg);
     }
 }

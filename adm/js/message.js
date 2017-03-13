@@ -432,11 +432,12 @@ function addCategParam(backUrl, id, dialogId,tabId){
         }catch (e){alert(e);}
     }  
     
-function savePromoBE(id, aname, adescr, avalue, adate, tabId, mode){
+function savePromoBE(id, aname, adescr, avalue, adate, amincnt, tabId, mode){
         var vname            = $( "#"+aname ).val();
         var vdescr           = tinyMCE.get(adescr).getContent();
         var vvalue       = $( "#"+avalue ).val();
         var vdate = $( "#"+adate ).val();
+        var vmincnt            = $( "#"+amincnt ).val();
         
         URL = host+"adm/BACKEND/em_promo_be.php";
         try{   
@@ -449,6 +450,7 @@ function savePromoBE(id, aname, adescr, avalue, adate, tabId, mode){
                        'descr': vdescr,
                        'value':vvalue,
                        'date':vdate,
+                       'minOrderCnt':vmincnt,
                        'id':id},
                      success: function (data, textStatus) { // вешаем свой обработчик на функцию success*
                         if(data!="1"){

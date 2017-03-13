@@ -48,7 +48,7 @@
         $totalSumm = 0;
         $orderDisc = 0; 
         $goodsPrice = $cart->getTotal();                                            
-        if ($promo!=null){
+        if (($promo!=null) && ($cart->getTotalCnt()>= $promo->minOrderCnt)){
             $totalSumm = $cart->getTotalWithDiscount($promo->value);
             $orderDisc = $promo->value;
         }

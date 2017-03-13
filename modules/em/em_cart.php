@@ -38,6 +38,14 @@ class Cart{
             return $total;
         }
         
+        public function getTotalCnt(){
+            $total = 0;
+            foreach($this->list as $item){
+                $total += $item->cnt;
+            }
+            return $total;
+        }
+        
         public function itemsCount(){
             return count($this->list);   
         }
