@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Мар 03 2017 г., 11:14
+-- Время создания: Мар 14 2017 г., 12:11
 -- Версия сервера: 5.1.37
 -- Версия PHP: 5.3.0
 
@@ -328,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `em_order` (
   `bar_code` varchar(200) DEFAULT NULL,
   `token` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=318 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=333 ;
 
 --
 -- Дамп данных таблицы `em_order`
@@ -369,8 +369,10 @@ INSERT INTO `em_order` (`id`, `id_parent`, `goodsid`, `cnt`, `goodsprice`, `disc
 (313, 312, 41, 1, '3500', 0, '0.00', 0, '', 'Сергей', '', '2017-03-01 09:03:42', '665254878', 'grace2007@yandex.ru', '', 0, NULL, '', NULL, NULL, NULL, ''),
 (314, NULL, NULL, 0, '1000', 2, '980.00', 0, '', 'sdfsdf', '', '2017-03-02 08:12:24', 'sdfsdfsf', '', '{&quot;method&quot;:3,&quot;curr&quot;:{&quot;price&quot;:376.4,&quot;price_base&quot;:170,&quot;price_service&quot;:206.4,&quot;delivery_period&quot;:&quot;2&quot;},&quot;address&quot;:&quot;asdfjh 1&quot;,&quot;city&quot;:&quot;eqrwi&quot;,&quot;index&quot;:&quot;190000&quot;}', 0, NULL, '', NULL, NULL, NULL, 'e0930f48e15c0035a6b271588558cf36'),
 (315, 314, 51, 1, '1000', 0, '0.00', 0, '', 'sdfsdf', '', '2017-03-02 08:12:25', 'sdfsdfsf', '', '', 0, NULL, '', NULL, NULL, NULL, ''),
-(316, NULL, NULL, 0, '1200', 0, '1200.00', 0, '', 'Ерошевич ', '', '2017-03-02 09:03:29', '45612345', 'grace20007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78141&quot;,&quot;zip&quot;:&quot;190000&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;190000, Санкт-Петербург г, Пискаревский пр-кт, д.25 Лит А&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 11.00-20.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;174.44&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', '', '', '', '26f99fae394db36cb84f5df7aa06cab7'),
-(317, 316, 12, 1, '1200', 0, '0.00', 0, '', 'Ерошевич', '', '2017-03-02 08:17:01', '45612345', '', '', 0, NULL, '', NULL, NULL, NULL, '');
+(316, NULL, NULL, 0, '1200', 0, '1200.00', 0, '', 'Ерошевич ', '', '2017-03-13 09:19:24', '45612345', 'grace20007@yandex.ru', '{&quot;method&quot;:2, &quot;pvzId&quot;:{&quot;id&quot;:&quot;78141&quot;,&quot;zip&quot;:&quot;190000&quot;,&quot;name&quot;:&quot;Санкт-Петербург&quot;,&quot;address&quot;:&quot;190000, Санкт-Петербург г, Пискаревский пр-кт, д.25 Лит А&quot;,&quot;phone&quot;:&quot;8-800-700-54-30&quot;,&quot;workschedule&quot;:&quot;пн-сб: 11.00-20.00&quot;,&quot;period&quot;:&quot;1&quot;,&quot;price&quot;:&quot;174.44&quot;,&quot;prepaid&quot;:&quot;No&quot;}}', 0, NULL, '', '', '', '', '26f99fae394db36cb84f5df7aa06cab7'),
+(317, 316, 12, 1, '1200', 0, '0.00', 0, '', 'Ерошевич', '', '2017-03-02 08:17:01', '45612345', '', '', 0, NULL, '', NULL, NULL, NULL, ''),
+(318, NULL, NULL, 0, '12000', 50, '6000.00', 0, '', 'asdfsdf', '', '2017-03-13 08:45:04', '123423424', '', '{&quot;method&quot;:1}', 0, NULL, '', NULL, NULL, NULL, '48419fe2a6fa5d787d6e253c03db0e0c'),
+(319, 318, 12, 10, '1200', 0, '0.00', 0, '', 'asdfsdf', '', '2017-03-13 08:45:04', '123423424', '', '', 0, NULL, '', NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -434,15 +436,17 @@ CREATE TABLE IF NOT EXISTS `em_promo` (
   `descr` text NOT NULL,
   `value` int(11) NOT NULL,
   `end_date` date NOT NULL,
+  `min_order_cnt` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=3 ;
 
 --
 -- Дамп данных таблицы `em_promo`
 --
 
-INSERT INTO `em_promo` (`id`, `name`, `descr`, `value`, `end_date`) VALUES
-(1, 'test', '<p><em><strong><span style="text-decoration: underline;">ЫВф</span>ЫФыы &nbsp;!</strong></em></p>', 2, '2017-04-28');
+INSERT INTO `em_promo` (`id`, `name`, `descr`, `value`, `end_date`, `min_order_cnt`) VALUES
+(1, 'test', '<p><em><strong><span style="text-decoration: underline;">ЫВф</span>ЫФыы &nbsp;!</strong></em></p>', 2, '2017-04-28', 1),
+(2, 'test10', '', 50, '2017-03-13', 10);
 
 -- --------------------------------------------------------
 
