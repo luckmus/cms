@@ -26,7 +26,8 @@ class CartView{
                                         
             $itemView = new CartItemView($item);
             $res .= $itemView->getView();
-            $summ +=  $item->price*$item->cnt;
+            $pv = new GoodsParameter($item->price);   
+            $summ +=  $pv->value*$item->cnt;
             $c += $item->cnt;
         }
         
@@ -253,7 +254,8 @@ class CartItemView{
         $res .= "<td>{$this->num}</td>";   
         $res .= "<td><a href='?show=goodsone&id={$this->item->goods->id}'>{$this->item->goods->name}</a></td>";   
         $res .= "<td><a href='#' onClick=\"cartMinusGoods({$this->item->goods->id});\"><img src='icons/minus.png'></a>&nbsp;&nbsp;{$this->item->cnt}&nbsp;&nbsp;<a href='#' onClick=\"cartPlusGoods({$this->item->goods->id});\"><img src='icons/add.ico'></a></td>";   
-        $totalForGoods = $this->item->price*$this->item->cnt;
+        $pv = new GoodsParameter($this->item->price);
+        $totalForGoods = $pv->value*$this->item->cnt;
         $res .= "<td>$totalForGoods</td>";   
         $res .= "<td><a title='Удалить товар из корзины' href='#' onClick=\" if (confirm('Удалить товар из корзины?')){removeFromCart({$this->item->goods->id});}\"><img src='icons/trash.gif'/></a></td>";                                       
         $res .= "</tr>";

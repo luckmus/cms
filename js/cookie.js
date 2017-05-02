@@ -83,7 +83,7 @@ function addGoodToCart(goodId, price){
      
     for (var i=0; i<cart.length; i++){
         var item = cart[i];
-        if (item.id == goodId){
+        if ((item.id == goodId) && (item.price == priceVal)){
             item.count++;
             found = true;
             break;

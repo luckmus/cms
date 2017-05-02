@@ -104,7 +104,8 @@
             for($i=0; $i<count($params); $i++){ 
                 $param = $params[$i][0];
                 $param->Load();
-                $res .= "<option value='{$param->value}'>{$param->parameter->value}: {$param->value} {$GLOBALS['currency']}</option>";              
+                //$res .= "<option value='{$param->value}'>{$param->parameter->value}: {$param->value} {$GLOBALS['currency']}</option>";              
+                $res .= "<option value='{$param->id}'>{$param->parameter->value}: {$param->value} {$GLOBALS['currency']}</option>";              
             }
             $res .= '</select>';
             return $res;
