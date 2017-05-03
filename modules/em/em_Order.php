@@ -137,13 +137,14 @@
         }
         
         public function generateMailMsg(){
+            /*
             if (($this->child!=null) && (count($this->cnt)>0)){
                 $res =  "На сайте "._title." вы заказали:";
                 $i = 0;
                 $sum = 0;
                 foreach($this->child as $item){                           
                     $goodsOne = new Goods($item->goodsId);
-                    $goodsLink = GetHost()."?show=goodsone&id=".$this->goodsId;  
+                    $goodsLink = GetHost()."?show=cl_order&id=342&token=c92aa8b39a4af8b3d7a43ff0bf16a826".$this->token;  
                     if ($i>0){
                         $res .= ", ";
                     }
@@ -157,8 +158,11 @@
             else{
                 $goodsOne = new Goods($this->goodsId);
                 $goodsLink = GetHost()."?show=goodsone&id=".$this->goodsId;
-                return "На сайте "._title." вы заказали {$goodsOne->name}. Стоимость заказа: {$this->goodsprice} {$GLOBALS[_CURRENCY]}";   
+                return "Вы сделали заказ на нашем сайте: "._title.". Заказ вы можете просмотреть по данной ссылке: $goodsLink . В ближайшее время с Вами свяжется наш менеджер.";   
             }
+            */
+            $goodsLink = GetHost()."?show=cl_order&id={$this->id}&token=".$this->token;  
+            return "Вы сделали заказ на нашем сайте: "._title.". Заказ вы можете просмотреть по данной ссылке: $goodsLink . В ближайшее время с Вами свяжется наш менеджер.";   
                 
         }
         

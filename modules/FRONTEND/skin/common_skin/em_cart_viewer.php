@@ -25,8 +25,9 @@ class CartView{
         foreach($this->cart->list as $item){
                                         
             $itemView = new CartItemView($item);
-            $res .= $itemView->getView();
             $pv = new GoodsParameter($item->price);   
+            $res .= $itemView->getView($pv);
+            
             $summ +=  $pv->value*$item->cnt;
             $c += $item->cnt;
         }
@@ -248,11 +249,11 @@ class CartItemView{
         $this->num = ++CartItemView::$counter;
     }
     
-    public function getView(){
+    public function getView($pv){
         $res = "";
         $res .= "<tr>";                 
         $res .= "<td>{$this->num}</td>";   
-        $pv = new GoodsParameter($this->item->price);
+        
         //$pâ = new ParameterValue($this->item->price);
         $res .= "<td><a href='?show=goodsone&id={$this->item->goods->id}'>{$this->item->goods->name}</a><br>{$pv->paramName}: {$pv->parameter->value}</td>";   
         $res .= "<td><a href='#' onClick=\"cartMinusGoods({$this->item->goods->id});\"><img src='icons/minus.png'></a>&nbsp;&nbsp;{$this->item->cnt}&nbsp;&nbsp;<a href='#' onClick=\"cartPlusGoods({$this->item->goods->id});\"><img src='icons/add.ico'></a></td>";   

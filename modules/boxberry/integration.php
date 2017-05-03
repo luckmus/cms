@@ -128,10 +128,12 @@
          
          $dicount = $order->discount;
          $nds = 18;
+         /*
          $price = $goodsOne->goodsprice;
          if ($dicount!=0){
             $price = $price- ($price*$dicount)/100;     
          }
+         */
          
          //$ndsVal = ($price*$nds)/100;
          $ndsVal = 0;
@@ -141,7 +143,8 @@
          $unitName = iconv("windows-1251", "UTF-8", 'רע');
          foreach($order->child as $item){
              $goodsOne = new Goods($item->goodsId); 
-             $price = $item->goodsprice;
+             $pv = new GoodsParameter($item->goodsprice); 
+             $price = $pv->value;
              if ($dicount!=0){
                 $price = $price- ($price*$dicount)/100;     
              }

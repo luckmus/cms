@@ -153,6 +153,7 @@ function ShowAdmPart($show)
                 //include "../modules/em/usercommunication.php";
                 include "../modules/em/em_accounts.php";
                 include "../modules/em/em_goods.php";
+                include "../modules/em/parameter.php";
               EditOrders($id);
          break;
          default:
@@ -707,14 +708,16 @@ function EditOrders($id)
       $chGoods = mQuery("SELECT goodsid, cnt,goodsprice FROM em_order where id_parent=$id");
       while($item=mysql_fetch_array($chGoods)){
           $goods = new Goods($item[0]);
-        echo "<a href='".GetHost()."?show=goodsone&id={$goods->id}'>{$goods->name}</a> {$item[1]} רע. x {$item[2]}</br>";    
-        $sum += $item[1]*$item[2];
+          $pv = new GoodsParameter($item[2]); 
+        echo "<a href='".GetHost()."?show=goodsone&id={$goods->id}'>{$goods->name}</a> ({$pv->paramName}: {$pv->parameter->value}) {$item[1]}רע. x {$pv->value}</br>";    
+        $sum += $item[1]*$pv->value;
       }
   }else{
       $goods= new Goods($row[1]);
       echo "<a href='".GetHost()."?show=goodsone&id={$goods->id}'>{$goods->name}</a>";
       $sum = $row[11];
   }
+  $sumToPay = $sum-($sum*$row[14])/100;
   print "</td>";  
   print "</tr>"; 
    

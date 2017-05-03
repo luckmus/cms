@@ -8,6 +8,7 @@
     Includer::initOrder();
     //include "../../em/em_Order.php";
     include "../../em/em_goods.php"; 
+    include "../../em/parameter.php"; 
     include "../../em/em_promo.php"; 
     include "../../../libs/commonfunctions.php"; 
     include "../../../libs/helpers.php";     

@@ -33,7 +33,8 @@ class Cart{
         public function getTotal(){
             $total = 0;
             foreach($this->list as $item){
-                $total += $item->cnt*$item->price;
+                $pv = new GoodsParameter($item->price);  
+                $total += $item->cnt*$pv->value;
             }
             return $total;
         }

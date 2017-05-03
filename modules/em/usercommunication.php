@@ -25,7 +25,8 @@
                 'X-Mailer: PHP/' . phpversion();
             try{
                 addlog("mail to $to");
-                @mail($to, $subject, $message, $headers);        
+                @$r = mail($to, $subject, $message, $headers);        
+                addlog("mail to $to res: $r");     
             }catch (Exception $e){
                 addlog("mail to $to error {$e->getMessage()}");
                 return  $e->getMessage();
