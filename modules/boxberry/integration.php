@@ -173,9 +173,9 @@
         //return "http://127.0.0.1/cms/bb_emul.php?token=".getToken()."&method=$func";
         //return "http://api.boxberry.de/json.php?token=".getToken()."&method=$func";
         if ($func!=null){
-            return "http://test.api.boxberry.de/json.php?token=".getToken()."&method=$func";
+            return "http://api.boxberry.de/json.php?token=".getToken()."&method=$func";
         }else{
-            return "http://test.api.boxberry.de/json.php";
+            return "http://api.boxberry.de/json.php";
         }
         
     }

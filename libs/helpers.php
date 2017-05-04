@@ -816,7 +816,7 @@ function GetHost()
  $uri = subStr($uri,1);
  $uri = subStr($uri,0,strPos($uri,"/"));
  if (_is_inet==1){
-    return "http://$server/";
+    return "https://$server/";
  }
  else
     return "http://$server/$uri/";

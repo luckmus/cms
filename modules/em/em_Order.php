@@ -181,6 +181,7 @@
             $t = "";
             if ($this->parent==null){
                 $t = $this->calcToken();
+                $this->token = $t;
             }
         $query = 
             "INSERT INTO em_order(goodsid,

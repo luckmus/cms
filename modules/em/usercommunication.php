@@ -16,7 +16,7 @@
         }
         public function sendMailFmooManager($to,$subject, $message){
             UserCommunication::init();
-            return UserCommunication::sendMail($to, $this->managerMail, $subject, $message);
+            return UserCommunication::sendMail($to, $this->senderMail, $subject, $message);
         }
         
         private  function sendMail($to, $from, $subject, $message){

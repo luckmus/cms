@@ -206,7 +206,7 @@ class CartView{
     }
     
     private function getDeliveryMethodBoxBerry($weight){
-     return "<a href=\"#\" onclick=\" boxberry.open(widjetCallback, '{$GLOBALS[_BB_INT_CODE]}', 'Санкт-Петербург', '',$('#paymentSum').val(), $weight, $('#paymentSum').val(),0,0,0  ); return false;\">Выбрать пункт выдачи на карте</a>";   
+     return "<a href=\"#\" onclick=\"boxberry.open(widjetCallback, '{$GLOBALS[_BB_INT_CODE]}', 'Санкт-Петербург', '',$('#paymentSum').val(), $weight, $('#paymentSum').val(),0,0,0  ); return false;\">Выбрать пункт выдачи на карте</a>";   
 
     }
     
