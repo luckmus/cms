@@ -42,6 +42,9 @@
        public $trackNum;
        public $barCode;
        public $token;
+       public $payResultCode;
+       public $payDesc;
+       public $payAmount;
 
         function Order($id){
             if ($id!=null){
@@ -51,7 +54,7 @@
         }
         
         private function load(){
-            $query = "SELECT id, goodsid, name, firstname, lastname,  date, tel, email, adres, iscomlete, datecomplete, description, managerdesc, goodsprice, userId, id_parent, (select count(*) from em_order where id_parent={$this->id}), cnt, totalsum, discount, track_number, bar_code, token FROM em_order WHERE id={$this->id}";    
+            $query = "SELECT id, goodsid, name, firstname, lastname,  date, tel, email, adres, iscomlete, datecomplete, description, managerdesc, goodsprice, userId, id_parent, (select count(*) from em_order where id_parent={$this->id}), cnt, totalsum, discount, track_number, bar_code, token, pay_result_code, pay_desc,pay_amount  FROM em_order WHERE id={$this->id}";    
             $res = mQuery($query);
             if ($row = mysql_fetch_row($res)){
                 $this->goodsId      =  $row[1];
@@ -78,6 +81,9 @@
                 $this->trackNum = $row[20];
                 $this->barCode = $row[21];
                 $this->token = $row[22];
+                $this->payResultCode = $row[23];    
+                $this->payDesc = $row[24];    
+                $this->payAmount = $row[25];    
                 
             }
             else{
@@ -238,7 +244,10 @@
                  
                  description = \"".addslashes($this->description)."\",
                  bar_code = \"".addslashes($this->barCode)."\",
-                 track_number = \"".addslashes($this->trackNum)."\"
+                 track_number = \"".addslashes($this->trackNum)."\",
+                 pay_result_code = \"".addslashes($this->payResultCode)."\",
+                 pay_desc = \"".addslashes($this->payDesc)."\",
+                 pay_amount = \"".addslashes($this->payAmount)."\"
                  WHERE id = {$this->id}";
                  //echo "$query\n";
             $res = mQuery($query);

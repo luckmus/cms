@@ -816,7 +816,7 @@ function GetHost()
  $uri = subStr($uri,1);
  $uri = subStr($uri,0,strPos($uri,"/"));
  if (_is_inet==1){
-     $protocol = "http";
+     $protocol = "https";
      if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
           $protocol = "https";
      }

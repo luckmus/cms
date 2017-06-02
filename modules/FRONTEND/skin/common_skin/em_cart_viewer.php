@@ -170,7 +170,11 @@ class CartView{
     $msgText .= "</tr>";
         
     $msgText .= "</table>";
-    
+    $msgText .= "<fieldset style=\"width:100%;\">
+  <legend>Оплата</legend>
+  <input $dis type='radio' name='payment' value='1' id='by_card'> <label for='by_card' style=\"cursor: pointer\" >Банковской картой на сайте</label><br>
+  <input $dis type='radio' name='payment' value='2' id='by_cash'> <label for='by_cash' style=\"cursor: pointer\" >Наличными при получении</label><br>
+  </fieldset>";
     $msgText .= "<fieldset style=\"width:100%;\">
   <legend>Доставка</legend>
   <div id='select_delivery_panel'>
@@ -196,6 +200,14 @@ class CartView{
         $res .="<button $dis id='apply_order_btn' onClick=\"showAddOrderBE(null, null,'$id','{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">Оформить</button>";
         $res .= "<img src='css/images/bx_loader.gif' style='width:25px; visibility:hidden;' id='apply_loader'> "; 
         $res .="<input type='hidden' id='promo_name_hidden'>";
+        $res .='<form name="payanyway_from" id="payanyway_from" action="https://moneta.ru/assistant.htm" method="post">
+     <fieldset>
+     <input type="hidden" name="MNT_ID" value="'.$GLOBALS[_PAW_SHOP_CODE].'" />
+     <input type="hidden" name="MNT_TEST_MODE" value="'.$GLOBALS[_PAW_TEST_MODE].'" />
+     <input type="hidden" name="MNT_AMOUNT" id="id_MNT_AMOUNT" value="" /></p>
+     <input type="hidden" name="MNT_TRANSACTION_ID" id="id_MNT_TRANSACTION_ID" value="" /></p>
+     </fieldset>
+    </form>';
         return $res; 
     }
     

@@ -20,7 +20,7 @@
     
     if ($ErrMes != '')         
     {
-        echo $ErrMes;
+        echo '{"err": "'.$ErrMes.'"}';
         return;   
     }         
     $order = new Order(null);
@@ -39,7 +39,7 @@
     
     $errmsg = $order->checkForm($rcontrdig);
     if ($errmsg!=''){
-        echo $errmsg;
+        echo '{"err": "'.$errmsg.'"}';
         return;
     }
     
@@ -87,6 +87,6 @@
     
     
     $order->save();
-    echo 1;
+    echo '{"id":'.$order->id.', "price":'.$totalSumm.', "err":0}';
 
 ?>

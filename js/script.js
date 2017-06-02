@@ -94,14 +94,18 @@
                      success: function (data, textStatus) { // вешаем свой обработчик на функцию success*
                      $('#apply_loader').attr("style", "visibility:hidden");
                      console.log(data);
-                        if(data.trim()!="1"){
+                     
+                        var res = jQuery.parseJSON(data);  
+                        if(isNaN(res.err)){
                         $( "#apply_order_btn" ).prop( "disabled", false );
-                            modalAlert("Ошибка записи заказа: \n"+data);
+                            modalAlert("Ошибка записи заказа: \n"+res.err);
                         }
                         else{
                             deleteCookie('cart');
-                            jqAlert('Заказ добавлен', reload);
-                            
+                            //jqAlert('Заказ добавлен', reload);
+                            jqAlert('Заказ добавлен', function(){$( "#id_MNT_AMOUNT" ).val(res.price);
+                            $( "#id_MNT_TRANSACTION_ID" ).val(res.id);
+                            $( "#payanyway_from" ).submit();});
                             
                         }
                      }
