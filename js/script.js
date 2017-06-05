@@ -96,16 +96,24 @@
                      console.log(data);
                      
                         var res = jQuery.parseJSON(data);  
-                        if(isNaN(res.err)){
+                        console.log("res", res);
+                        if((res.err!='') || (res.order_id==0)){
                         $( "#apply_order_btn" ).prop( "disabled", false );
                             modalAlert("Ошибка записи заказа: \n"+res.err);
                         }
                         else{
                             deleteCookie('cart');
                             //jqAlert('Заказ добавлен', reload);
-                            jqAlert('Заказ добавлен', function(){$( "#id_MNT_AMOUNT" ).val(res.price);
-                            $( "#id_MNT_TRANSACTION_ID" ).val(res.id);
-                            $( "#payanyway_from" ).submit();});
+                            var msg_add = "Заказ добавлен";
+                            if (parseInt(res.ediscount)>0){
+                                 msg_add += "<br/>При оплате заказа с сайта Вам предоставляется  дополнительная <b>"+parseInt(res.ediscount)+"% процентная скидка</b>.";
+                            }
+                            jqAlert(msg_add, function(){
+        $( "#id_MNT_AMOUNT" ).val(res.price);
+        $( "#id_MNT_TRANSACTION_ID" ).val(res.order_id);
+        console.log("res", res);
+        jqAlert("Переход на страницу оптаты...", null)
+        $( "#payanyway_from" ).submit();});
                             
                         }
                      }
@@ -113,8 +121,15 @@
                      //*/      
         }catch (e){console.log(e);$('#apply_loader').attr("style", "visibility:hidden");$( "#apply_order_btn" ).prop( "disabled", false );}
         
-    }
+    }   
     
+    function sendToPay(res){
+        $( "#id_MNT_AMOUNT" ).val(res.price);
+        $( "#id_MNT_TRANSACTION_ID" ).val(res.order_id);
+        console.log("res", res);
+        jqAlert("Переход на страницу оптаты...", null)
+        $( "#payanyway_from" ).submit();
+    }
     function reload(){
         console.log("reload");
         location.reload();

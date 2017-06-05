@@ -170,11 +170,13 @@ class CartView{
     $msgText .= "</tr>";
         
     $msgText .= "</table>";
+  /*
     $msgText .= "<fieldset style=\"width:100%;\">
   <legend>Оплата</legend>
   <input $dis type='radio' name='payment' value='1' id='by_card'> <label for='by_card' style=\"cursor: pointer\" >Банковской картой на сайте</label><br>
   <input $dis type='radio' name='payment' value='2' id='by_cash'> <label for='by_cash' style=\"cursor: pointer\" >Наличными при получении</label><br>
   </fieldset>";
+    */
     $msgText .= "<fieldset style=\"width:100%;\">
   <legend>Доставка</legend>
   <div id='select_delivery_panel'>

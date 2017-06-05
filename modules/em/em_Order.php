@@ -315,8 +315,13 @@ class DeliveryInfo{
                 $this->period = $infoDec->curr->delivery_period;
                 $this->deliveryPrice =$infoDec->curr->price ;
              break;
+             default:
+                $this->deliveryPrice=0;
+             break;
          }
     } 
+    
+    
 }    
 
 ?>

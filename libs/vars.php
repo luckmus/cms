@@ -33,6 +33,7 @@ define("_BB_TOKEN","bb_token");
 define("_PAW_SHOP_CODE","paw_shop_code");
 define("_PAW_IDENT_CODE","paw_ident_code");
 define("_PAW_TEST_MODE","paw_test_mode");
+define("_EMONEY_DISCOUNT","EMONEY_DISCOUNT");
 #папка в которую загружаются файлы
 define ('_UploadDir', 'uploadfiles');
 define ('_SmallFoto', 'smallimg');

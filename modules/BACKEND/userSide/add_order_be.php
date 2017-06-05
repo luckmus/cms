@@ -87,6 +87,10 @@
     
     
     $order->save();
-    echo '{"id":'.$order->id.', "price":'.$totalSumm.', "err":0}';
+    $di = new DeliveryInfo($order->adres);
+    $totalSumm += $di->deliveryPrice;
+    $totalSumm = $totalSumm - ($totalSumm/100)* intval($GLOBALS[_EMONEY_DISCOUNT]);
+    
+    echo '{"order_id":'.$order->id.', "price":'.$totalSumm.', "err":"", "ediscount":"'.intval($GLOBALS[_EMONEY_DISCOUNT]).'"}';
 
 ?>
