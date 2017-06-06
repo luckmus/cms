@@ -111,8 +111,17 @@
                             jqAlert(msg_add, function(){
         $( "#id_MNT_AMOUNT" ).val(res.price);
         $( "#id_MNT_TRANSACTION_ID" ).val(res.order_id);
+        var token = "&token="+res.token;
+        $( "#id_MNT_SUCCESS_URL" ).val($( "#id_MNT_SUCCESS_URL" ).val()+token);
+        $( "#id_MNT_RETURN_URL" ).val($( "#id_MNT_RETURN_URL" ).val()+token);
+        $( "#id_MNT_FAIL_URL" ).val($( "#id_MNT_FAIL_URL" ).val()+token);
+        $( "#MNT_INPROGRESS_URL" ).val($( "#MNT_INPROGRESS_URL" ).val()+token);
         console.log("res", res);
-        jqAlert("Переход на страницу оптаты...", null)
+        console.log("MNT_INPROGRESS_URL", $( "#MNT_INPROGRESS_URL" ).val());                              
+        console.log("id_MNT_FAIL_URL", $( "#id_MNT_FAIL_URL" ).val());                              
+        console.log("id_MNT_RETURN_URL", $( "#id_MNT_RETURN_URL" ).val());                              
+        console.log("id_MNT_FAIL_URL", $( "#id_MNT_FAIL_URL" ).val());                              
+        jqAlert("Переход на страницу оплаты...", null)
         $( "#payanyway_from" ).submit();});
                             
                         }

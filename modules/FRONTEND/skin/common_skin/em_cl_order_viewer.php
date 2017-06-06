@@ -61,8 +61,8 @@ class ClOrderView{
                 <div  class='div-table-col'>{$paySum}&nbsp;{$GLOBALS[_CURRENCY]}</div>
              </div>
              <div class='div-table-row'>
-                <div class='div-table-col' >Оплачено:</div>
-                <div  class='div-table-col'>{$payed}&nbsp;{$GLOBALS[_CURRENCY]}</div>
+                <div class='div-table-col' ><b>Оплачено:</b></div>
+                <div  class='div-table-col'><b>{$payed}&nbsp;{$GLOBALS[_CURRENCY]}</b></div>
              </div>
               <div class='div-table-row'>
                         <div class='div-table-col' >&nbsp;</div>

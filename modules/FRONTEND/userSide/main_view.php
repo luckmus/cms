@@ -157,16 +157,11 @@
                 break;
                 
                 case _PAY_INFO_SUCCESS:
-                    $orderId = $_GET['MNT_TRANSACTION_ID'];
-                break;
                 case _PAY_INFO_FAIL:
-
-                break;
                 case _PAY_INFO_INPROGRESS:
-
-                break;
                 case _PAY_INFO_RETURN:
-
+                    $_GET['id']=$_GET['MNT_TRANSACTION_ID'];
+                    include "modules/shop/pay_order_skin.php";                       
                 break;
                                 
                 

@@ -198,6 +198,7 @@ class CartView{
 
     $msgText .= "<br>";
     $res .= $msgText;
+    $payUrl = GetHost()."/?show=";
         //$res .="<button $dis onClick=\"showAddOrderFE_cart('apply_card',null,null,'{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">ќформить</button>";
         $res .="<button $dis id='apply_order_btn' onClick=\"showAddOrderBE(null, null,'$id','{$_SESSION[_LOGIN_ID]}', true,  $('#promo_id').val());\">ќформить</button>";
         $res .= "<img src='css/images/bx_loader.gif' style='width:25px; visibility:hidden;' id='apply_loader'> "; 
@@ -208,12 +209,12 @@ class CartView{
      <input type="hidden" name="MNT_TEST_MODE" value="'.$GLOBALS[_PAW_TEST_MODE].'" />
      <input type="hidden" name="MNT_AMOUNT" id="id_MNT_AMOUNT" value="" /></p>
      <input type="hidden" name="MNT_TRANSACTION_ID" id="id_MNT_TRANSACTION_ID" value="" /></p>
-     <input type="hidden" name="MNT_SUCCESS_URL" id="id_MNT_SUCCESS_URL" value="" /></p> 
-     <input type="hidden" name="MNT_RETURN_URL" id="id_MNT_RETURN_URL" value="" /></p> 
-     <input type="hidden" name="MNT_FAIL_URL" id="id_MNT_FAIL_URL" value="" /></p> 
-     <input type="hidden" name="MNT_INPROGRESS_URL" id="id_MNT_INPROGRESS_URL" value="" /></p> 
+     <input type="hidden" name="MNT_SUCCESS_URL" id="id_MNT_SUCCESS_URL" value="'.$payUrl.'pay_info_success" /></p> 
+     <input type="hidden" name="MNT_RETURN_URL" id="id_MNT_RETURN_URL" value="'.$payUrl.'pay_info_return" /></p> 
+     <input type="hidden" name="MNT_FAIL_URL" id="id_MNT_FAIL_URL" value="'.$payUrl.'pay_info_fail" /></p> 
+     <input type="hidden" name="MNT_INPROGRESS_URL" id="id_MNT_INPROGRESS_URL" value="'.$payUrl.'pay_info_inpogress" /></p> 
      </fieldset>
-    </form>';
+    </form>';   
         return $res; 
     }
     
