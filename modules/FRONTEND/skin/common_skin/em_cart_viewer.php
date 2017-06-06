@@ -208,6 +208,10 @@ class CartView{
      <input type="hidden" name="MNT_TEST_MODE" value="'.$GLOBALS[_PAW_TEST_MODE].'" />
      <input type="hidden" name="MNT_AMOUNT" id="id_MNT_AMOUNT" value="" /></p>
      <input type="hidden" name="MNT_TRANSACTION_ID" id="id_MNT_TRANSACTION_ID" value="" /></p>
+     <input type="hidden" name="MNT_SUCCESS_URL" id="id_MNT_SUCCESS_URL" value="" /></p> 
+     <input type="hidden" name="MNT_RETURN_URL" id="id_MNT_RETURN_URL" value="" /></p> 
+     <input type="hidden" name="MNT_FAIL_URL" id="id_MNT_FAIL_URL" value="" /></p> 
+     <input type="hidden" name="MNT_INPROGRESS_URL" id="id_MNT_INPROGRESS_URL" value="" /></p> 
      </fieldset>
     </form>';
         return $res; 

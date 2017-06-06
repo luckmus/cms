@@ -50,15 +50,32 @@
                 break;
                                
                 case _PAY_INFO_SUCCESS:
+                        Includer::initGoodsFromRoot(); 
+                       require_once "modules/em/usercommunication.php";
+                       require_once "modules/em/em_Order.php";
+                       require_once "modules/em/em_accounts.php";
                     $title .="Успешная оплата";
+                    $orderId = $_GET['MNT_TRANSACTION_ID'];
                 break;
                 case _PAY_INFO_FAIL:
+                Includer::initGoodsFromRoot(); 
+                       require_once "modules/em/usercommunication.php";
+                       require_once "modules/em/em_Order.php";
+                       require_once "modules/em/em_accounts.php";
                     $title .="Не успешная оплата";
                 break;
                 case _PAY_INFO_INPROGRESS:
+                Includer::initGoodsFromRoot(); 
+                       require_once "modules/em/usercommunication.php";
+                       require_once "modules/em/em_Order.php";
+                       require_once "modules/em/em_accounts.php";
                     $title .="Ожидание подтверждения оплаты";
                 break;
                 case _PAY_INFO_RETURN:
+                Includer::initGoodsFromRoot(); 
+                       require_once "modules/em/usercommunication.php";
+                       require_once "modules/em/em_Order.php";
+                       require_once "modules/em/em_accounts.php";
                     $title .="Отказ от оплаты";
                 break;
                 
@@ -138,6 +155,20 @@
                 case _CL_ORDER:
                     include "modules/shop/cl_order_skin.php";
                 break;
+                
+                case _PAY_INFO_SUCCESS:
+                    $orderId = $_GET['MNT_TRANSACTION_ID'];
+                break;
+                case _PAY_INFO_FAIL:
+
+                break;
+                case _PAY_INFO_INPROGRESS:
+
+                break;
+                case _PAY_INFO_RETURN:
+
+                break;
+                                
                 
                 default:
                     print "<br>";
