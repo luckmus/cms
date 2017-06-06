@@ -40,6 +40,7 @@ class ClOrderView{
         }
         $di = new DeliveryInfo($this->order->adres); 
         $paySum =  round($this->order->totalSum+$di->deliveryPrice, 2);
+         $payed =  $this->order->payAmount;
         $res .= "      
         <div class='div-table'>
              <div class='div-table-row'>
@@ -58,6 +59,10 @@ class ClOrderView{
              <div class='div-table-row'>
                 <div class='div-table-col' >Сумма к оплате:</div>
                 <div  class='div-table-col'>{$paySum}&nbsp;{$GLOBALS[_CURRENCY]}</div>
+             </div>
+             <div class='div-table-row'>
+                <div class='div-table-col' >Оплачено:</div>
+                <div  class='div-table-col'>{$payed}&nbsp;{$GLOBALS[_CURRENCY]}</div>
              </div>
               <div class='div-table-row'>
                         <div class='div-table-col' >&nbsp;</div>

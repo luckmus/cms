@@ -72,8 +72,9 @@
          $SDATA['order_id']=$order->id;
          //$SDATA['barcode']='Штрих-код заказа';
          $SDATA['price']=$order->totalSum;
-         $SDATA['payment_sum']=$order->totalSum+$di->deliveryPrice;
-         $SDATA['delivery_sum']=$di->deliveryPrice;
+         
+         $SDATA['payment_sum']  = $order->isPaid() ? 0 : $order->totalSum+$di->deliveryPrice;
+         $SDATA['delivery_sum'] = $order->isPaid() ? 0 : $di->deliveryPrice;
              $custName = '';
              $phone = '';
              $email = '';

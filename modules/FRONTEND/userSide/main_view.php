@@ -48,6 +48,22 @@
                        require_once "modules/em/em_accounts.php";
                        $title .= "Заказ";
                 break;
+                               
+                case _PAY_INFO_SUCCESS:
+                    $title .="Успешная оплата";
+                break;
+                case _PAY_INFO_FAIL:
+                    $title .="Не успешная оплата";
+                break;
+                case _PAY_INFO_INPROGRESS:
+                    $title .="Ожидание подтверждения оплаты";
+                break;
+                case _PAY_INFO_RETURN:
+                    $title .="Отказ от оплаты";
+                break;
+                
+                
+                
                 default:
                     $title .= getTitle(mainViewer::$show,mainViewer::$id);
                 break;

@@ -96,6 +96,10 @@
             return $this->parent==null;
         }
         
+        public function isPaid(){
+            return $this->payResultCode == 200;
+            
+        }    
         private function loadChild(){
             $query = "SELECT id FROM em_order WHERE id_parent={$this->id}";    
             $res = mQuery($query);

@@ -49,6 +49,10 @@ define ('_GOODSONE','goodsone');
 define ('_CABINET','cabinet'); 
 define ('_CART','cart'); 
 define ('_CL_ORDER','cl_order'); 
+define ('_PAY_INFO_SUCCESS','pay_info_success'); 
+define ('_PAY_INFO_FAIL','pay_info_fail'); 
+define ('_PAY_INFO_INPROGRESS','pay_info_inpogress'); 
+define ('_PAY_INFO_RETURN','pay_info_return'); 
 $width_n  = 266;
 $height_n = 200;
 

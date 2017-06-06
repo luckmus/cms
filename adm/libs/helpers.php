@@ -679,7 +679,7 @@ function EditOrders($id)
   $pname="";
   if ($id!="")
   {
-    $result=mQuery("SELECT o.id,o.goodsId,o.date,o.iscomlete,o.datecomplete,CONCAT(o.firstname,' ',lastname) as FIO,tel,email,adres,o.description,o.managerdesc,goodsprice, userId, totalsum, discount, track_number, bar_code, token
+    $result=mQuery("SELECT o.id,o.goodsId,o.date,o.iscomlete,o.datecomplete,CONCAT(o.firstname,' ',lastname) as FIO,tel,email,adres,o.description,o.managerdesc,goodsprice, userId, totalsum, discount, track_number, bar_code, token,  pay_result_code, pay_desc,pay_amount
                 FROM em_order o
                 WHERE o.id = $id");    
     $row=mysql_fetch_array($result);
@@ -747,6 +747,17 @@ function EditOrders($id)
   print "{$row[13]}";
   print "</td>";  
   print "</tr>";
+  
+  if ($row[18] == 200){
+      print "<tr>";
+      print "<td 'width=100'>";
+      print "<b>Оплачено:</b>";
+      print "</td>";
+      print "<td 'width=300'>";
+      print "{$row[20]}";
+      print "</td>";  
+      print "</tr>";
+  } 
 
   print "<tr>";
   print "<td 'width=100'>";
