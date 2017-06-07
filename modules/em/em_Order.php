@@ -216,7 +216,7 @@
         }
         
         public function geuUserMail(){
-            if($this->user->id!=null) {
+            if(($this->user->id!=null)&& ($this->user->id!=0)) {
                 $this->user->load();
                 return $this->user->email;
             }
