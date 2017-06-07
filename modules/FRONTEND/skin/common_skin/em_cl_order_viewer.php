@@ -2,6 +2,7 @@
 class ClOrderView{
     public $order;
     public $error;
+    public $token;
     function ClOrderView($id, $token){
         if ($id == null){
             $this->error = "Номер заказа не передан";
@@ -59,11 +60,21 @@ class ClOrderView{
              <div class='div-table-row'>
                 <div class='div-table-col' >Сумма к оплате:</div>
                 <div  class='div-table-col'>{$paySum}&nbsp;{$GLOBALS[_CURRENCY]}</div>
-             </div>
-             <div class='div-table-row'>
-                <div class='div-table-col' ><b>Оплачено:</b></div>
-                <div  class='div-table-col'><b>{$payed}&nbsp;{$GLOBALS[_CURRENCY]}</b></div>
-             </div>
+             </div>";
+             $res .= "
+                 <div class='div-table-row'>
+                    <div class='div-table-col' ><b>Оплачено:</b></div>
+                    <div  class='div-table-col'><b>{$payed}&nbsp;{$GLOBALS[_CURRENCY]}</b></div>
+                 </div>";             
+             if (($payed==0) && !($this->order->isPassedToDelivery())){
+                $res .= "
+                 <div class='div-table-row'>
+                    <div class='div-table-col' ><b>Ссылка на оплату:</b><br/>При оплатае через сайт Вам будет предоставленна дополнительная скидка в размере <b>{$GLOBALS[_EMONEY_DISCOUNT]}%</b></div>
+                    <div  class='div-table-col'><b><a href='{$this->order->getPaymentURL()}'>Оплатить</a></b></div>
+                 </div>";
+             }
+             
+             $res .= "
               <div class='div-table-row'>
                         <div class='div-table-col' >&nbsp;</div>
                         <div class='div-table-col' >&nbsp;</div>

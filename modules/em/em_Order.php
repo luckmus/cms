@@ -92,6 +92,38 @@
             }
         }
         
+        public function isPassedToDelivery(){
+            return ($this->trackNum != "");
+        }
+        
+        public function getTotalPriceWithEDiscount(){
+            if (intval($GLOBALS[_EMONEY_DISCOUNT])>0){
+                   return $this->totalSum-($this->totalSum/100)*$GLOBALS[_EMONEY_DISCOUNT];
+            }else{
+                return   $this->totalSum; 
+            }
+        }
+        
+        public function getPaymentURL(){
+               $di = new DeliveryInfo($this->adres);
+               $delPrice = intval($di->deliveryPrice);
+               $payUrl = GetHost()."/?show=";
+               $token=$this->token;     
+               $delPrice =$this->getTotalPriceWithEDiscount()+$delPrice;
+               $URL = "https://moneta.ru/assistant.htm";
+               $URL .= "?MNT_ID=".$GLOBALS[_PAW_SHOP_CODE];
+               $URL .= "&MNT_TEST_MODE=".$GLOBALS[_PAW_TEST_MODE];
+               $URL .= "&MNT_AMOUNT=".$delPrice;
+               $URL .= "&MNT_TRANSACTION_ID=".$this->id;
+
+               $URL .= "&MNT_SUCCESS_URL={$payUrl}pay_info_success%26token=$token";
+               $URL .= "&MNT_RETURN_URL={$payUrl}pay_info_return%26token=$token";
+               $URL .= "&MNT_FAIL_URL={$payUrl}pay_info_fail%26token=$token";
+               $URL .= "&MNT_INPROGRESS_URL={$payUrl}pay_info_inpogress%26token=$token";
+               
+               return $URL;
+        }
+        
         public function isParent(){
             return $this->parent==null;
         }
