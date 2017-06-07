@@ -156,6 +156,7 @@
             return md5($str);
         }
         public function save(){
+            $isInsert = ($this->id==null);
             if ($this->id == null){
                 $this->insert();
                 foreach($this->child as $child){
@@ -166,15 +167,16 @@
             else{
                 $this->update();
             }
+            if ($isInsert == true){
+                UserCommunication::init();
+                $userMail = $this->geuUserMail();
+                UserCommunication::sendMailToManager("Новый заказ", "На сайте ".GetHost()." совершен новый заказ №".$this->id);
+                
+                if ($userMail!=null){
+                    UserCommunication::sendMailFmooManager($userMail,"Заказ на сайте "._title, $this->generateMailMsg());    
+                }
             
-            UserCommunication::init();
-            $userMail = $this->geuUserMail();
-            UserCommunication::sendMailToManager("Новый заказ", "На сайте ".GetHost()." совершен новый заказ №".$this->id);
-            
-            if ($userMail!=null){
-                UserCommunication::sendMailFmooManager($userMail,"Заказ на сайте "._title, $this->generateMailMsg());    
             }
-            
             
         }
         
@@ -203,9 +205,14 @@
                 return "Вы сделали заказ на нашем сайте: "._title.". Заказ вы можете просмотреть по данной ссылке: $goodsLink . В ближайшее время с Вами свяжется наш менеджер.";   
             }
             */
-            $goodsLink = GetHost()."?show=cl_order&id={$this->id}&token=".$this->token;  
+            $goodsLink = $this->getOrderLink();  
             return "Вы сделали заказ на нашем сайте: "._title.". Заказ вы можете просмотреть по данной ссылке: $goodsLink . В ближайшее время с Вами свяжется наш менеджер.";   
                 
+        }
+        
+        public function getOrderLink(){
+            $goodsLink = GetHost()."?show=cl_order&id={$this->id}&token=".$this->token;
+            return $goodsLink;
         }
         
         public function geuUserMail(){
@@ -213,11 +220,13 @@
                 $this->user->load();
                 return $this->user->email;
             }
-
+            /*
             if (($this->email!="") || ($this->email!=null)){
                 return $this->email;
             }
             return null;
+            */
+            return $this->email;
         }
         private function insert(){    
             $t = "";
