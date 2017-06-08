@@ -3,6 +3,7 @@ class ClOrderView{
     public $order;
     public $error;
     public $token;
+    public $extPayed = false;
     function ClOrderView($id, $token){
         if ($id == null){
             $this->error = "Номер заказа не передан";
@@ -61,12 +62,20 @@ class ClOrderView{
                 <div class='div-table-col' >Сумма к оплате:</div>
                 <div  class='div-table-col'>{$paySum}&nbsp;{$GLOBALS[_CURRENCY]}</div>
              </div>";
+             $paymetnInfo = "";
+             if (($this->extPayed == true) && ($payed==0)){
+                  $paymetnInfo = "Если Вы попали на эту страницу, то скорее всего Ваш заказ оплачен, но мы еще не получили подтверждение от банка.<br/><br/>
+                  Как правило, оно приходит в течении нескольких минут. Просто наберитесь терпения и перезагрузите страницу через некоторое время.<br/><br/>
+                  Если Вы продолжаете видеть данное сообщение, спустя несколько минут после оплаты,то свяжитесь с нами по телефону указанному в разделе Контакты, и мы обязательно Вам поможем.";
+             }else{
+                 $paymetnInfo = "{$payed}&nbsp;{$GLOBALS[_CURRENCY]}"; 
+             }
              $res .= "
                  <div class='div-table-row'>
                     <div class='div-table-col' ><b>Оплачено:</b></div>
-                    <div  class='div-table-col'><b>{$payed}&nbsp;{$GLOBALS[_CURRENCY]}</b></div>
+                    <div  class='div-table-col'><b>$paymetnInfo</b></div>
                  </div>";             
-             if (($payed==0) && !($this->order->isPassedToDelivery())){
+             if (($payed==0) && !($this->order->isPassedToDelivery()) && ($this->extPayed == false)){
                 $res .= "
                  <div class='div-table-row'>
                     <div class='div-table-col' ><b>Ссылка на оплату:</b><br/>При оплатае через сайт Вам будет предоставленна дополнительная скидка в размере <b>{$GLOBALS[_EMONEY_DISCOUNT]}%</b></div>
