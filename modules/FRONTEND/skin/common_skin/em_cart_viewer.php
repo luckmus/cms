@@ -82,6 +82,8 @@ class CartView{
     $msgText .= "Контрольное число:<font color=\"red\">*</font>";
     $msgText .= "</td>";
     
+    $msgText .= "<form id='order_form_id'>"; 
+    
     $msgText .= "<td>";
     $msgText .= "<input type=\"text\" name=\"rcontrdig$id\" id=\"rcontrdig$id\" size=\"4\" maxlength=\"4\"></input>";
     $cntrlDig = GetHost()."/controldig.php";
@@ -102,7 +104,7 @@ class CartView{
         $msgText .= "</td>";
         
         $msgText .= "<td>";
-        $msgText .= "<input id=\"firstnameid$id\" name=\"firstname\" value=\"$firstname\"  size=\"33\" class=\"inputtext\" type=\"text\"></input>";
+        $msgText .= "<input id=\"firstnameid$id\" name=\"firstname\" autocomplete=\"name\" value=\"$firstname\"  size=\"33\" class=\"inputtext\" type=\"text\"></input>";
         $msgText .= "</td>";
         
         $msgText .= "</tr>";
@@ -126,7 +128,7 @@ class CartView{
         $msgText .= "</td>";
         
         $msgText .= "<td>";
-        $msgText .= "<input id=\"telid$id\" name=\"tel\"  value=\"$tel\"  size=\"33\" class=\"inputtext\" type=\"text\"></input>";
+        $msgText .= "<input id=\"telid$id\" name=\"tel\" autocomplete=\"tel\" required value=\"$tel\"  size=\"33\" class=\"inputtext\" type=\"text\"></input>";
         $msgText .= "</td>";
         
         $msgText .= "</tr>";
@@ -138,7 +140,7 @@ class CartView{
         $msgText .= "</td>";
         
         $msgText .= "<td>";
-        $msgText .= "<input id=\"emailid$id\" name=\"email\" value=\"$email\" size=\"33\" class=\"inputtext\" type=\"text\"></input>";
+        $msgText .= "<input id=\"emailid$id\" autocomplete=\"email\" name=\"email\" value=\"$email\" size=\"33\" class=\"inputtext\" type=\"text\"></input>";
         $msgText .= "</td>";
         
         $msgText .= "</tr>";
@@ -195,7 +197,10 @@ class CartView{
 </fieldset> 
 <input type='hidden' id='selected_delivery_method'>
 ";
-
+  $msgText .= "</form>";
+  $msgText .= "<script>\$('#order_form_id').submit(function() {
+  return false;
+});</script>";
     $msgText .= "<br>";
     $res .= $msgText;
     $payUrl = GetHost()."/?show=";
@@ -232,7 +237,7 @@ class CartView{
     private function getDeliveryMethodBoxBerryCur($weight){
      return "<div id='bb_descr' class='cur_del_desc'> 
         <span class='delivery_firel_descr'>Индекс города куда надо осуществить доставку</span><br>
-        <input type='text' id='bb_delivery_index' onkeydown=\"if (event.keyCode==13){ getBBPoints($('#bb_delivery_index').val(),  $('#paymentSum').val(),  $weight)}\">
+        <input type='text' autocomplete='shipping postal-code' id='bb_delivery_index' onkeydown=\"if (event.keyCode==13){ getBBPoints($('#bb_delivery_index').val(),  $('#paymentSum').val(),  $weight)}\">
         <button onClick=\"getBBPoints($('#bb_delivery_index').val(),  $('#paymentSum').val(),  $weight)\">Проверить</button >
         <img src='css/images/bx_loader.gif' style='width:25px; visibility:hidden;' id='currier_loader'/>
         <div id='bb_curier_info' class='cur_del_desc'>
