@@ -106,7 +106,7 @@
                             //jqAlert('Заказ добавлен', reload);
                             var msg_add = "Заказ добавлен";
                             if (parseInt(res.ediscount)>0){
-                                 msg_add += "<br/>При оплате заказа с сайта Вам предоставляется  дополнительная <b>"+parseInt(res.ediscount)+"% процентная скидка</b>.";
+                                 msg_add += "<br/>При оплате заказа с сайта, Вам предоставляется  дополнительная <b>"+parseInt(res.ediscount)+"% процентная скидка</b>.";
                             }
                             jqAlert(msg_add, function(){
         $( "#id_MNT_AMOUNT" ).val(res.price);

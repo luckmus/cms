@@ -78,7 +78,7 @@ class ClOrderView{
              if (($payed==0) && !($this->order->isPassedToDelivery()) && ($this->extPayed == false)){
                 $res .= "
                  <div class='div-table-row'>
-                    <div class='div-table-col' ><b>Ссылка на оплату:</b><br/>При оплатае через сайт Вам будет предоставленна дополнительная скидка в размере <b>{$GLOBALS[_EMONEY_DISCOUNT]}%</b></div>
+                    <div class='div-table-col' ><b>Ссылка на оплату:</b><br/>При оплате заказа через сайт, Вам будет предоставленна дополнительная скидка в размере <b>{$GLOBALS[_EMONEY_DISCOUNT]}%</b></div>
                     <div  class='div-table-col'><b><a href='{$this->order->getPaymentURL()}'>Оплатить</a></b></div>
                  </div>";
              }
