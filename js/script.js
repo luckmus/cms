@@ -115,9 +115,9 @@
         $( "#id_MNT_SUCCESS_URL" ).val($( "#id_MNT_SUCCESS_URL" ).val()+token);
         $( "#id_MNT_RETURN_URL" ).val($( "#id_MNT_RETURN_URL" ).val()+token);
         $( "#id_MNT_FAIL_URL" ).val($( "#id_MNT_FAIL_URL" ).val()+token);
-        $( "#MNT_INPROGRESS_URL" ).val($( "#id_MNT_INPROGRESS_URL" ).val()+token);
+        $( "#id_MNT_INPROGRESS_URL" ).val($( "#id_MNT_INPROGRESS_URL" ).val()+token);
         console.log("res", res);
-        console.log("MNT_INPROGRESS_URL", $( "#MNT_INPROGRESS_URL" ).val());                              
+        console.log("MNT_INPROGRESS_URL", $( "#id_MNT_INPROGRESS_URL" ).val());                              
         console.log("id_MNT_FAIL_URL", $( "#id_MNT_FAIL_URL" ).val());                              
         console.log("id_MNT_RETURN_URL", $( "#id_MNT_RETURN_URL" ).val());                              
         console.log("id_MNT_FAIL_URL", $( "#id_MNT_FAIL_URL" ).val());                              
