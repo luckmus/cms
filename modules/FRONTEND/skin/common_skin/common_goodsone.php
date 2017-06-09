@@ -19,6 +19,33 @@
             $gal = array();
             array_push($gal, new  GoodsPhoto(null, $this->goodsOne->id, $this->goodsOne->imagefile, 0, ""));
         }
+        
+  $res .='<div class="popup-gallery">';
+  foreach($gal as $photo){ 
+    $res .="<a href='{$photo->url}' title='{$photo->description}'><img src='{$photo->url}' width='200' height='200'></a>";   
+  }
+
+    $res .='</div><br/><br/><br/>';
+    $res .= "<script>
+    $('.popup-gallery').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+        tLoading: 'Loading image #%curr%...',
+        mainClass: 'mfp-img-mobile',
+        gallery: {
+            enabled: true,
+            navigateByImgClick: true,
+            preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+        },
+        image: {
+            tError: '<a href=\"#\">The image</a> could not be loaded.',
+            titleSrc: function(item) {
+                return item.el.attr('title');
+            }
+        }
+    });
+    </script>";
+/*        
                     $res .= ' 
             <ul class="bxslider">';
 
@@ -30,20 +57,20 @@
 
                 <script>
             $(".bxslider").bxSlider({
-              auto: true,
+              auto: false,
               autoControls: true,
               captions: true
             });
               </script>';
   
-        
+  */      
         //$res .= "<p>";
         //$res .= "<img align='left' style=\" width: 400px; height: 290px; margin: 10px 15px 20px 7px\"  src='{$this->goodsOne->imagefile}'>";
         $res .= $this->goodsOne->desc;
         //$res .= "</p>";
-        $res .="</div>";
+        $res .="</div><br/>";
         $res.=$this->getViewParams( );
-        $res .= "<div>";
+        $res .= "<div><br/>";
         $res .= $this->getSelectPrice();
         //$res .= "</div>";
         //$res .= "<div>";
